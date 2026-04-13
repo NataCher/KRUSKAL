@@ -35,18 +35,33 @@ namespace KRUSKAL {
 			}
 		}
 	private: System::Windows::Forms::Button^ btn_exit;
-	private: System::Windows::Forms::Label^ label1;
-	private: System::Windows::Forms::Label^ label2;
-	private: System::Windows::Forms::NumericUpDown^ numericUpDown1;
-	private: System::Windows::Forms::DataGridView^ dataGridView1;
-	private: System::Windows::Forms::Button^ button1;
-	private: System::Windows::Forms::Button^ button2;
-	private: System::Windows::Forms::Button^ button3;
-	private: System::Windows::Forms::Panel^ panel1;
-	private: System::Windows::Forms::Panel^ panel2;
-	private: System::Windows::Forms::Label^ label3;
-	private: System::Windows::Forms::Label^ label4;
-	private: System::Windows::Forms::Label^ label5;
+	private: System::Windows::Forms::Label^ lbl_1;
+	private: System::Windows::Forms::Label^ lbl_2;
+	private: System::Windows::Forms::NumericUpDown^ numericUpDown;
+
+
+
+	private: System::Windows::Forms::DataGridView^ dataGridView;
+	private: System::Windows::Forms::Button^ btn_create_matrix;
+
+
+	private: System::Windows::Forms::Button^ btn_start_algorithm;
+
+	private: System::Windows::Forms::Button^ btn_random;
+	private: System::Windows::Forms::Panel^ panel_1;
+	private: System::Windows::Forms::Panel^ panel_2;
+	private: System::Windows::Forms::Label^ lbl_3;
+	private: System::Windows::Forms::Label^ Lbl_4;
+
+
+
+
+
+
+
+	private: System::Windows::Forms::Label^ lbl_status;
+
+
 	protected:
 
 	protected:
@@ -65,20 +80,20 @@ namespace KRUSKAL {
 		void InitializeComponent(void)
 		{
 			this->btn_exit = (gcnew System::Windows::Forms::Button());
-			this->label1 = (gcnew System::Windows::Forms::Label());
-			this->label2 = (gcnew System::Windows::Forms::Label());
-			this->numericUpDown1 = (gcnew System::Windows::Forms::NumericUpDown());
-			this->dataGridView1 = (gcnew System::Windows::Forms::DataGridView());
-			this->button1 = (gcnew System::Windows::Forms::Button());
-			this->button2 = (gcnew System::Windows::Forms::Button());
-			this->button3 = (gcnew System::Windows::Forms::Button());
-			this->panel1 = (gcnew System::Windows::Forms::Panel());
-			this->panel2 = (gcnew System::Windows::Forms::Panel());
-			this->label3 = (gcnew System::Windows::Forms::Label());
-			this->label4 = (gcnew System::Windows::Forms::Label());
-			this->label5 = (gcnew System::Windows::Forms::Label());
-			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->numericUpDown1))->BeginInit();
-			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->dataGridView1))->BeginInit();
+			this->lbl_1 = (gcnew System::Windows::Forms::Label());
+			this->lbl_2 = (gcnew System::Windows::Forms::Label());
+			this->numericUpDown = (gcnew System::Windows::Forms::NumericUpDown());
+			this->dataGridView = (gcnew System::Windows::Forms::DataGridView());
+			this->btn_create_matrix = (gcnew System::Windows::Forms::Button());
+			this->btn_start_algorithm = (gcnew System::Windows::Forms::Button());
+			this->btn_random = (gcnew System::Windows::Forms::Button());
+			this->panel_1 = (gcnew System::Windows::Forms::Panel());
+			this->panel_2 = (gcnew System::Windows::Forms::Panel());
+			this->lbl_3 = (gcnew System::Windows::Forms::Label());
+			this->Lbl_4 = (gcnew System::Windows::Forms::Label());
+			this->lbl_status = (gcnew System::Windows::Forms::Label());
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->numericUpDown))->BeginInit();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->dataGridView))->BeginInit();
 			this->SuspendLayout();
 			// 
 			// btn_exit
@@ -95,138 +110,140 @@ namespace KRUSKAL {
 			this->btn_exit->UseVisualStyleBackColor = false;
 			this->btn_exit->Click += gcnew System::EventHandler(this, &MyForm::btn_exit_Click);
 			// 
-			// label1
+			// lbl_1
 			// 
-			this->label1->AutoSize = true;
-			this->label1->Location = System::Drawing::Point(37, 35);
-			this->label1->Name = L"label1";
-			this->label1->Size = System::Drawing::Size(202, 20);
-			this->label1->TabIndex = 1;
-			this->label1->Text = L"Введите вершины графа";
+			this->lbl_1->AutoSize = true;
+			this->lbl_1->Location = System::Drawing::Point(37, 35);
+			this->lbl_1->Name = L"lbl_1";
+			this->lbl_1->Size = System::Drawing::Size(202, 20);
+			this->lbl_1->TabIndex = 1;
+			this->lbl_1->Text = L"Введите вершины графа";
 			// 
-			// label2
+			// lbl_2
 			// 
-			this->label2->AutoSize = true;
-			this->label2->Location = System::Drawing::Point(37, 74);
-			this->label2->Name = L"label2";
-			this->label2->Size = System::Drawing::Size(143, 20);
-			this->label2->TabIndex = 2;
-			this->label2->Text = L"Введите матрицу";
+			this->lbl_2->AutoSize = true;
+			this->lbl_2->Location = System::Drawing::Point(37, 74);
+			this->lbl_2->Name = L"lbl_2";
+			this->lbl_2->Size = System::Drawing::Size(143, 20);
+			this->lbl_2->TabIndex = 2;
+			this->lbl_2->Text = L"Введите матрицу";
 			// 
-			// numericUpDown1
+			// numericUpDown
 			// 
-			this->numericUpDown1->Location = System::Drawing::Point(245, 33);
-			this->numericUpDown1->Name = L"numericUpDown1";
-			this->numericUpDown1->Size = System::Drawing::Size(54, 26);
-			this->numericUpDown1->TabIndex = 3;
+			this->numericUpDown->Location = System::Drawing::Point(245, 33);
+			this->numericUpDown->Minimum = System::Decimal(gcnew cli::array< System::Int32 >(4) { 1, 0, 0, 0 });
+			this->numericUpDown->Name = L"numericUpDown";
+			this->numericUpDown->Size = System::Drawing::Size(109, 26);
+			this->numericUpDown->TabIndex = 3;
+			this->numericUpDown->Value = System::Decimal(gcnew cli::array< System::Int32 >(4) { 1, 0, 0, 0 });
 			// 
-			// dataGridView1
+			// dataGridView
 			// 
-			this->dataGridView1->ColumnHeadersHeightSizeMode = System::Windows::Forms::DataGridViewColumnHeadersHeightSizeMode::AutoSize;
-			this->dataGridView1->Location = System::Drawing::Point(41, 108);
-			this->dataGridView1->Name = L"dataGridView1";
-			this->dataGridView1->RowHeadersWidth = 62;
-			this->dataGridView1->RowTemplate->Height = 28;
-			this->dataGridView1->Size = System::Drawing::Size(313, 238);
-			this->dataGridView1->TabIndex = 4;
-			this->dataGridView1->CellContentClick += gcnew System::Windows::Forms::DataGridViewCellEventHandler(this, &MyForm::dataGridView1_CellContentClick);
+			this->dataGridView->ColumnHeadersHeightSizeMode = System::Windows::Forms::DataGridViewColumnHeadersHeightSizeMode::AutoSize;
+			this->dataGridView->Location = System::Drawing::Point(41, 108);
+			this->dataGridView->Name = L"dataGridView";
+			this->dataGridView->RowHeadersWidth = 62;
+			this->dataGridView->RowTemplate->Height = 28;
+			this->dataGridView->Size = System::Drawing::Size(313, 238);
+			this->dataGridView->TabIndex = 4;
+			this->dataGridView->CellContentClick += gcnew System::Windows::Forms::DataGridViewCellEventHandler(this, &MyForm::dataGridView1_CellContentClick);
 			// 
-			// button1
+			// btn_create_matrix
 			// 
-			this->button1->Location = System::Drawing::Point(102, 365);
-			this->button1->Name = L"button1";
-			this->button1->Size = System::Drawing::Size(153, 44);
-			this->button1->TabIndex = 5;
-			this->button1->Text = L"Создать матрицу";
-			this->button1->UseVisualStyleBackColor = true;
-			this->button1->Click += gcnew System::EventHandler(this, &MyForm::button1_Click);
+			this->btn_create_matrix->Location = System::Drawing::Point(102, 365);
+			this->btn_create_matrix->Name = L"btn_create_matrix";
+			this->btn_create_matrix->Size = System::Drawing::Size(153, 44);
+			this->btn_create_matrix->TabIndex = 5;
+			this->btn_create_matrix->Text = L"Создать матрицу";
+			this->btn_create_matrix->UseVisualStyleBackColor = true;
+			this->btn_create_matrix->Click += gcnew System::EventHandler(this, &MyForm::button1_Click);
 			// 
-			// button2
+			// btn_start_algorithm
 			// 
-			this->button2->Location = System::Drawing::Point(458, 35);
-			this->button2->Name = L"button2";
-			this->button2->Size = System::Drawing::Size(223, 59);
-			this->button2->TabIndex = 6;
-			this->button2->Text = L"Запуск алгоритма";
-			this->button2->UseVisualStyleBackColor = true;
-			this->button2->Click += gcnew System::EventHandler(this, &MyForm::button2_Click);
+			this->btn_start_algorithm->Location = System::Drawing::Point(458, 35);
+			this->btn_start_algorithm->Name = L"btn_start_algorithm";
+			this->btn_start_algorithm->Size = System::Drawing::Size(223, 59);
+			this->btn_start_algorithm->TabIndex = 6;
+			this->btn_start_algorithm->Text = L"Запуск алгоритма";
+			this->btn_start_algorithm->UseVisualStyleBackColor = true;
+			this->btn_start_algorithm->Click += gcnew System::EventHandler(this, &MyForm::button2_Click);
 			// 
-			// button3
+			// btn_random
 			// 
-			this->button3->Location = System::Drawing::Point(1097, 95);
-			this->button3->Name = L"button3";
-			this->button3->Size = System::Drawing::Size(194, 77);
-			this->button3->TabIndex = 7;
-			this->button3->Text = L"Заполнить случайными числами";
-			this->button3->UseVisualStyleBackColor = true;
-			this->button3->Click += gcnew System::EventHandler(this, &MyForm::button3_Click);
+			this->btn_random->Location = System::Drawing::Point(1097, 95);
+			this->btn_random->Name = L"btn_random";
+			this->btn_random->Size = System::Drawing::Size(194, 77);
+			this->btn_random->TabIndex = 7;
+			this->btn_random->Text = L"Заполнить случайными числами";
+			this->btn_random->UseVisualStyleBackColor = true;
+			this->btn_random->Click += gcnew System::EventHandler(this, &MyForm::button3_Click);
 			// 
-			// panel1
+			// panel_1
 			// 
-			this->panel1->Location = System::Drawing::Point(41, 425);
-			this->panel1->Name = L"panel1";
-			this->panel1->Size = System::Drawing::Size(600, 459);
-			this->panel1->TabIndex = 8;
+			this->panel_1->Location = System::Drawing::Point(41, 425);
+			this->panel_1->Name = L"panel_1";
+			this->panel_1->Size = System::Drawing::Size(600, 459);
+			this->panel_1->TabIndex = 8;
 			// 
-			// panel2
+			// panel_2
 			// 
-			this->panel2->Location = System::Drawing::Point(674, 425);
-			this->panel2->Name = L"panel2";
-			this->panel2->Size = System::Drawing::Size(600, 459);
-			this->panel2->TabIndex = 9;
+			this->panel_2->Location = System::Drawing::Point(674, 425);
+			this->panel_2->Name = L"panel_2";
+			this->panel_2->Size = System::Drawing::Size(600, 459);
+			this->panel_2->TabIndex = 9;
 			// 
-			// label3
+			// lbl_3
 			// 
-			this->label3->AutoSize = true;
-			this->label3->Location = System::Drawing::Point(204, 904);
-			this->label3->Name = L"label3";
-			this->label3->Size = System::Drawing::Size(278, 20);
-			this->label3->TabIndex = 10;
-			this->label3->Text = L"Связный неориентированный граф";
+			this->lbl_3->AutoSize = true;
+			this->lbl_3->Location = System::Drawing::Point(204, 904);
+			this->lbl_3->Name = L"lbl_3";
+			this->lbl_3->Size = System::Drawing::Size(278, 20);
+			this->lbl_3->TabIndex = 10;
+			this->lbl_3->Text = L"Связный неориентированный граф";
 			// 
-			// label4
+			// Lbl_4
 			// 
-			this->label4->AutoSize = true;
-			this->label4->Location = System::Drawing::Point(856, 904);
-			this->label4->Name = L"label4";
-			this->label4->Size = System::Drawing::Size(326, 20);
-			this->label4->TabIndex = 11;
-			this->label4->Text = L"Каркас с минимальным суммарным весом";
-			this->label4->Click += gcnew System::EventHandler(this, &MyForm::label4_Click);
+			this->Lbl_4->AutoSize = true;
+			this->Lbl_4->Location = System::Drawing::Point(856, 904);
+			this->Lbl_4->Name = L"Lbl_4";
+			this->Lbl_4->Size = System::Drawing::Size(326, 20);
+			this->Lbl_4->TabIndex = 11;
+			this->Lbl_4->Text = L"Каркас с минимальным суммарным весом";
+			this->Lbl_4->Click += gcnew System::EventHandler(this, &MyForm::label4_Click);
 			// 
-			// label5
+			// lbl_status
 			// 
-			this->label5->AutoSize = true;
-			this->label5->Location = System::Drawing::Point(454, 123);
-			this->label5->Name = L"label5";
-			this->label5->Size = System::Drawing::Size(62, 20);
-			this->label5->TabIndex = 12;
-			this->label5->Text = L"Статус";
+			this->lbl_status->AutoSize = true;
+			this->lbl_status->Location = System::Drawing::Point(454, 123);
+			this->lbl_status->Name = L"lbl_status";
+			this->lbl_status->Size = System::Drawing::Size(62, 20);
+			this->lbl_status->TabIndex = 12;
+			this->lbl_status->Text = L"Статус";
 			// 
 			// MyForm
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(9, 20);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			this->ClientSize = System::Drawing::Size(1303, 978);
-			this->Controls->Add(this->label5);
-			this->Controls->Add(this->label4);
-			this->Controls->Add(this->label3);
-			this->Controls->Add(this->panel2);
-			this->Controls->Add(this->panel1);
-			this->Controls->Add(this->button3);
-			this->Controls->Add(this->button2);
-			this->Controls->Add(this->button1);
-			this->Controls->Add(this->dataGridView1);
-			this->Controls->Add(this->numericUpDown1);
-			this->Controls->Add(this->label2);
-			this->Controls->Add(this->label1);
+			this->Controls->Add(this->lbl_status);
+			this->Controls->Add(this->Lbl_4);
+			this->Controls->Add(this->lbl_3);
+			this->Controls->Add(this->panel_2);
+			this->Controls->Add(this->panel_1);
+			this->Controls->Add(this->btn_random);
+			this->Controls->Add(this->btn_start_algorithm);
+			this->Controls->Add(this->btn_create_matrix);
+			this->Controls->Add(this->dataGridView);
+			this->Controls->Add(this->numericUpDown);
+			this->Controls->Add(this->lbl_2);
+			this->Controls->Add(this->lbl_1);
 			this->Controls->Add(this->btn_exit);
 			this->FormBorderStyle = System::Windows::Forms::FormBorderStyle::None;
 			this->Name = L"MyForm";
 			this->StartPosition = System::Windows::Forms::FormStartPosition::CenterScreen;
 			this->Text = L"MyForm";
-			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->numericUpDown1))->EndInit();
-			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->dataGridView1))->EndInit();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->numericUpDown))->EndInit();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->dataGridView))->EndInit();
 			this->ResumeLayout(false);
 			this->PerformLayout();
 

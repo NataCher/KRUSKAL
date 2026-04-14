@@ -43,21 +43,16 @@ namespace KRUSKAL {
 
 	private: System::Windows::Forms::DataGridView^ dataGridView;
 	private: System::Windows::Forms::Button^ btn_create_matrix;
+	private: System::Windows::Forms::Button^ btn_run;
 
 
-	private: System::Windows::Forms::Button^ btn_start_algorithm;
+
 
 	private: System::Windows::Forms::Button^ btn_random;
 	private: System::Windows::Forms::Panel^ panel_1;
 	private: System::Windows::Forms::Panel^ panel_2;
 	private: System::Windows::Forms::Label^ lbl_3;
 	private: System::Windows::Forms::Label^ Lbl_4;
-
-
-
-
-
-
 
 	private: System::Windows::Forms::Label^ lbl_status;
 
@@ -72,6 +67,10 @@ namespace KRUSKAL {
 		/// </summary>
 		System::ComponentModel::Container ^components;
 
+
+
+
+
 #pragma region Windows Form Designer generated code
 		/// <summary>
 		/// Требуемый метод для поддержки конструктора — не изменяйте 
@@ -85,7 +84,7 @@ namespace KRUSKAL {
 			this->numericUpDown = (gcnew System::Windows::Forms::NumericUpDown());
 			this->dataGridView = (gcnew System::Windows::Forms::DataGridView());
 			this->btn_create_matrix = (gcnew System::Windows::Forms::Button());
-			this->btn_start_algorithm = (gcnew System::Windows::Forms::Button());
+			this->btn_run = (gcnew System::Windows::Forms::Button());
 			this->btn_random = (gcnew System::Windows::Forms::Button());
 			this->panel_1 = (gcnew System::Windows::Forms::Panel());
 			this->panel_2 = (gcnew System::Windows::Forms::Panel());
@@ -146,7 +145,7 @@ namespace KRUSKAL {
 			this->dataGridView->RowTemplate->Height = 28;
 			this->dataGridView->Size = System::Drawing::Size(313, 238);
 			this->dataGridView->TabIndex = 4;
-			this->dataGridView->CellContentClick += gcnew System::Windows::Forms::DataGridViewCellEventHandler(this, &MyForm::dataGridView1_CellContentClick);
+			this->dataGridView->CellContentClick += gcnew System::Windows::Forms::DataGridViewCellEventHandler(this, &MyForm::dataGridView_CellContentClick);
 			// 
 			// btn_create_matrix
 			// 
@@ -156,17 +155,17 @@ namespace KRUSKAL {
 			this->btn_create_matrix->TabIndex = 5;
 			this->btn_create_matrix->Text = L"Создать матрицу";
 			this->btn_create_matrix->UseVisualStyleBackColor = true;
-			this->btn_create_matrix->Click += gcnew System::EventHandler(this, &MyForm::button1_Click);
+			this->btn_create_matrix->Click += gcnew System::EventHandler(this, &MyForm::btn_create_matrix_Click);
 			// 
-			// btn_start_algorithm
+			// btn_run
 			// 
-			this->btn_start_algorithm->Location = System::Drawing::Point(458, 35);
-			this->btn_start_algorithm->Name = L"btn_start_algorithm";
-			this->btn_start_algorithm->Size = System::Drawing::Size(223, 59);
-			this->btn_start_algorithm->TabIndex = 6;
-			this->btn_start_algorithm->Text = L"Запуск алгоритма";
-			this->btn_start_algorithm->UseVisualStyleBackColor = true;
-			this->btn_start_algorithm->Click += gcnew System::EventHandler(this, &MyForm::button2_Click);
+			this->btn_run->Location = System::Drawing::Point(458, 35);
+			this->btn_run->Name = L"btn_run";
+			this->btn_run->Size = System::Drawing::Size(223, 59);
+			this->btn_run->TabIndex = 6;
+			this->btn_run->Text = L"Запуск алгоритма";
+			this->btn_run->UseVisualStyleBackColor = true;
+			this->btn_run->Click += gcnew System::EventHandler(this, &MyForm::btn_run_Click);
 			// 
 			// btn_random
 			// 
@@ -176,7 +175,7 @@ namespace KRUSKAL {
 			this->btn_random->TabIndex = 7;
 			this->btn_random->Text = L"Заполнить случайными числами";
 			this->btn_random->UseVisualStyleBackColor = true;
-			this->btn_random->Click += gcnew System::EventHandler(this, &MyForm::button3_Click);
+			this->btn_random->Click += gcnew System::EventHandler(this, &MyForm::btn_random_Click);
 			// 
 			// panel_1
 			// 
@@ -224,6 +223,7 @@ namespace KRUSKAL {
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(9, 20);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
+			this->BackColor = System::Drawing::SystemColors::Control;
 			this->ClientSize = System::Drawing::Size(1303, 978);
 			this->Controls->Add(this->lbl_status);
 			this->Controls->Add(this->Lbl_4);
@@ -231,7 +231,7 @@ namespace KRUSKAL {
 			this->Controls->Add(this->panel_2);
 			this->Controls->Add(this->panel_1);
 			this->Controls->Add(this->btn_random);
-			this->Controls->Add(this->btn_start_algorithm);
+			this->Controls->Add(this->btn_run);
 			this->Controls->Add(this->btn_create_matrix);
 			this->Controls->Add(this->dataGridView);
 			this->Controls->Add(this->numericUpDown);
@@ -249,18 +249,175 @@ namespace KRUSKAL {
 
 		}
 #pragma endregion
+
+	public: value struct edge {
+		int u; //Откуда 
+		int v; //Куда
+		int weight; //Вес
+	};
+
+		 // Класс DSU (Система непересекающихся множеств)
+		 ref class DSU {
+			  array<int>^ parent;
+		  public:
+			  DSU(int n) {
+				  parent = gcnew array<int>(n + 1);
+				  for (int i = 0; i <= n; i++) parent[i] = i;
+			  }
+			  int find(int i) {
+				  if (parent[i] == i) return i;
+				  return parent[i] = find(parent[i]);
+			  }
+			  void unite(int i, int j) {
+				  int root_i = find(i);
+				  int root_j = find(j);
+				  if (root_i != root_j) parent[root_i] = root_j;
+			  }
+		  };
+
+	//Функция для получения списка всех ребер
+	System::Collections::Generic::List<edge>^ GetEdgesFromGrid() {
+		auto edges = gcnew System::Collections::Generic::List<edge>();
+		int n = dataGridView->RowCount;
+
+		for (int i = 0; i < n; i++) {
+			for (int j = 0; j < n;j++) {
+
+				if (dataGridView->Rows[i]->Cells[j]->Value != nullptr) {
+					int w = System::Convert::ToInt32(dataGridView->Rows[i]->Cells[j]->Value);
+
+					if (w > 0) {
+						edge e;
+						e.u = i; e.v = j;
+						e.weight = w;
+						edges->Add(e);
+					}
+				}
+			}
+		}
+		return edges;
+	}
+
 	private: System::Void btn_exit_Click(System::Object^ sender, System::EventArgs^ e) {
 		this->Close();
 	}
-	private: System::Void dataGridView1_CellContentClick(System::Object^ sender, System::Windows::Forms::DataGridViewCellEventArgs^ e) {
+	private: System::Void dataGridView_CellContentClick(System::Object^ sender, System::Windows::Forms::DataGridViewCellEventArgs^ e) {
 	}
-private: System::Void button1_Click(System::Object^ sender, System::EventArgs^ e) {
+private: System::Void btn_create_matrix_Click(System::Object^ sender, System::EventArgs^ e) {
+	int n = (int)numericUpDown->Value; // получаем n из элемента 2
+	dataGridView->RowCount = n;
+	dataGridView->ColumnCount = n;
+
+	for (int i = 0; i < n; i++) {
+		dataGridView->Columns[i]->Width = 30; // делаем ячейки квадратными
+
+		for (int j = 0; j < n; j++) {
+			if (i == j) {
+				dataGridView->Rows[i]->Cells[j]->Value = "0";
+				dataGridView->Rows[i]->Cells[j]->ReadOnly = true; // диагональ всегда 0
+			}
+		}
+	}
 }
-private: System::Void button3_Click(System::Object^ sender, System::EventArgs^ e) {
+
+private: System::Void btn_random_Click(System::Object^ sender, System::EventArgs^ e) {
+	Random^ rand = gcnew Random();
+	int n = dataGridView->RowCount;
+
+	for (int i = 0; i < n; i++) {
+		for (int j = i + 1; j < n; j++) {
+
+			int weight = rand->Next(1, 30); // Веса от  1 до 20
+
+			dataGridView->Rows[i]->Cells[j]->Value = weight.ToString();
+			dataGridView->Rows[j]->Cells[i]->Value = weight.ToString();
+		}
+	}
 }
+
+	   void bubble_sort_edges(System::Collections::Generic::List<edge>^ edges) {
+		   int n = edges->Count;
+		   for (int i = 0; i < n; i++) {
+			   for (int j = 0; j < n - i - 1; j++) {
+				   if (edges[i].weight > edges[j + 1].weight) {
+					   edge temp = edges[j];
+					   edges[j] = edges[j + 1];
+					   edges[j + 1] = temp;
+				   }
+			   }
+		   }
+	   }
+
+
+void DrawGraph(Panel^ p, System::Collections::Generic::List<edge>^ edges, int nodeCount, bool isResult) {
+		   Graphics^ g = p->CreateGraphics();
+		   g->SmoothingMode = Drawing2D::SmoothingMode::AntiAlias; 
+		   g->Clear(Color::White);
+
+		   int R = Math::Min(p->Width, p->Height) / 2 - 30; // Радиус круга
+		   Point center(p->Width / 2, p->Height / 2);
+
+		   // 1. Рисуем ребра
+		   Pen^ edgePen = gcnew Pen(isResult ? Color::DarkRed : Color::Black, 2);
+		   for each (edge e in edges) {
+			   float angle1 = 2 * Math::PI * e.u / nodeCount;
+			   float angle2 = 2 * Math::PI * e.v / nodeCount;
+
+			   Point p1(center.X + R * Math::Cos(angle1), center.Y + R * Math::Sin(angle1));
+			   Point p2(center.X + R * Math::Cos(angle2), center.Y + R * Math::Sin(angle2));
+
+			   g->DrawLine(edgePen, p1, p2);
+
+			   // Рисуем вес ребра в рамке (как на твоем эскизе)
+			   String^ weightStr = e.weight.ToString();
+			   Point mid((p1.X + p2.X) / 2, (p1.Y + p2.Y) / 2);
+			   g->FillRectangle(Brushes::White, mid.X - 10, mid.Y - 10, 20, 20);
+			   g->DrawRectangle(Pens::Black, mid.X - 10, mid.Y - 10, 20, 20);
+			   g->DrawString(weightStr, gcnew System::Drawing::Font("Arial", 8), Brushes::Black, mid.X - 8, mid.Y - 7);
+		   }
+
+		   // 2. Рисуем вершины
+		   for (int i = 0; i < nodeCount; i++) {
+			   float angle = 2 * Math::PI * i / nodeCount;
+			   int x = center.X + R * Math::Cos(angle) - 15;
+			   int y = center.Y + R * Math::Sin(angle) - 15;
+
+			   g->FillEllipse(Brushes::White, x, y, 30, 30);
+			   g->DrawEllipse(Pens::Black, x, y, 30, 30);
+
+			   // Corrected DrawString call
+			   g->DrawString((i + 1).ToString(), gcnew System::Drawing::Font("Arial", 10, FontStyle::Bold),
+				   Brushes::Black, (float)(x + 7), (float)(y + 7));
+		   }
+	   }
+
 private: System::Void label4_Click(System::Object^ sender, System::EventArgs^ e) {
 }
-private: System::Void button2_Click(System::Object^ sender, System::EventArgs^ e) {
+private: System::Void btn_run_Click(System::Object^ sender, System::EventArgs^ e) {
+	int n = (int)numericUpDown->Value;
+	System::Collections::Generic::List<edge>^all_edges = GetEdgesFromGrid(); //получаем все ребра
+	//сортируем ребра во весу Лямбда
+	bubble_sort_edges(all_edges);
+
+	System::Collections::Generic::List<edge>^ mst_edges = gcnew System::Collections::Generic::List<edge>();
+	DSU^ dsu = gcnew DSU(n);
+	int total_weight = 0;
+
+	for each (edge e in all_edges) {
+		if (dsu->find(e.u) != dsu->find(e.v)) {
+			dsu->unite(e.u, e.v);
+			mst_edges->Add(e);
+			total_weight += e.weight;
+		}
+	}
+
+	//Вывод текста
+
+	lbl_status->Text = "Готово. Количество рёбер в каркасе(MST): " + mst_edges->Count;
+//	lbl_total_weight->Text = "Суммарный вес каркаса: " + total_weight;
+
+	DrawGraph(panel_1, GetEdgesFromGrid(), n, false); //Исходный граф
+	DrawGraph(panel_2, mst_edges, n, true); //Остовной граф
 }
 };
 }

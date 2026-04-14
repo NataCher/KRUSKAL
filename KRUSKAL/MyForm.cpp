@@ -11,3 +11,6 @@ int main(array<String^>^ args) {
 	KRUSKAL::MyForm form;
 	Application::Run(% form);
 }
+
+
+

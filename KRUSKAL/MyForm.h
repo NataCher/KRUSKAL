@@ -265,6 +265,7 @@ namespace KRUSKAL {
 				  for (int i = 0; i <= n; i++) parent[i] = i;
 			  }
 			  int find(int i) {
+
 				  if (parent[i] == i) return i;
 				  return parent[i] = find(parent[i]);
 			  }
@@ -304,6 +305,7 @@ namespace KRUSKAL {
 	private: System::Void dataGridView_CellContentClick(System::Object^ sender, System::Windows::Forms::DataGridViewCellEventArgs^ e) {
 	}
 private: System::Void btn_create_matrix_Click(System::Object^ sender, System::EventArgs^ e) {
+	
 	int n = (int)numericUpDown->Value; // получаем n из элемента 2
 	dataGridView->RowCount = n;
 	dataGridView->ColumnCount = n;
@@ -318,7 +320,16 @@ private: System::Void btn_create_matrix_Click(System::Object^ sender, System::Ev
 			}
 		}
 	}
+
+	//Настройка заголовков таблицы
+	for (int i = 0; i < n; i++) {
+		char letter = (char)(65 + i);
+		dataGridView->Columns[i]->HeaderText = gcnew String(letter, 1);
+		dataGridView->Rows[i]->HeaderCell->Value = gcnew String(letter, 1);
+	}
 }
+
+
 
 private: System::Void btn_random_Click(System::Object^ sender, System::EventArgs^ e) {
 	Random^ rand = gcnew Random();
@@ -327,7 +338,7 @@ private: System::Void btn_random_Click(System::Object^ sender, System::EventArgs
 	for (int i = 0; i < n; i++) {
 		for (int j = i + 1; j < n; j++) {
 
-			int weight = rand->Next(1, 30); // Веса от  1 до 20
+			int weight = rand->Next(100); // Веса от  1 до 20
 
 			dataGridView->Rows[i]->Cells[j]->Value = weight.ToString();
 			dataGridView->Rows[j]->Cells[i]->Value = weight.ToString();
@@ -385,8 +396,10 @@ void DrawGraph(Panel^ p, System::Collections::Generic::List<edge>^ edges, int no
 			   g->FillEllipse(Brushes::White, x, y, 30, 30);
 			   g->DrawEllipse(Pens::Black, x, y, 30, 30);
 
-			   // Corrected DrawString call
-			   g->DrawString((i + 1).ToString(), gcnew System::Drawing::Font("Arial", 10, FontStyle::Bold),
+			  
+			   char letter = (char)(65 + i); // 0 -> 'A' ; 1 -> 'B' и так далее
+			   String^ vertex_name = gcnew String(letter, 1);
+			   g->DrawString(vertex_name, gcnew System::Drawing::Font("Arial", 10, FontStyle::Bold),
 				   Brushes::Black, (float)(x + 7), (float)(y + 7));
 		   }
 	   }
@@ -397,6 +410,7 @@ private: System::Void btn_run_Click(System::Object^ sender, System::EventArgs^ e
 	int n = (int)numericUpDown->Value;
 	System::Collections::Generic::List<edge>^all_edges = GetEdgesFromGrid(); //получаем все ребра
 
+	//сортируем ребра во весу 
 	bubble_sort_edges(all_edges);
 
 	System::Collections::Generic::List<edge>^ mst_edges = gcnew System::Collections::Generic::List<edge>();
@@ -409,12 +423,19 @@ private: System::Void btn_run_Click(System::Object^ sender, System::EventArgs^ e
 			mst_edges->Add(e);
 			total_weight += e.weight;
 		}
+
+	char u_letter = (char)(65 + e.u);
+	char v_letter = (char)(65 + e.v);
+	String^ edgeInfo = String::Format("{0} - {1} (Вес:{2})",
+		gcnew String(u_letter, 1),
+		gcnew String(v_letter, 1), e.weight);
+
+	lbl_status->Text = "Готово. Количество рёбер в каркасе(MST): " + edgeInfo;//mst_edges->Count
+	//	lbl_total_weight->Text = "Суммарный вес каркаса: " + total_weight;
 	}
 
 	//Вывод текста
 
-	lbl_status->Text = "Готово. Количество рёбер в каркасе(MST): " + mst_edges->Count;
-//	lbl_total_weight->Text = "Суммарный вес каркаса: " + total_weight;
 
 	DrawGraph(panel_1, GetEdgesFromGrid(), n, false); //Исходный граф
 	DrawGraph(panel_2, mst_edges, n, true); //Остовной граф

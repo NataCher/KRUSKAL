@@ -55,6 +55,10 @@ namespace KRUSKAL {
 	private: System::Windows::Forms::Label^ Lbl_4;
 
 	private: System::Windows::Forms::Label^ lbl_status;
+	private: System::Windows::Forms::Button^ btn_minimaze;
+
+
+
 
 
 	protected:
@@ -91,6 +95,7 @@ namespace KRUSKAL {
 			this->lbl_3 = (gcnew System::Windows::Forms::Label());
 			this->Lbl_4 = (gcnew System::Windows::Forms::Label());
 			this->lbl_status = (gcnew System::Windows::Forms::Label());
+			this->btn_minimaze = (gcnew System::Windows::Forms::Button());
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->numericUpDown))->BeginInit();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->dataGridView))->BeginInit();
 			this->SuspendLayout();
@@ -219,12 +224,27 @@ namespace KRUSKAL {
 			this->lbl_status->TabIndex = 12;
 			this->lbl_status->Text = L"Статус";
 			// 
+			// btn_minimaze
+			// 
+			this->btn_minimaze->BackColor = System::Drawing::Color::LightSkyBlue;
+			this->btn_minimaze->Cursor = System::Windows::Forms::Cursors::Hand;
+			this->btn_minimaze->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 18, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(204)));
+			this->btn_minimaze->Location = System::Drawing::Point(1127, 12);
+			this->btn_minimaze->Name = L"btn_minimaze";
+			this->btn_minimaze->Size = System::Drawing::Size(79, 65);
+			this->btn_minimaze->TabIndex = 13;
+			this->btn_minimaze->Text = L"_";
+			this->btn_minimaze->UseVisualStyleBackColor = false;
+			this->btn_minimaze->Click += gcnew System::EventHandler(this, &MyForm::btn_minimaze_Click);
+			// 
 			// MyForm
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(9, 20);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			this->BackColor = System::Drawing::SystemColors::Control;
 			this->ClientSize = System::Drawing::Size(1303, 978);
+			this->Controls->Add(this->btn_minimaze);
 			this->Controls->Add(this->lbl_status);
 			this->Controls->Add(this->Lbl_4);
 			this->Controls->Add(this->lbl_3);
@@ -300,7 +320,16 @@ namespace KRUSKAL {
 	}
 
 	private: System::Void btn_exit_Click(System::Object^ sender, System::EventArgs^ e) {
-		this->Close();
+		System::Windows::Forms::DialogResult result;
+		result = MessageBox::Show("Вы уверены что хотите выйти?",
+				"Выход из программы",
+				MessageBoxButtons::YesNo,
+				MessageBoxIcon::Question);
+		if (result == System::Windows::Forms::DialogResult::Yes)
+		{
+			Application::Exit();
+		}
+					
 	}
 	private: System::Void dataGridView_CellContentClick(System::Object^ sender, System::Windows::Forms::DataGridViewCellEventArgs^ e) {
 	}
@@ -328,8 +357,6 @@ private: System::Void btn_create_matrix_Click(System::Object^ sender, System::Ev
 		dataGridView->Rows[i]->HeaderCell->Value = gcnew String(letter, 1);
 	}
 }
-
-
 
 private: System::Void btn_random_Click(System::Object^ sender, System::EventArgs^ e) {
 	Random^ rand = gcnew Random();
@@ -379,7 +406,7 @@ void DrawGraph(Panel^ p, System::Collections::Generic::List<edge>^ edges, int no
 
 			   g->DrawLine(edgePen, p1, p2);
 
-			   // Рисуем вес ребра в рамке (как на твоем эскизе)
+			   // Рисуем вес ребра в рамке
 			   String^ weightStr = e.weight.ToString();
 			   Point mid((p1.X + p2.X) / 2, (p1.Y + p2.Y) / 2);
 			   g->FillRectangle(Brushes::White, mid.X - 10, mid.Y - 10, 20, 20);
@@ -438,6 +465,9 @@ private: System::Void btn_run_Click(System::Object^ sender, System::EventArgs^ e
 
 	DrawGraph(panel_1, GetEdgesFromGrid(), n, false); //Исходный граф
 	DrawGraph(panel_2, mst_edges, n, true); //Остовной граф
+}
+private: System::Void btn_minimaze_Click(System::Object^ sender, System::EventArgs^ e) {
+	this->WindowState = FormWindowState::Minimized;
 }
 };
 }

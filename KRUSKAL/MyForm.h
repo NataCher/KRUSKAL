@@ -151,6 +151,7 @@ namespace KRUSKAL {
 			this->dataGridView->Size = System::Drawing::Size(313, 238);
 			this->dataGridView->TabIndex = 4;
 			this->dataGridView->CellContentClick += gcnew System::Windows::Forms::DataGridViewCellEventHandler(this, &MyForm::dataGridView_CellContentClick);
+			this->dataGridView->CellValueChanged += gcnew System::Windows::Forms::DataGridViewCellEventHandler(this, &MyForm::dataGridView_CellValueChanged);
 			// 
 			// btn_create_matrix
 			// 
@@ -302,14 +303,16 @@ namespace KRUSKAL {
 		int n = dataGridView->RowCount;
 
 		for (int i = 0; i < n; i++) {
-			for (int j = 0; j < n;j++) {
+			for (int j = 0; j < n; j++) {
 
 				if (dataGridView->Rows[i]->Cells[j]->Value != nullptr) {
+
 					int w = System::Convert::ToInt32(dataGridView->Rows[i]->Cells[j]->Value);
 
-					if (w > 0) {
+					if (w > 0) { //ребро существует, если вес > 0 
 						edge e;
-						e.u = i; e.v = j;
+						e.u = i;
+						e.v = j;
 						e.weight = w;
 						edges->Add(e);
 					}
@@ -319,6 +322,13 @@ namespace KRUSKAL {
 		return edges;
 	}
 
+	private:System::Void dataGridView_CellValueChanged(System::Object^ sender, System::Windows::Forms::DataGridViewCellEventArgs^ e)
+	{
+		if (e->RowIndex >= 0 && e->ColumnIndex >= 0 && e->RowIndex != e->ColumnIndex) {
+			//копируем значение в симметричную ячейку
+			dataGridView->Rows[e->ColumnIndex]->Cells[e->RowIndex]->Value = dataGridView->Rows[e->RowIndex]->Cells[e->ColumnIndex]->Value;
+		}
+	}
 	private: System::Void btn_exit_Click(System::Object^ sender, System::EventArgs^ e) {
 		System::Windows::Forms::DialogResult result;
 		result = MessageBox::Show("Вы уверены что хотите выйти?",
@@ -456,7 +466,7 @@ private: System::Void btn_run_Click(System::Object^ sender, System::EventArgs^ e
 		gcnew String(u_letter, 1),
 		gcnew String(v_letter, 1), e.weight);
 
-	lbl_status->Text = "Готово. Количество рёбер в каркасе(MST): " + edgeInfo;//mst_edges->Count
+	lbl_status->Text = "Количество рёбер в каркасе(MST): " + edgeInfo;//mst_edges->Count
 	//	lbl_total_weight->Text = "Суммарный вес каркаса: " + total_weight;
 	}
 

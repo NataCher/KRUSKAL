@@ -56,9 +56,12 @@ namespace KRUSKAL {
 
 	private: System::Windows::Forms::Label^ lbl_status;
 	private: System::Windows::Forms::Button^ btn_minimaze;
+	private: System::Windows::Forms::Timer^ timer;
+	private: System::Windows::Forms::ListBox^ lst_box;
 
+	private: System::ComponentModel::IContainer^ components;
 
-
+	//
 
 
 	protected:
@@ -69,7 +72,7 @@ namespace KRUSKAL {
 		/// <summary>
 		/// Обязательная переменная конструктора.
 		/// </summary>
-		System::ComponentModel::Container ^components;
+
 
 
 
@@ -82,6 +85,7 @@ namespace KRUSKAL {
 		/// </summary>
 		void InitializeComponent(void)
 		{
+			this->components = (gcnew System::ComponentModel::Container());
 			this->btn_exit = (gcnew System::Windows::Forms::Button());
 			this->lbl_1 = (gcnew System::Windows::Forms::Label());
 			this->lbl_2 = (gcnew System::Windows::Forms::Label());
@@ -96,6 +100,8 @@ namespace KRUSKAL {
 			this->Lbl_4 = (gcnew System::Windows::Forms::Label());
 			this->lbl_status = (gcnew System::Windows::Forms::Label());
 			this->btn_minimaze = (gcnew System::Windows::Forms::Button());
+			this->timer = (gcnew System::Windows::Forms::Timer(this->components));
+			this->lst_box = (gcnew System::Windows::Forms::ListBox());
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->numericUpDown))->BeginInit();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->dataGridView))->BeginInit();
 			this->SuspendLayout();
@@ -126,7 +132,7 @@ namespace KRUSKAL {
 			// lbl_2
 			// 
 			this->lbl_2->AutoSize = true;
-			this->lbl_2->Location = System::Drawing::Point(37, 74);
+			this->lbl_2->Location = System::Drawing::Point(158, 358);
 			this->lbl_2->Name = L"lbl_2";
 			this->lbl_2->Size = System::Drawing::Size(143, 20);
 			this->lbl_2->TabIndex = 2;
@@ -134,7 +140,7 @@ namespace KRUSKAL {
 			// 
 			// numericUpDown
 			// 
-			this->numericUpDown->Location = System::Drawing::Point(245, 33);
+			this->numericUpDown->Location = System::Drawing::Point(321, 35);
 			this->numericUpDown->Minimum = System::Decimal(gcnew cli::array< System::Int32 >(4) { 1, 0, 0, 0 });
 			this->numericUpDown->Name = L"numericUpDown";
 			this->numericUpDown->Size = System::Drawing::Size(109, 26);
@@ -144,18 +150,18 @@ namespace KRUSKAL {
 			// dataGridView
 			// 
 			this->dataGridView->ColumnHeadersHeightSizeMode = System::Windows::Forms::DataGridViewColumnHeadersHeightSizeMode::AutoSize;
-			this->dataGridView->Location = System::Drawing::Point(41, 108);
+			this->dataGridView->Location = System::Drawing::Point(41, 117);
 			this->dataGridView->Name = L"dataGridView";
 			this->dataGridView->RowHeadersWidth = 62;
 			this->dataGridView->RowTemplate->Height = 28;
-			this->dataGridView->Size = System::Drawing::Size(313, 238);
+			this->dataGridView->Size = System::Drawing::Size(389, 238);
 			this->dataGridView->TabIndex = 4;
 			this->dataGridView->CellContentClick += gcnew System::Windows::Forms::DataGridViewCellEventHandler(this, &MyForm::dataGridView_CellContentClick);
 			this->dataGridView->CellValueChanged += gcnew System::Windows::Forms::DataGridViewCellEventHandler(this, &MyForm::dataGridView_CellValueChanged);
 			// 
 			// btn_create_matrix
 			// 
-			this->btn_create_matrix->Location = System::Drawing::Point(102, 365);
+			this->btn_create_matrix->Location = System::Drawing::Point(41, 67);
 			this->btn_create_matrix->Name = L"btn_create_matrix";
 			this->btn_create_matrix->Size = System::Drawing::Size(153, 44);
 			this->btn_create_matrix->TabIndex = 5;
@@ -165,7 +171,7 @@ namespace KRUSKAL {
 			// 
 			// btn_run
 			// 
-			this->btn_run->Location = System::Drawing::Point(458, 35);
+			this->btn_run->Location = System::Drawing::Point(501, 35);
 			this->btn_run->Name = L"btn_run";
 			this->btn_run->Size = System::Drawing::Size(223, 59);
 			this->btn_run->TabIndex = 6;
@@ -192,7 +198,7 @@ namespace KRUSKAL {
 			// 
 			// panel_2
 			// 
-			this->panel_2->Location = System::Drawing::Point(674, 425);
+			this->panel_2->Location = System::Drawing::Point(691, 425);
 			this->panel_2->Name = L"panel_2";
 			this->panel_2->Size = System::Drawing::Size(600, 459);
 			this->panel_2->TabIndex = 9;
@@ -219,7 +225,7 @@ namespace KRUSKAL {
 			// lbl_status
 			// 
 			this->lbl_status->AutoSize = true;
-			this->lbl_status->Location = System::Drawing::Point(454, 123);
+			this->lbl_status->Location = System::Drawing::Point(497, 108);
 			this->lbl_status->Name = L"lbl_status";
 			this->lbl_status->Size = System::Drawing::Size(62, 20);
 			this->lbl_status->TabIndex = 12;
@@ -239,12 +245,26 @@ namespace KRUSKAL {
 			this->btn_minimaze->UseVisualStyleBackColor = false;
 			this->btn_minimaze->Click += gcnew System::EventHandler(this, &MyForm::btn_minimaze_Click);
 			// 
+			// timer
+			// 
+			this->timer->Tick += gcnew System::EventHandler(this, &MyForm::timer_Tick);
+			// 
+			// lst_box
+			// 
+			this->lst_box->FormattingEnabled = true;
+			this->lst_box->ItemHeight = 20;
+			this->lst_box->Location = System::Drawing::Point(501, 191);
+			this->lst_box->Name = L"lst_box";
+			this->lst_box->Size = System::Drawing::Size(790, 164);
+			this->lst_box->TabIndex = 14;
+			// 
 			// MyForm
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(9, 20);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			this->BackColor = System::Drawing::SystemColors::Control;
 			this->ClientSize = System::Drawing::Size(1303, 978);
+			this->Controls->Add(this->lst_box);
 			this->Controls->Add(this->btn_minimaze);
 			this->Controls->Add(this->lbl_status);
 			this->Controls->Add(this->Lbl_4);
@@ -321,6 +341,13 @@ namespace KRUSKAL {
 		}
 		return edges;
 	}
+
+	private:
+		System::Collections::Generic::List<edge>^ animation_edges; //Список всех отсортированных ребер
+		System::Collections::Generic::List<edge>^ curent_MST; //Список ребер, уже принятых в каркас
+		int current_edge_index; //Индекс ребра, которое проверяем сейчас
+		DSU^ animation_DSU; //CHM для проверки циклов
+
 
 	private:System::Void dataGridView_CellValueChanged(System::Object^ sender, System::Windows::Forms::DataGridViewCellEventArgs^ e)
 	{
@@ -461,24 +488,71 @@ private: System::Void btn_run_Click(System::Object^ sender, System::EventArgs^ e
 			total_weight += e.weight;
 		}
 
-	char u_letter = (char)(65 + e.u);
+/*	char u_letter = (char)(65 + e.u);
 	char v_letter = (char)(65 + e.v);
 	String^ edgeInfo = String::Format("{0} - {1} (Вес:{2})",
 		gcnew String(u_letter, 1),
 		gcnew String(v_letter, 1), e.weight);
+*/
+	
+	
+	
+	animation_edges = GetEdgesFromGrid();
+	bubble_sort_edges(animation_edges);
 
-	lbl_status->Text = "Количество рёбер в каркасе(MST): " + edgeInfo;//mst_edges->Count
+	//Сброс состояния
+	curent_MST = gcnew System::Collections::Generic::List<edge>();
+	animation_DSU = gcnew DSU(n);
+	current_edge_index = 0;
+	lst_box->Items->Clear();
+
+	//Отрисовываем пустой исходный граф слева
+	DrawGraph(panel_1, animation_edges, n, false); //Исходный граф
+
+	timer->Start();
+
+
+
+	//lbl_status->Text = "Количество рёбер в каркасе(MST): " + edgeInfo;//mst_edges->Count
 	//	lbl_total_weight->Text = "Суммарный вес каркаса: " + total_weight;
 	}
 
 	//Вывод текста
 
 
-	DrawGraph(panel_1, GetEdgesFromGrid(), n, false); //Исходный граф
-	DrawGraph(panel_2, mst_edges, n, true); //Остовной граф
+//	DrawGraph(panel_1, GetEdgesFromGrid(), n, false); //Исходный граф
+//	DrawGraph(panel_2, mst_edges, n, true); //Остовной граф
 }
 private: System::Void btn_minimaze_Click(System::Object^ sender, System::EventArgs^ e) {
 	this->WindowState = FormWindowState::Minimized;
+}
+private: System::Void timer_Tick(System::Object^ sender, System::EventArgs^ e) {
+	if (current_edge_index >= animation_edges->Count) {
+		timer->Stop();
+		lbl_status->Text = "Алгоритм завершен!";
+		return;
+	}
+
+	edge current_e = animation_edges[current_edge_index];
+	char ul = (char)(65 + current_e.u);
+	char vl = (char)(65 + current_e.v);
+
+	//Логика Краскала 
+
+	if (animation_DSU->find(current_e.u) != animation_DSU->find(current_e.v)) {
+		animation_DSU->unite(current_e.u, current_e.v);
+		curent_MST->Add(current_e);
+
+	//Лог в тестовое поле (lst_log)
+		lst_box->Items->Add(String::Format("Берем ребро {0}-{1} (вес {2}) - OK",
+							gcnew String(ul, 1), gcnew String(vl, 1), current_e.weight));
+		lst_box->Items->Add(String::Format("Ребро {0}-{1} (вес {2} - цикл! Пропуск",
+							gcnew String(ul, 1), gcnew String(vl, 1), current_e.weight));
+	}
+	//Перерисовываем правую панель
+	DrawGraph(panel_2, curent_MST, (int)numericUpDown->Value, true);
+
+	current_edge_index;
 }
 };
 }

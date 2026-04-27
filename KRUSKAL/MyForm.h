@@ -191,6 +191,7 @@ namespace KRUSKAL {
 			// 
 			// panel_1
 			// 
+			this->panel_1->BorderStyle = System::Windows::Forms::BorderStyle::Fixed3D;
 			this->panel_1->Location = System::Drawing::Point(41, 425);
 			this->panel_1->Name = L"panel_1";
 			this->panel_1->Size = System::Drawing::Size(600, 459);
@@ -198,6 +199,7 @@ namespace KRUSKAL {
 			// 
 			// panel_2
 			// 
+			this->panel_2->BorderStyle = System::Windows::Forms::BorderStyle::Fixed3D;
 			this->panel_2->Location = System::Drawing::Point(691, 425);
 			this->panel_2->Name = L"panel_2";
 			this->panel_2->Size = System::Drawing::Size(600, 459);
@@ -263,7 +265,7 @@ namespace KRUSKAL {
 			this->AutoScaleDimensions = System::Drawing::SizeF(9, 20);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			this->BackColor = System::Drawing::SystemColors::Control;
-			this->ClientSize = System::Drawing::Size(1303, 978);
+			this->ClientSize = System::Drawing::Size(1323, 978);
 			this->Controls->Add(this->lst_box);
 			this->Controls->Add(this->btn_minimaze);
 			this->Controls->Add(this->lbl_status);
@@ -323,18 +325,24 @@ namespace KRUSKAL {
 		int n = dataGridView->RowCount;
 
 		for (int i = 0; i < n; i++) {
-			for (int j = 0; j < n; j++) {
-
+			for (int j = i + 1; j < n; j++) { // Начинаем с i + 1 
 				if (dataGridView->Rows[i]->Cells[j]->Value != nullptr) {
-
-					int w = System::Convert::ToInt32(dataGridView->Rows[i]->Cells[j]->Value);
-
-					if (w > 0) { //ребро существует, если вес > 0 
-						edge e;
-						e.u = i;
-						e.v = j;
-						e.weight = w;
-						edges->Add(e);
+					try {
+						String^ cellVal = dataGridView->Rows[i]->Cells[j]->Value->ToString();
+						if (!String::IsNullOrWhiteSpace(cellVal)) {
+							int w = System::Convert::ToInt32(cellVal);
+							if (w > 0) {
+								edge e;
+								e.u = i;
+								e.v = j;
+								e.weight = w;
+								edges->Add(e);
+							}
+						}
+					}
+					catch (...) {
+						// Если в ячейке мусор или пусто — просто пропускаем её
+						continue;
 					}
 				}
 			}
@@ -357,24 +365,24 @@ namespace KRUSKAL {
 		}
 	}
 	private: System::Void btn_exit_Click(System::Object^ sender, System::EventArgs^ e) {
-		System::Windows::Forms::DialogResult result;
-		result = MessageBox::Show("Вы уверены что хотите выйти?",
-				"Выход из программы",
-				MessageBoxButtons::YesNo,
-				MessageBoxIcon::Question);
-		if (result == System::Windows::Forms::DialogResult::Yes)
-		{
+		System::Windows::Forms::DialogResult 
+			result = MessageBox::Show("Вы уверены?", "Выход", MessageBoxButtons::YesNo);
+		if (result == System::Windows::Forms::DialogResult::Yes) {
 			Application::Exit();
 		}
 					
 	}
 	private: System::Void dataGridView_CellContentClick(System::Object^ sender, System::Windows::Forms::DataGridViewCellEventArgs^ e) {
 	}
-private: System::Void btn_create_matrix_Click(System::Object^ sender, System::EventArgs^ e) {
-	
+	private: System::Void btn_create_matrix_Click(System::Object^ sender, System::EventArgs^ e) {
+
 	int n = (int)numericUpDown->Value; // получаем n из элемента 2
+
+	dataGridView->AllowUserToAddRows = false;
+
 	dataGridView->RowCount = n;
 	dataGridView->ColumnCount = n;
+
 
 	for (int i = 0; i < n; i++) {
 		dataGridView->Columns[i]->Width = 30; // делаем ячейки квадратными
@@ -409,12 +417,14 @@ private: System::Void btn_random_Click(System::Object^ sender, System::EventArgs
 		}
 	}
 }
-
 	   void bubble_sort_edges(System::Collections::Generic::List<edge>^ edges) {
 		   int n = edges->Count;
-		   for (int i = 0; i < n; i++) {
+		   if (n < 2) return; // Если ребер 0 или 1, сортировка не нужна 
+
+		   for (int i = 0; i < n - 1; i++) {
 			   for (int j = 0; j < n - i - 1; j++) {
-				   if (edges[i].weight > edges[j + 1].weight) {
+				   // Сравниваем соседние элементы j и j + 1 
+				   if (edges[j].weight > edges[j + 1].weight) {
 					   edge temp = edges[j];
 					   edges[j] = edges[j + 1];
 					   edges[j + 1] = temp;
@@ -422,7 +432,6 @@ private: System::Void btn_random_Click(System::Object^ sender, System::EventArgs
 			   }
 		   }
 	   }
-
 
 void DrawGraph(Panel^ p, System::Collections::Generic::List<edge>^ edges, int nodeCount, bool isResult) {
 		   Graphics^ g = p->CreateGraphics();
@@ -471,13 +480,29 @@ void DrawGraph(Panel^ p, System::Collections::Generic::List<edge>^ edges, int no
 private: System::Void label4_Click(System::Object^ sender, System::EventArgs^ e) {
 }
 private: System::Void btn_run_Click(System::Object^ sender, System::EventArgs^ e) {
+
 	int n = (int)numericUpDown->Value;
-	System::Collections::Generic::List<edge>^all_edges = GetEdgesFromGrid(); //получаем все ребра
+	
+	//Получаем ребра из матрицы 
+	animation_edges = GetEdgesFromGrid();
+	bubble_sort_edges(animation_edges);
 
-	//сортируем ребра во весу 
-	bubble_sort_edges(all_edges);
+	//Сброс состояния для анимации
+	curent_MST = gcnew System::Collections::Generic::List<edge>();
+	animation_DSU = gcnew DSU((int)numericUpDown->Value);
+	current_edge_index = 0;
 
+	lst_box->Items->Clear();
+
+	//Отрисовываем пустой исходный граф слева
+	DrawGraph(panel_1, animation_edges, n, false); //Исходный граф
+	timer->Start();
+
+
+/*	System::Collections::Generic::List<edge>^ all_edges = GetEdgesFromGrid(); //получаем все ребра
+	
 	System::Collections::Generic::List<edge>^ mst_edges = gcnew System::Collections::Generic::List<edge>();
+
 	DSU^ dsu = gcnew DSU(n);
 	int total_weight = 0;
 
@@ -487,75 +512,74 @@ private: System::Void btn_run_Click(System::Object^ sender, System::EventArgs^ e
 			mst_edges->Add(e);
 			total_weight += e.weight;
 		}
-
-/*	char u_letter = (char)(65 + e.u);
-	char v_letter = (char)(65 + e.v);
-	String^ edgeInfo = String::Format("{0} - {1} (Вес:{2})",
-		gcnew String(u_letter, 1),
-		gcnew String(v_letter, 1), e.weight);
-*/
-	
-	
-	
-	animation_edges = GetEdgesFromGrid();
-	bubble_sort_edges(animation_edges);
-
-	//Сброс состояния
-	curent_MST = gcnew System::Collections::Generic::List<edge>();
-	animation_DSU = gcnew DSU(n);
-	current_edge_index = 0;
-	lst_box->Items->Clear();
-
-	//Отрисовываем пустой исходный граф слева
-	DrawGraph(panel_1, animation_edges, n, false); //Исходный граф
-
-	timer->Start();
-
-
-
-	//lbl_status->Text = "Количество рёбер в каркасе(MST): " + edgeInfo;//mst_edges->Count
-	//	lbl_total_weight->Text = "Суммарный вес каркаса: " + total_weight;
 	}
-
-	//Вывод текста
-
-
-//	DrawGraph(panel_1, GetEdgesFromGrid(), n, false); //Исходный граф
-//	DrawGraph(panel_2, mst_edges, n, true); //Остовной граф
+*/
 }
 private: System::Void btn_minimaze_Click(System::Object^ sender, System::EventArgs^ e) {
 	this->WindowState = FormWindowState::Minimized;
 }
 private: System::Void timer_Tick(System::Object^ sender, System::EventArgs^ e) {
-	if (current_edge_index >= animation_edges->Count) {
-		timer->Stop();
-		lbl_status->Text = "Алгоритм завершен!";
-		return;
+		// n - количество вершин из numericUpDown
+		int n = (int)numericUpDown->Value;
+
+		// Условие: пока не перебрали все ребра и не построили каркас (n-1 ребер)
+		if (current_edge_index < animation_edges->Count && curent_MST->Count < n - 1) {
+
+			// Берем следующее ребро из отсортированного списка
+			edge current_e = animation_edges[current_edge_index++];
+
+			// Конвертируем индексы в буквы для лога
+			char u_letter = (char)(65 + current_e.u);
+			char v_letter = (char)(65 + current_e.v);
+			String^ name_u = gcnew String(u_letter, 1);
+			String^ name_v = gcnew String(v_letter, 1);
+
+			// Проверяем на цикл через DSU
+			if (animation_DSU->find(current_e.u) != animation_DSU->find(current_e.v)) {
+				animation_DSU->unite(current_e.u, current_e.v);
+				curent_MST->Add(current_e);
+
+				lbl_status->Text = String::Format("Добавлено: {0} - {1} (вес {2})", name_u, name_v, current_e.weight);
+
+				String^ log_entry = String::Format("{0}) Ребро {1} - {2}, вес: {3} — ОК (Добавлено)",
+					current_edge_index, name_u, name_v, current_e.weight);
+
+				lst_box->Items->Add(log_entry);
+			}
+			else {
+				String^ logEntry = String::Format("{0}) Ребро {1} - {2}, вес: {3} — Пропуск (Цикл!)",
+					current_edge_index, name_u, name_v, current_e.weight);
+				lst_box->Items->Add(logEntry);
+
+				lbl_status->Text = String::Format("Пропуск ребра {0}-{1}", name_u, name_v);
+			}
+
+			// Автоматическая прокрутка ListBox вниз к последней записи
+			lst_box->SelectedIndex = lst_box->Items->Count - 1;
+
+			// Перерисовываем правую панель, чтобы видеть прогресс
+			DrawGraph(panel_2, curent_MST, n, true);
+		}
+		else {
+
+			timer->Stop();
+
+			int totalWeight = 0;
+			for each (edge mstEdge in curent_MST) {
+				totalWeight += mstEdge.weight;
+			}
+
+			lst_box->Items->Add("------------------------------------------");
+			lst_box->Items->Add("Алгоритм завершен успешно.");
+			lst_box->Items->Add("Итоговый вес каркаса: " + totalWeight.ToString());
+
+			lbl_status->Text = "Готово!";
+		}
 	}
 
-	edge current_e = animation_edges[current_edge_index];
-	char ul = (char)(65 + current_e.u);
-	char vl = (char)(65 + current_e.v);
-
-	//Логика Краскала 
-
-	if (animation_DSU->find(current_e.u) != animation_DSU->find(current_e.v)) {
-		animation_DSU->unite(current_e.u, current_e.v);
-		curent_MST->Add(current_e);
-
-	//Лог в тестовое поле (lst_log)
-		lst_box->Items->Add(String::Format("Берем ребро {0}-{1} (вес {2}) - OK",
-							gcnew String(ul, 1), gcnew String(vl, 1), current_e.weight));
-		lst_box->Items->Add(String::Format("Ребро {0}-{1} (вес {2} - цикл! Пропуск",
-							gcnew String(ul, 1), gcnew String(vl, 1), current_e.weight));
-	}
-	//Перерисовываем правую панель
-	DrawGraph(panel_2, curent_MST, (int)numericUpDown->Value, true);
-
-	current_edge_index;
-}
 };
-}
+};
+
 
 
 

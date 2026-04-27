@@ -225,7 +225,7 @@ namespace KRUSKAL {
 			this->Lbl_4->Click += gcnew System::EventHandler(this, &MyForm::label4_Click);
 			// 
 			// lbl_status
-			// 
+			//  
 			this->lbl_status->AutoSize = true;
 			this->lbl_status->Location = System::Drawing::Point(497, 108);
 			this->lbl_status->Name = L"lbl_status";

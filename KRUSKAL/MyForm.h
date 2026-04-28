@@ -58,6 +58,7 @@ namespace KRUSKAL {
 	private: System::Windows::Forms::Button^ btn_minimaze;
 	private: System::Windows::Forms::Timer^ timer;
 	private: System::Windows::Forms::ListBox^ lst_box;
+	private: System::Windows::Forms::Label^ label1;
 
 	private: System::ComponentModel::IContainer^ components;
 
@@ -72,11 +73,6 @@ namespace KRUSKAL {
 		/// <summary>
 		/// Обязательная переменная конструктора.
 		/// </summary>
-
-
-
-
-
 
 #pragma region Windows Form Designer generated code
 		/// <summary>
@@ -102,6 +98,7 @@ namespace KRUSKAL {
 			this->btn_minimaze = (gcnew System::Windows::Forms::Button());
 			this->timer = (gcnew System::Windows::Forms::Timer(this->components));
 			this->lst_box = (gcnew System::Windows::Forms::ListBox());
+			this->label1 = (gcnew System::Windows::Forms::Label());
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->numericUpDown))->BeginInit();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->dataGridView))->BeginInit();
 			this->SuspendLayout();
@@ -123,47 +120,55 @@ namespace KRUSKAL {
 			// lbl_1
 			// 
 			this->lbl_1->AutoSize = true;
+			this->lbl_1->Font = (gcnew System::Drawing::Font(L"Courier New", 10, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(204)));
 			this->lbl_1->Location = System::Drawing::Point(37, 35);
 			this->lbl_1->Name = L"lbl_1";
-			this->lbl_1->Size = System::Drawing::Size(202, 20);
+			this->lbl_1->Size = System::Drawing::Size(262, 23);
 			this->lbl_1->TabIndex = 1;
 			this->lbl_1->Text = L"Введите вершины графа";
 			// 
 			// lbl_2
 			// 
 			this->lbl_2->AutoSize = true;
-			this->lbl_2->Location = System::Drawing::Point(158, 358);
+			this->lbl_2->Font = (gcnew System::Drawing::Font(L"Courier New", 9, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(204)));
+			this->lbl_2->Location = System::Drawing::Point(37, 136);
 			this->lbl_2->Name = L"lbl_2";
-			this->lbl_2->Size = System::Drawing::Size(143, 20);
+			this->lbl_2->Size = System::Drawing::Size(175, 21);
 			this->lbl_2->TabIndex = 2;
 			this->lbl_2->Text = L"Введите матрицу";
 			// 
 			// numericUpDown
 			// 
-			this->numericUpDown->Location = System::Drawing::Point(321, 35);
+			this->numericUpDown->Font = (gcnew System::Drawing::Font(L"Courier New", 10, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(204)));
+			this->numericUpDown->Location = System::Drawing::Point(343, 35);
 			this->numericUpDown->Minimum = System::Decimal(gcnew cli::array< System::Int32 >(4) { 1, 0, 0, 0 });
 			this->numericUpDown->Name = L"numericUpDown";
-			this->numericUpDown->Size = System::Drawing::Size(109, 26);
+			this->numericUpDown->Size = System::Drawing::Size(131, 30);
 			this->numericUpDown->TabIndex = 3;
 			this->numericUpDown->Value = System::Decimal(gcnew cli::array< System::Int32 >(4) { 1, 0, 0, 0 });
 			// 
 			// dataGridView
 			// 
 			this->dataGridView->ColumnHeadersHeightSizeMode = System::Windows::Forms::DataGridViewColumnHeadersHeightSizeMode::AutoSize;
-			this->dataGridView->Location = System::Drawing::Point(41, 117);
+			this->dataGridView->Location = System::Drawing::Point(40, 160);
 			this->dataGridView->Name = L"dataGridView";
 			this->dataGridView->RowHeadersWidth = 62;
 			this->dataGridView->RowTemplate->Height = 28;
-			this->dataGridView->Size = System::Drawing::Size(389, 238);
+			this->dataGridView->Size = System::Drawing::Size(433, 256);
 			this->dataGridView->TabIndex = 4;
 			this->dataGridView->CellContentClick += gcnew System::Windows::Forms::DataGridViewCellEventHandler(this, &MyForm::dataGridView_CellContentClick);
 			this->dataGridView->CellValueChanged += gcnew System::Windows::Forms::DataGridViewCellEventHandler(this, &MyForm::dataGridView_CellValueChanged);
 			// 
 			// btn_create_matrix
 			// 
-			this->btn_create_matrix->Location = System::Drawing::Point(41, 67);
+			this->btn_create_matrix->Font = (gcnew System::Drawing::Font(L"Courier New", 10, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(204)));
+			this->btn_create_matrix->Location = System::Drawing::Point(40, 71);
 			this->btn_create_matrix->Name = L"btn_create_matrix";
-			this->btn_create_matrix->Size = System::Drawing::Size(153, 44);
+			this->btn_create_matrix->Size = System::Drawing::Size(434, 56);
 			this->btn_create_matrix->TabIndex = 5;
 			this->btn_create_matrix->Text = L"Создать матрицу";
 			this->btn_create_matrix->UseVisualStyleBackColor = true;
@@ -171,9 +176,11 @@ namespace KRUSKAL {
 			// 
 			// btn_run
 			// 
-			this->btn_run->Location = System::Drawing::Point(501, 35);
+			this->btn_run->Font = (gcnew System::Drawing::Font(L"Courier New", 10, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(204)));
+			this->btn_run->Location = System::Drawing::Point(40, 485);
 			this->btn_run->Name = L"btn_run";
-			this->btn_run->Size = System::Drawing::Size(223, 59);
+			this->btn_run->Size = System::Drawing::Size(433, 59);
 			this->btn_run->TabIndex = 6;
 			this->btn_run->Text = L"Запуск алгоритма";
 			this->btn_run->UseVisualStyleBackColor = true;
@@ -181,9 +188,11 @@ namespace KRUSKAL {
 			// 
 			// btn_random
 			// 
-			this->btn_random->Location = System::Drawing::Point(1097, 95);
+			this->btn_random->Font = (gcnew System::Drawing::Font(L"Courier New", 10, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(204)));
+			this->btn_random->Location = System::Drawing::Point(41, 422);
 			this->btn_random->Name = L"btn_random";
-			this->btn_random->Size = System::Drawing::Size(194, 77);
+			this->btn_random->Size = System::Drawing::Size(433, 57);
 			this->btn_random->TabIndex = 7;
 			this->btn_random->Text = L"Заполнить случайными числами";
 			this->btn_random->UseVisualStyleBackColor = true;
@@ -191,16 +200,18 @@ namespace KRUSKAL {
 			// 
 			// panel_1
 			// 
+			this->panel_1->BackColor = System::Drawing::SystemColors::ButtonHighlight;
 			this->panel_1->BorderStyle = System::Windows::Forms::BorderStyle::Fixed3D;
-			this->panel_1->Location = System::Drawing::Point(41, 425);
+			this->panel_1->Location = System::Drawing::Point(40, 550);
 			this->panel_1->Name = L"panel_1";
 			this->panel_1->Size = System::Drawing::Size(600, 459);
 			this->panel_1->TabIndex = 8;
 			// 
 			// panel_2
 			// 
+			this->panel_2->BackColor = System::Drawing::SystemColors::ButtonHighlight;
 			this->panel_2->BorderStyle = System::Windows::Forms::BorderStyle::Fixed3D;
-			this->panel_2->Location = System::Drawing::Point(691, 425);
+			this->panel_2->Location = System::Drawing::Point(691, 550);
 			this->panel_2->Name = L"panel_2";
 			this->panel_2->Size = System::Drawing::Size(600, 459);
 			this->panel_2->TabIndex = 9;
@@ -208,28 +219,34 @@ namespace KRUSKAL {
 			// lbl_3
 			// 
 			this->lbl_3->AutoSize = true;
-			this->lbl_3->Location = System::Drawing::Point(204, 904);
+			this->lbl_3->Font = (gcnew System::Drawing::Font(L"Courier New", 11, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(204)));
+			this->lbl_3->Location = System::Drawing::Point(140, 1022);
 			this->lbl_3->Name = L"lbl_3";
-			this->lbl_3->Size = System::Drawing::Size(278, 20);
+			this->lbl_3->Size = System::Drawing::Size(402, 25);
 			this->lbl_3->TabIndex = 10;
 			this->lbl_3->Text = L"Связный неориентированный граф";
 			// 
 			// Lbl_4
 			// 
 			this->Lbl_4->AutoSize = true;
-			this->Lbl_4->Location = System::Drawing::Point(856, 904);
+			this->Lbl_4->Font = (gcnew System::Drawing::Font(L"Courier New", 11, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(204)));
+			this->Lbl_4->Location = System::Drawing::Point(759, 1022);
 			this->Lbl_4->Name = L"Lbl_4";
-			this->Lbl_4->Size = System::Drawing::Size(326, 20);
+			this->Lbl_4->Size = System::Drawing::Size(480, 25);
 			this->Lbl_4->TabIndex = 11;
 			this->Lbl_4->Text = L"Каркас с минимальным суммарным весом";
 			this->Lbl_4->Click += gcnew System::EventHandler(this, &MyForm::label4_Click);
 			// 
 			// lbl_status
-			//  
+			// 
 			this->lbl_status->AutoSize = true;
-			this->lbl_status->Location = System::Drawing::Point(497, 108);
+			this->lbl_status->Font = (gcnew System::Drawing::Font(L"Courier New", 9, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(204)));
+			this->lbl_status->Location = System::Drawing::Point(491, 136);
 			this->lbl_status->Name = L"lbl_status";
-			this->lbl_status->Size = System::Drawing::Size(62, 20);
+			this->lbl_status->Size = System::Drawing::Size(76, 21);
 			this->lbl_status->TabIndex = 12;
 			this->lbl_status->Text = L"Статус";
 			// 
@@ -253,19 +270,34 @@ namespace KRUSKAL {
 			// 
 			// lst_box
 			// 
+			this->lst_box->Font = (gcnew System::Drawing::Font(L"Courier New", 10, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(204)));
 			this->lst_box->FormattingEnabled = true;
-			this->lst_box->ItemHeight = 20;
-			this->lst_box->Location = System::Drawing::Point(501, 191);
+			this->lst_box->ItemHeight = 23;
+			this->lst_box->Location = System::Drawing::Point(495, 164);
 			this->lst_box->Name = L"lst_box";
-			this->lst_box->Size = System::Drawing::Size(790, 164);
+			this->lst_box->Size = System::Drawing::Size(796, 349);
 			this->lst_box->TabIndex = 14;
+			// 
+			// label1
+			// 
+			this->label1->AutoSize = true;
+			this->label1->Font = (gcnew System::Drawing::Font(L"Courier New", 28, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(204)));
+			this->label1->Location = System::Drawing::Point(503, 14);
+			this->label1->Name = L"label1";
+			this->label1->Size = System::Drawing::Size(605, 63);
+			this->label1->TabIndex = 15;
+			this->label1->Text = L"Алгоритм Краскала";
+			this->label1->TextAlign = System::Drawing::ContentAlignment::TopCenter;
 			// 
 			// MyForm
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(9, 20);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			this->BackColor = System::Drawing::SystemColors::Control;
-			this->ClientSize = System::Drawing::Size(1323, 978);
+			this->ClientSize = System::Drawing::Size(1323, 1075);
+			this->Controls->Add(this->label1);
 			this->Controls->Add(this->lst_box);
 			this->Controls->Add(this->btn_minimaze);
 			this->Controls->Add(this->lbl_status);
@@ -497,28 +529,14 @@ private: System::Void btn_run_Click(System::Object^ sender, System::EventArgs^ e
 	//Отрисовываем пустой исходный граф слева
 	DrawGraph(panel_1, animation_edges, n, false); //Исходный граф
 	timer->Start();
-
-
-/*	System::Collections::Generic::List<edge>^ all_edges = GetEdgesFromGrid(); //получаем все ребра
-	
-	System::Collections::Generic::List<edge>^ mst_edges = gcnew System::Collections::Generic::List<edge>();
-
-	DSU^ dsu = gcnew DSU(n);
-	int total_weight = 0;
-
-	for each (edge e in all_edges) {
-		if (dsu->find(e.u) != dsu->find(e.v)) {
-			dsu->unite(e.u, e.v);
-			mst_edges->Add(e);
-			total_weight += e.weight;
-		}
-	}
-*/
 }
 private: System::Void btn_minimaze_Click(System::Object^ sender, System::EventArgs^ e) {
 	this->WindowState = FormWindowState::Minimized;
 }
 private: System::Void timer_Tick(System::Object^ sender, System::EventArgs^ e) {
+		
+		timer->Interval = 1000;
+
 		// n - количество вершин из numericUpDown
 		int n = (int)numericUpDown->Value;
 
@@ -564,14 +582,14 @@ private: System::Void timer_Tick(System::Object^ sender, System::EventArgs^ e) {
 
 			timer->Stop();
 
-			int totalWeight = 0;
-			for each (edge mstEdge in curent_MST) {
-				totalWeight += mstEdge.weight;
+			int total_weight = 0;
+			for each (edge mst_edge in curent_MST) {
+				total_weight += mst_edge.weight;
 			}
 
 			lst_box->Items->Add("------------------------------------------");
 			lst_box->Items->Add("Алгоритм завершен успешно.");
-			lst_box->Items->Add("Итоговый вес каркаса: " + totalWeight.ToString());
+			lst_box->Items->Add("Итоговый вес каркаса: " + total_weight.ToString());
 
 			lbl_status->Text = "Готово!";
 		}

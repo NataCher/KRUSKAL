@@ -124,7 +124,7 @@ namespace KRUSKAL {
 				static_cast<System::Byte>(204)));
 			this->lbl_1->Location = System::Drawing::Point(37, 35);
 			this->lbl_1->Name = L"lbl_1";
-			this->lbl_1->Size = System::Drawing::Size(262, 23);
+			this->lbl_1->Size = System::Drawing::Size(175, 16);
 			this->lbl_1->TabIndex = 1;
 			this->lbl_1->Text = L"Введите вершины графа";
 			// 
@@ -135,7 +135,7 @@ namespace KRUSKAL {
 				static_cast<System::Byte>(204)));
 			this->lbl_2->Location = System::Drawing::Point(37, 136);
 			this->lbl_2->Name = L"lbl_2";
-			this->lbl_2->Size = System::Drawing::Size(175, 21);
+			this->lbl_2->Size = System::Drawing::Size(112, 16);
 			this->lbl_2->TabIndex = 2;
 			this->lbl_2->Text = L"Введите матрицу";
 			// 
@@ -146,7 +146,7 @@ namespace KRUSKAL {
 			this->numericUpDown->Location = System::Drawing::Point(343, 35);
 			this->numericUpDown->Minimum = System::Decimal(gcnew cli::array< System::Int32 >(4) { 1, 0, 0, 0 });
 			this->numericUpDown->Name = L"numericUpDown";
-			this->numericUpDown->Size = System::Drawing::Size(131, 30);
+			this->numericUpDown->Size = System::Drawing::Size(131, 23);
 			this->numericUpDown->TabIndex = 3;
 			this->numericUpDown->Value = System::Decimal(gcnew cli::array< System::Int32 >(4) { 1, 0, 0, 0 });
 			// 
@@ -223,7 +223,7 @@ namespace KRUSKAL {
 				static_cast<System::Byte>(204)));
 			this->lbl_3->Location = System::Drawing::Point(140, 1022);
 			this->lbl_3->Name = L"lbl_3";
-			this->lbl_3->Size = System::Drawing::Size(402, 25);
+			this->lbl_3->Size = System::Drawing::Size(278, 17);
 			this->lbl_3->TabIndex = 10;
 			this->lbl_3->Text = L"Связный неориентированный граф";
 			// 
@@ -234,7 +234,7 @@ namespace KRUSKAL {
 				static_cast<System::Byte>(204)));
 			this->Lbl_4->Location = System::Drawing::Point(759, 1022);
 			this->Lbl_4->Name = L"Lbl_4";
-			this->Lbl_4->Size = System::Drawing::Size(480, 25);
+			this->Lbl_4->Size = System::Drawing::Size(332, 17);
 			this->Lbl_4->TabIndex = 11;
 			this->Lbl_4->Text = L"Каркас с минимальным суммарным весом";
 			this->Lbl_4->Click += gcnew System::EventHandler(this, &MyForm::label4_Click);
@@ -246,7 +246,7 @@ namespace KRUSKAL {
 				static_cast<System::Byte>(204)));
 			this->lbl_status->Location = System::Drawing::Point(491, 136);
 			this->lbl_status->Name = L"lbl_status";
-			this->lbl_status->Size = System::Drawing::Size(76, 21);
+			this->lbl_status->Size = System::Drawing::Size(49, 16);
 			this->lbl_status->TabIndex = 12;
 			this->lbl_status->Text = L"Статус";
 			// 
@@ -273,10 +273,10 @@ namespace KRUSKAL {
 			this->lst_box->Font = (gcnew System::Drawing::Font(L"Courier New", 10, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(204)));
 			this->lst_box->FormattingEnabled = true;
-			this->lst_box->ItemHeight = 23;
+			this->lst_box->ItemHeight = 16;
 			this->lst_box->Location = System::Drawing::Point(495, 164);
 			this->lst_box->Name = L"lst_box";
-			this->lst_box->Size = System::Drawing::Size(796, 349);
+			this->lst_box->Size = System::Drawing::Size(796, 340);
 			this->lst_box->TabIndex = 14;
 			// 
 			// label1
@@ -286,7 +286,7 @@ namespace KRUSKAL {
 				static_cast<System::Byte>(204)));
 			this->label1->Location = System::Drawing::Point(503, 14);
 			this->label1->Name = L"label1";
-			this->label1->Size = System::Drawing::Size(605, 63);
+			this->label1->Size = System::Drawing::Size(410, 43);
 			this->label1->TabIndex = 15;
 			this->label1->Text = L"Алгоритм Краскала";
 			this->label1->TextAlign = System::Drawing::ContentAlignment::TopCenter;
@@ -359,8 +359,8 @@ namespace KRUSKAL {
 		for (int i = 0; i < n; i++) {
 			for (int j = i + 1; j < n; j++) { // Начинаем с i + 1 
 				if (dataGridView->Rows[i]->Cells[j]->Value != nullptr) {
-					try {
-						String^ cellVal = dataGridView->Rows[i]->Cells[j]->Value->ToString();
+
+					String^ cellVal = dataGridView->Rows[i]->Cells[j]->Value->ToString();
 						if (!String::IsNullOrWhiteSpace(cellVal)) {
 							int w = System::Convert::ToInt32(cellVal);
 							if (w > 0) {
@@ -371,11 +371,7 @@ namespace KRUSKAL {
 								edges->Add(e);
 							}
 						}
-					}
-					catch (...) {
-						// Если в ячейке мусор или пусто — просто пропускаем её
-						continue;
-					}
+					
 				}
 			}
 		}
@@ -442,7 +438,7 @@ private: System::Void btn_random_Click(System::Object^ sender, System::EventArgs
 	for (int i = 0; i < n; i++) {
 		for (int j = i + 1; j < n; j++) {
 
-			int weight = rand->Next(100); // Веса от  1 до 20
+			int weight = rand->Next(1, 45); // Веса от  1 до 20
 
 			dataGridView->Rows[i]->Cells[j]->Value = weight.ToString();
 			dataGridView->Rows[j]->Cells[i]->Value = weight.ToString();
@@ -511,25 +507,39 @@ void DrawGraph(Panel^ p, System::Collections::Generic::List<edge>^ edges, int no
 
 private: System::Void label4_Click(System::Object^ sender, System::EventArgs^ e) {
 }
-private: System::Void btn_run_Click(System::Object^ sender, System::EventArgs^ e) {
+	private: System::Void btn_run_Click(System::Object^ sender, System::EventArgs^ e) {
 
-	int n = (int)numericUpDown->Value;
-	
-	//Получаем ребра из матрицы 
-	animation_edges = GetEdgesFromGrid();
-	bubble_sort_edges(animation_edges);
+		int n = (int)numericUpDown->Value;
+		bool can_start = false;
 
-	//Сброс состояния для анимации
-	curent_MST = gcnew System::Collections::Generic::List<edge>();
-	animation_DSU = gcnew DSU((int)numericUpDown->Value);
-	current_edge_index = 0;
+		//Получаем ребра из матрицы 
+		animation_edges = GetEdgesFromGrid();
 
-	lst_box->Items->Clear();
+		if (animation_edges->Count == 0) {
+			MessageBox::Show("Таблица пуста или веса не введены! Пожалуйста, заполните матрицу.",
+				"Внимание", MessageBoxButtons::OK,
+				MessageBoxIcon::Warning);
+		}
+		else {
+			can_start = true;
+		}
 
-	//Отрисовываем пустой исходный граф слева
-	DrawGraph(panel_1, animation_edges, n, false); //Исходный граф
-	timer->Start();
-}
+		if (can_start) {
+
+			bubble_sort_edges(animation_edges);
+
+			//Сброс состояния для анимации
+			curent_MST = gcnew System::Collections::Generic::List<edge>();
+			animation_DSU = gcnew DSU((int)numericUpDown->Value);
+			current_edge_index = 0;
+
+			lst_box->Items->Clear();
+
+			//Отрисовываем пустой исходный граф слева
+			DrawGraph(panel_1, animation_edges, n, false); //Исходный граф
+			timer->Start();
+		}
+	}
 private: System::Void btn_minimaze_Click(System::Object^ sender, System::EventArgs^ e) {
 	this->WindowState = FormWindowState::Minimized;
 }

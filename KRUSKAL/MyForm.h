@@ -1,4 +1,4 @@
-#pragma once
+п»ї#pragma once
 
 namespace KRUSKAL {
 
@@ -10,7 +10,7 @@ namespace KRUSKAL {
 	using namespace System::Drawing;
 
 	/// <summary>
-	/// Сводка для MyForm
+	/// РЎРІРѕРґРєР° РґР»СЏ MyForm
 	/// </summary>
 	public ref class MyForm : public System::Windows::Forms::Form
 	{
@@ -19,13 +19,13 @@ namespace KRUSKAL {
 		{
 			InitializeComponent();
 			//
-			//TODO: добавьте код конструктора
+			//TODO: РґРѕР±Р°РІСЊС‚Рµ РєРѕРґ РєРѕРЅСЃС‚СЂСѓРєС‚РѕСЂР°
 			//
 		}
 
 	protected:
 		/// <summary>
-		/// Освободить все используемые ресурсы.
+		/// РћСЃРІРѕР±РѕРґРёС‚СЊ РІСЃРµ РёСЃРїРѕР»СЊР·СѓРµРјС‹Рµ СЂРµСЃСѓСЂСЃС‹.
 		/// </summary>
 		~MyForm()
 		{
@@ -60,6 +60,7 @@ namespace KRUSKAL {
 	private: System::Windows::Forms::ListBox^ lst_box;
 	private: System::Windows::Forms::Label^ label1;
 	private: System::Windows::Forms::Panel^ panel1;
+	private: System::Windows::Forms::Button^ btn_stop;
 
 
 
@@ -71,17 +72,20 @@ namespace KRUSKAL {
 
 	private:
 		/// <summary>
-		/// Обязательная переменная конструктора.
+		/// РћР±СЏР·Р°С‚РµР»СЊРЅР°СЏ РїРµСЂРµРјРµРЅРЅР°СЏ РєРѕРЅСЃС‚СЂСѓРєС‚РѕСЂР°.
 		/// </summary>
 
 #pragma region Windows Form Designer generated code
 		/// <summary>
-		/// Требуемый метод для поддержки конструктора — не изменяйте 
-		/// содержимое этого метода с помощью редактора кода.
+		/// РўСЂРµР±СѓРµРјС‹Р№ РјРµС‚РѕРґ РґР»СЏ РїРѕРґРґРµСЂР¶РєРё РєРѕРЅСЃС‚СЂСѓРєС‚РѕСЂР° вЂ” РЅРµ РёР·РјРµРЅСЏР№С‚Рµ 
+		/// СЃРѕРґРµСЂР¶РёРјРѕРµ СЌС‚РѕРіРѕ РјРµС‚РѕРґР° СЃ РїРѕРјРѕС‰СЊСЋ СЂРµРґР°РєС‚РѕСЂР° РєРѕРґР°.
 		/// </summary>
 		void InitializeComponent(void)
 		{
 			this->components = (gcnew System::ComponentModel::Container());
+			System::Windows::Forms::DataGridViewCellStyle^ dataGridViewCellStyle1 = (gcnew System::Windows::Forms::DataGridViewCellStyle());
+			System::Windows::Forms::DataGridViewCellStyle^ dataGridViewCellStyle2 = (gcnew System::Windows::Forms::DataGridViewCellStyle());
+			System::Windows::Forms::DataGridViewCellStyle^ dataGridViewCellStyle3 = (gcnew System::Windows::Forms::DataGridViewCellStyle());
 			this->btn_exit = (gcnew System::Windows::Forms::Button());
 			this->lbl_1 = (gcnew System::Windows::Forms::Label());
 			this->lbl_2 = (gcnew System::Windows::Forms::Label());
@@ -100,6 +104,7 @@ namespace KRUSKAL {
 			this->lst_box = (gcnew System::Windows::Forms::ListBox());
 			this->label1 = (gcnew System::Windows::Forms::Label());
 			this->panel1 = (gcnew System::Windows::Forms::Panel());
+			this->btn_stop = (gcnew System::Windows::Forms::Button());
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->numericUpDown))->BeginInit();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->dataGridView))->BeginInit();
 			this->panel1->SuspendLayout();
@@ -131,7 +136,7 @@ namespace KRUSKAL {
 			this->lbl_1->Name = L"lbl_1";
 			this->lbl_1->Size = System::Drawing::Size(371, 31);
 			this->lbl_1->TabIndex = 1;
-			this->lbl_1->Text = L"Введите вершины графа";
+			this->lbl_1->Text = L"Р’РІРµРґРёС‚Рµ РІРµСЂС€РёРЅС‹ РіСЂР°С„Р°";
 			// 
 			// lbl_2
 			// 
@@ -143,7 +148,7 @@ namespace KRUSKAL {
 			this->lbl_2->Name = L"lbl_2";
 			this->lbl_2->Size = System::Drawing::Size(222, 27);
 			this->lbl_2->TabIndex = 2;
-			this->lbl_2->Text = L"Введите матрицу";
+			this->lbl_2->Text = L"Р’РІРµРґРёС‚Рµ РјР°С‚СЂРёС†Сѓ";
 			// 
 			// numericUpDown
 			// 
@@ -168,20 +173,47 @@ namespace KRUSKAL {
 			this->dataGridView->AllowUserToResizeRows = false;
 			this->dataGridView->BackgroundColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(30)),
 				static_cast<System::Int32>(static_cast<System::Byte>(30)), static_cast<System::Int32>(static_cast<System::Byte>(30)));
-			this->dataGridView->ColumnHeadersHeightSizeMode = System::Windows::Forms::DataGridViewColumnHeadersHeightSizeMode::AutoSize;
+			this->dataGridView->BorderStyle = System::Windows::Forms::BorderStyle::None;
+			dataGridViewCellStyle1->Alignment = System::Windows::Forms::DataGridViewContentAlignment::MiddleCenter;
+			dataGridViewCellStyle1->BackColor = System::Drawing::Color::Black;
+			dataGridViewCellStyle1->Font = (gcnew System::Drawing::Font(L"Consolas", 14, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(204)));
+			dataGridViewCellStyle1->ForeColor = System::Drawing::Color::DeepSkyBlue;
+			dataGridViewCellStyle1->SelectionBackColor = System::Drawing::SystemColors::Highlight;
+			dataGridViewCellStyle1->SelectionForeColor = System::Drawing::Color::DeepSkyBlue;
+			dataGridViewCellStyle1->WrapMode = System::Windows::Forms::DataGridViewTriState::True;
+			this->dataGridView->ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+			this->dataGridView->ColumnHeadersHeight = 34;
+			this->dataGridView->ColumnHeadersHeightSizeMode = System::Windows::Forms::DataGridViewColumnHeadersHeightSizeMode::DisableResizing;
 			this->dataGridView->EnableHeadersVisualStyles = false;
+			this->dataGridView->GridColor = System::Drawing::Color::DeepSkyBlue;
 			this->dataGridView->Location = System::Drawing::Point(42, 233);
 			this->dataGridView->Name = L"dataGridView";
+			dataGridViewCellStyle2->Alignment = System::Windows::Forms::DataGridViewContentAlignment::MiddleCenter;
+			dataGridViewCellStyle2->BackColor = System::Drawing::Color::Black;
+			dataGridViewCellStyle2->Font = (gcnew System::Drawing::Font(L"Consolas", 14, System::Drawing::FontStyle::Bold));
+			dataGridViewCellStyle2->ForeColor = System::Drawing::Color::DeepSkyBlue;
+			dataGridViewCellStyle2->SelectionBackColor = System::Drawing::Color::DeepSkyBlue;
+			dataGridViewCellStyle2->SelectionForeColor = System::Drawing::SystemColors::HighlightText;
+			dataGridViewCellStyle2->WrapMode = System::Windows::Forms::DataGridViewTriState::True;
+			this->dataGridView->RowHeadersDefaultCellStyle = dataGridViewCellStyle2;
 			this->dataGridView->RowHeadersWidth = 50;
+			this->dataGridView->RowHeadersWidthSizeMode = System::Windows::Forms::DataGridViewRowHeadersWidthSizeMode::DisableResizing;
+			dataGridViewCellStyle3->Alignment = System::Windows::Forms::DataGridViewContentAlignment::MiddleCenter;
+			dataGridViewCellStyle3->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(30)), static_cast<System::Int32>(static_cast<System::Byte>(30)),
+				static_cast<System::Int32>(static_cast<System::Byte>(30)));
+			dataGridViewCellStyle3->Font = (gcnew System::Drawing::Font(L"Consolas", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(204)));
+			dataGridViewCellStyle3->ForeColor = System::Drawing::Color::DeepSkyBlue;
+			dataGridViewCellStyle3->SelectionBackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(0)),
+				static_cast<System::Int32>(static_cast<System::Byte>(80)), static_cast<System::Int32>(static_cast<System::Byte>(150)));
+			this->dataGridView->RowsDefaultCellStyle = dataGridViewCellStyle3;
 			this->dataGridView->RowTemplate->Height = 28;
+			this->dataGridView->SelectionMode = System::Windows::Forms::DataGridViewSelectionMode::CellSelect;
 			this->dataGridView->Size = System::Drawing::Size(578, 411);
 			this->dataGridView->TabIndex = 4;
 			this->dataGridView->CellContentClick += gcnew System::Windows::Forms::DataGridViewCellEventHandler(this, &MyForm::dataGridView_CellContentClick);
 			this->dataGridView->CellValueChanged += gcnew System::Windows::Forms::DataGridViewCellEventHandler(this, &MyForm::dataGridView_CellValueChanged);
-			
-			
-			
-			
 			// 
 			// btn_create_matrix
 			// 
@@ -199,7 +231,7 @@ namespace KRUSKAL {
 			this->btn_create_matrix->Name = L"btn_create_matrix";
 			this->btn_create_matrix->Size = System::Drawing::Size(577, 72);
 			this->btn_create_matrix->TabIndex = 5;
-			this->btn_create_matrix->Text = L"Создать матрицу";
+			this->btn_create_matrix->Text = L"РЎРѕР·РґР°С‚СЊ РјР°С‚СЂРёС†Сѓ";
 			this->btn_create_matrix->UseVisualStyleBackColor = false;
 			this->btn_create_matrix->Click += gcnew System::EventHandler(this, &MyForm::btn_create_matrix_Click);
 			// 
@@ -216,7 +248,7 @@ namespace KRUSKAL {
 			this->btn_run->Name = L"btn_run";
 			this->btn_run->Size = System::Drawing::Size(576, 72);
 			this->btn_run->TabIndex = 6;
-			this->btn_run->Text = L"Запуск алгоритма";
+			this->btn_run->Text = L"Р—Р°РїСѓСЃРє Р°Р»РіРѕСЂРёС‚РјР°";
 			this->btn_run->UseVisualStyleBackColor = false;
 			this->btn_run->Click += gcnew System::EventHandler(this, &MyForm::btn_run_Click);
 			// 
@@ -233,7 +265,7 @@ namespace KRUSKAL {
 			this->btn_random->Name = L"btn_random";
 			this->btn_random->Size = System::Drawing::Size(577, 72);
 			this->btn_random->TabIndex = 7;
-			this->btn_random->Text = L"Заполнить случайными числами";
+			this->btn_random->Text = L"Р—Р°РїРѕР»РЅРёС‚СЊ СЃР»СѓС‡Р°Р№РЅС‹РјРё С‡РёСЃР»Р°РјРё";
 			this->btn_random->UseVisualStyleBackColor = false;
 			this->btn_random->Click += gcnew System::EventHandler(this, &MyForm::btn_random_Click);
 			// 
@@ -258,26 +290,26 @@ namespace KRUSKAL {
 			// lbl_3
 			// 
 			this->lbl_3->AutoSize = true;
-			this->lbl_3->Font = (gcnew System::Drawing::Font(L"Courier New", 12, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
+			this->lbl_3->Font = (gcnew System::Drawing::Font(L"Courier New", 14, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(204)));
 			this->lbl_3->ForeColor = System::Drawing::Color::DeepSkyBlue;
-			this->lbl_3->Location = System::Drawing::Point(188, 1344);
+			this->lbl_3->Location = System::Drawing::Point(149, 1351);
 			this->lbl_3->Name = L"lbl_3";
-			this->lbl_3->Size = System::Drawing::Size(432, 27);
+			this->lbl_3->Size = System::Drawing::Size(524, 31);
 			this->lbl_3->TabIndex = 10;
-			this->lbl_3->Text = L"Связный неориентированный граф";
+			this->lbl_3->Text = L"РЎРІСЏР·РЅС‹Р№ РЅРµРѕСЂРёРµРЅС‚РёСЂРѕРІР°РЅРЅС‹Р№ РіСЂР°С„";
 			// 
 			// Lbl_4
 			// 
 			this->Lbl_4->AutoSize = true;
-			this->Lbl_4->Font = (gcnew System::Drawing::Font(L"Courier New", 12, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
+			this->Lbl_4->Font = (gcnew System::Drawing::Font(L"Courier New", 14, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(204)));
 			this->Lbl_4->ForeColor = System::Drawing::Color::DeepSkyBlue;
-			this->Lbl_4->Location = System::Drawing::Point(867, 1344);
+			this->Lbl_4->Location = System::Drawing::Point(817, 1351);
 			this->Lbl_4->Name = L"Lbl_4";
-			this->Lbl_4->Size = System::Drawing::Size(516, 27);
+			this->Lbl_4->Size = System::Drawing::Size(626, 31);
 			this->Lbl_4->TabIndex = 11;
-			this->Lbl_4->Text = L"Каркас с минимальным суммарным весом";
+			this->Lbl_4->Text = L"РљР°СЂРєР°СЃ СЃ РјРёРЅРёРјР°Р»СЊРЅС‹Рј СЃСѓРјРјР°СЂРЅС‹Рј РІРµСЃРѕРј";
 			this->Lbl_4->Click += gcnew System::EventHandler(this, &MyForm::label4_Click);
 			// 
 			// lbl_status
@@ -286,11 +318,10 @@ namespace KRUSKAL {
 			this->lbl_status->Font = (gcnew System::Drawing::Font(L"Courier New", 18, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(204)));
 			this->lbl_status->ForeColor = System::Drawing::Color::SkyBlue;
-			this->lbl_status->Location = System::Drawing::Point(633, 159);
+			this->lbl_status->Location = System::Drawing::Point(633, 169);
 			this->lbl_status->Name = L"lbl_status";
-			this->lbl_status->Size = System::Drawing::Size(810, 41);
+			this->lbl_status->Size = System::Drawing::Size(0, 41);
 			this->lbl_status->TabIndex = 12;
-			this->lbl_status->Text = L"Каркас с минимальным суммарным весом";
 			this->lbl_status->TextAlign = System::Drawing::ContentAlignment::BottomCenter;
 			// 
 			// btn_minimaze
@@ -301,7 +332,7 @@ namespace KRUSKAL {
 			this->btn_minimaze->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 18, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(204)));
 			this->btn_minimaze->ForeColor = System::Drawing::Color::DeepSkyBlue;
-			this->btn_minimaze->Location = System::Drawing::Point(1371, 0);
+			this->btn_minimaze->Location = System::Drawing::Point(1368, 0);
 			this->btn_minimaze->Name = L"btn_minimaze";
 			this->btn_minimaze->Size = System::Drawing::Size(67, 64);
 			this->btn_minimaze->TabIndex = 13;
@@ -338,12 +369,13 @@ namespace KRUSKAL {
 			this->label1->Name = L"label1";
 			this->label1->Size = System::Drawing::Size(605, 63);
 			this->label1->TabIndex = 15;
-			this->label1->Text = L"Алгоритм Краскала";
+			this->label1->Text = L"РђР»РіРѕСЂРёС‚Рј РљСЂР°СЃРєР°Р»Р°";
 			this->label1->TextAlign = System::Drawing::ContentAlignment::TopCenter;
 			// 
 			// panel1
 			// 
 			this->panel1->BackColor = System::Drawing::Color::MidnightBlue;
+			this->panel1->Controls->Add(this->btn_stop);
 			this->panel1->Controls->Add(this->label1);
 			this->panel1->Controls->Add(this->btn_minimaze);
 			this->panel1->Controls->Add(this->btn_exit);
@@ -352,6 +384,22 @@ namespace KRUSKAL {
 			this->panel1->Size = System::Drawing::Size(1514, 64);
 			this->panel1->TabIndex = 16;
 			// 
+			// btn_stop
+			// 
+			this->btn_stop->BackColor = System::Drawing::Color::MidnightBlue;
+			this->btn_stop->Cursor = System::Windows::Forms::Cursors::Hand;
+			this->btn_stop->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
+			this->btn_stop->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 18, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(204)));
+			this->btn_stop->ForeColor = System::Drawing::Color::DeepSkyBlue;
+			this->btn_stop->Location = System::Drawing::Point(1295, 0);
+			this->btn_stop->Name = L"btn_stop";
+			this->btn_stop->Size = System::Drawing::Size(67, 64);
+			this->btn_stop->TabIndex = 17;
+			this->btn_stop->Text = L"||";
+			this->btn_stop->UseVisualStyleBackColor = false;
+			this->btn_stop->Click += gcnew System::EventHandler(this, &MyForm::btn_stop_Click);
+			// 
 			// MyForm
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(9, 20);
@@ -359,7 +407,7 @@ namespace KRUSKAL {
 			this->AutoSize = true;
 			this->BackColor = System::Drawing::SystemColors::ControlText;
 			this->BackgroundImageLayout = System::Windows::Forms::ImageLayout::None;
-			this->ClientSize = System::Drawing::Size(1514, 1391);
+			this->ClientSize = System::Drawing::Size(1514, 1401);
 			this->Controls->Add(this->lst_box);
 			this->Controls->Add(this->lbl_status);
 			this->Controls->Add(this->Lbl_4);
@@ -389,13 +437,15 @@ namespace KRUSKAL {
 		}
 #pragma endregion
 
+	bool paused = false;
+
 	public: value struct edge {
-		int u; //Откуда 
-		int v; //Куда
-		int weight; //Вес
+		int u; //РћС‚РєСѓРґР° 
+		int v; //РљСѓРґР°
+		int weight; //Р’РµСЃ
 	};
 
-		  // Класс DSU (Система непересекающихся множеств)
+		  // РљР»Р°СЃСЃ DSU (РЎРёСЃС‚РµРјР° РЅРµРїРµСЂРµСЃРµРєР°СЋС‰РёС…СЃСЏ РјРЅРѕР¶РµСЃС‚РІ)
 		  ref class DSU {
 			  array<int>^ parent;
 		  public:
@@ -415,13 +465,13 @@ namespace KRUSKAL {
 			  }
 		  };
 
-		  //Функция для получения списка всех ребер
+		  //Р¤СѓРЅРєС†РёСЏ РґР»СЏ РїРѕР»СѓС‡РµРЅРёСЏ СЃРїРёСЃРєР° РІСЃРµС… СЂРµР±РµСЂ
 		  System::Collections::Generic::List<edge>^ GetEdgesFromGrid() {
 			  auto edges = gcnew System::Collections::Generic::List<edge>();
 			  int n = dataGridView->RowCount;
 
 			  for (int i = 0; i < n; i++) {
-				  for (int j = i + 1; j < n; j++) { // Начинаем с i + 1 
+				  for (int j = i + 1; j < n; j++) { // РќР°С‡РёРЅР°РµРј СЃ i + 1 
 					  if (dataGridView->Rows[i]->Cells[j]->Value != nullptr) {
 
 						  String^ cellVal = dataGridView->Rows[i]->Cells[j]->Value->ToString();
@@ -443,22 +493,22 @@ namespace KRUSKAL {
 		  }
 
 	private:
-		System::Collections::Generic::List<edge>^ animation_edges; //Список всех отсортированных ребер
-		System::Collections::Generic::List<edge>^ curent_MST; //Список ребер, уже принятых в каркас
-		int current_edge_index; //Индекс ребра, которое проверяем сейчас
-		DSU^ animation_DSU; //CHM для проверки циклов
+		System::Collections::Generic::List<edge>^ animation_edges; //РЎРїРёСЃРѕРє РІСЃРµС… РѕС‚СЃРѕСЂС‚РёСЂРѕРІР°РЅРЅС‹С… СЂРµР±РµСЂ
+		System::Collections::Generic::List<edge>^ curent_MST; //РЎРїРёСЃРѕРє СЂРµР±РµСЂ, СѓР¶Рµ РїСЂРёРЅСЏС‚С‹С… РІ РєР°СЂРєР°СЃ
+		int current_edge_index; //РРЅРґРµРєСЃ СЂРµР±СЂР°, РєРѕС‚РѕСЂРѕРµ РїСЂРѕРІРµСЂСЏРµРј СЃРµР№С‡Р°СЃ
+		DSU^ animation_DSU; //CHM РґР»СЏ РїСЂРѕРІРµСЂРєРё С†РёРєР»РѕРІ
 
 
 	private:System::Void dataGridView_CellValueChanged(System::Object^ sender, System::Windows::Forms::DataGridViewCellEventArgs^ e)
 	{
 		if (e->RowIndex >= 0 && e->ColumnIndex >= 0 && e->RowIndex != e->ColumnIndex) {
-			//копируем значение в симметричную ячейку
+			//РєРѕРїРёСЂСѓРµРј Р·РЅР°С‡РµРЅРёРµ РІ СЃРёРјРјРµС‚СЂРёС‡РЅСѓСЋ СЏС‡РµР№РєСѓ
 			dataGridView->Rows[e->ColumnIndex]->Cells[e->RowIndex]->Value = dataGridView->Rows[e->RowIndex]->Cells[e->ColumnIndex]->Value;
 		}
 	}
 	private: System::Void btn_exit_Click(System::Object^ sender, System::EventArgs^ e) {
 		System::Windows::Forms::DialogResult
-			result = MessageBox::Show("Вы уверены?", "Выход", MessageBoxButtons::YesNo);
+			result = MessageBox::Show("Р’С‹ СѓРІРµСЂРµРЅС‹?", "Р’С‹С…РѕРґ", MessageBoxButtons::YesNo);
 		if (result == System::Windows::Forms::DialogResult::Yes) {
 			Application::Exit();
 		}
@@ -468,7 +518,7 @@ namespace KRUSKAL {
 	}
 	private: System::Void btn_create_matrix_Click(System::Object^ sender, System::EventArgs^ e) {
 
-		int n = (int)numericUpDown->Value; // получаем n из элемента 2
+		int n = (int)numericUpDown->Value; // РїРѕР»СѓС‡Р°РµРј n РёР· СЌР»РµРјРµРЅС‚Р° 2
 
 		dataGridView->AllowUserToAddRows = false;
 
@@ -477,17 +527,17 @@ namespace KRUSKAL {
 
 
 		for (int i = 0; i < n; i++) {
-			dataGridView->Columns[i]->Width = 30; // делаем ячейки квадратными
+			dataGridView->Columns[i]->Width = 30; // РґРµР»Р°РµРј СЏС‡РµР№РєРё РєРІР°РґСЂР°С‚РЅС‹РјРё
 
 			for (int j = 0; j < n; j++) {
 				if (i == j) {
 					dataGridView->Rows[i]->Cells[j]->Value = "0";
-					dataGridView->Rows[i]->Cells[j]->ReadOnly = true; // диагональ всегда 0
+					dataGridView->Rows[i]->Cells[j]->ReadOnly = true; // РґРёР°РіРѕРЅР°Р»СЊ РІСЃРµРіРґР° 0
 				}
 			}
 		}
 
-		//Настройка заголовков таблицы
+		//РќР°СЃС‚СЂРѕР№РєР° Р·Р°РіРѕР»РѕРІРєРѕРІ С‚Р°Р±Р»РёС†С‹
 		for (int i = 0; i < n; i++) {
 			char letter = (char)(65 + i);
 			dataGridView->Columns[i]->HeaderText = gcnew String(letter, 1);
@@ -498,30 +548,30 @@ namespace KRUSKAL {
 
 	private: System::Void btn_random_Click(System::Object^ sender, System::EventArgs^ e) {
 		Random^ rand = gcnew Random();
-		//Проверяем, создана ли матрица(количество строк больше 0)
+		//РџСЂРѕРІРµСЂСЏРµРј, СЃРѕР·РґР°РЅР° Р»Рё РјР°С‚СЂРёС†Р°(РєРѕР»РёС‡РµСЃС‚РІРѕ СЃС‚СЂРѕРє Р±РѕР»СЊС€Рµ 0)
 		int rows = dataGridView->RowCount;
 		bool is_matrix_created = false;
 
 		if (rows > 0) {
 			is_matrix_created = true;
 		}
-			//Если матрица создана — заполняем, если нет — выводим предупреждение
+			//Р•СЃР»Рё РјР°С‚СЂРёС†Р° СЃРѕР·РґР°РЅР° вЂ” Р·Р°РїРѕР»РЅСЏРµРј, РµСЃР»Рё РЅРµС‚ вЂ” РІС‹РІРѕРґРёРј РїСЂРµРґСѓРїСЂРµР¶РґРµРЅРёРµ
 		if (is_matrix_created) {
-			// Проходим только по верхней треугольной части для симметрии
+			// РџСЂРѕС…РѕРґРёРј С‚РѕР»СЊРєРѕ РїРѕ РІРµСЂС…РЅРµР№ С‚СЂРµСѓРіРѕР»СЊРЅРѕР№ С‡Р°СЃС‚Рё РґР»СЏ СЃРёРјРјРµС‚СЂРёРё
 			for (int i = 0; i < rows; i++) {
 				for (int j = i + 1; j < rows; j++) {
 
 					int weight = rand->Next(1, 51);
 
-					// Устанавливаем симметричные значения
+					// РЈСЃС‚Р°РЅР°РІР»РёРІР°РµРј СЃРёРјРјРµС‚СЂРёС‡РЅС‹Рµ Р·РЅР°С‡РµРЅРёСЏ
 					dataGridView->Rows[i]->Cells[j]->Value = weight.ToString();
 					dataGridView->Rows[j]->Cells[i]->Value = weight.ToString();
 				}
 			}
 		}
 		else {
-			MessageBox::Show("Сначала создайте матрицу, указав количество вершин.",
-				"Внимание", 
+			MessageBox::Show("РЎРЅР°С‡Р°Р»Р° СЃРѕР·РґР°Р№С‚Рµ РјР°С‚СЂРёС†Сѓ, СѓРєР°Р·Р°РІ РєРѕР»РёС‡РµСЃС‚РІРѕ РІРµСЂС€РёРЅ.",
+				"Р’РЅРёРјР°РЅРёРµ", 
 				MessageBoxButtons::OK,
 				MessageBoxIcon::Warning);
 		}
@@ -541,27 +591,27 @@ namespace KRUSKAL {
 
 		   void DrawGraph(Panel^ p, System::Collections::Generic::List<edge>^ edges, int nodeCount, bool isResult) {
 			   Graphics^ g = p->CreateGraphics();
-			   g->SmoothingMode = Drawing2D::SmoothingMode::AntiAlias; // Гладкие линии
-			   g->Clear(Color::Black); // Очистка черным цветом
+			   g->SmoothingMode = Drawing2D::SmoothingMode::AntiAlias; // Р“Р»Р°РґРєРёРµ Р»РёРЅРёРё
+			   g->Clear(Color::Black); // РћС‡РёСЃС‚РєР° С‡РµСЂРЅС‹Рј С†РІРµС‚РѕРј
 
 			   int R = Math::Min(p->Width, p->Height) / 2 - 40;
 			   Point center(p->Width / 2, p->Height / 2);
 
-			   // Цвет ребер: обычные — тускло-синие, результат (MST) — ярко-голубой
+			   // Р¦РІРµС‚ СЂРµР±РµСЂ: РѕР±С‹С‡РЅС‹Рµ вЂ” С‚СѓСЃРєР»Рѕ-СЃРёРЅРёРµ, СЂРµР·СѓР»СЊС‚Р°С‚ (MST) вЂ” СЏСЂРєРѕ-РіРѕР»СѓР±РѕР№
 			   Color edgeColor = isResult ? Color::Cyan : Color::FromArgb(50, 50, 150);
 			   Pen^ edgePen = gcnew Pen(edgeColor, isResult ? 3 : 1);
 
 			   for each (edge e in edges) {
-				   // Вычисление координат вершин
+				   // Р’С‹С‡РёСЃР»РµРЅРёРµ РєРѕРѕСЂРґРёРЅР°С‚ РІРµСЂС€РёРЅ
 				   float a1 = 2 * Math::PI * e.u / nodeCount;
 				   float a2 = 2 * Math::PI * e.v / nodeCount;
 				   Point p1(center.X + R * Math::Cos(a1), center.Y + R * Math::Sin(a1));
 				   Point p2(center.X + R * Math::Cos(a2), center.Y + R * Math::Sin(a2));
 
-				   // Рисуем само ребро
+				   // Р РёСЃСѓРµРј СЃР°РјРѕ СЂРµР±СЂРѕ
 				   g->DrawLine(edgePen, p1, p2);
 
-				   // Блок отрисовки веса в рамке
+				   // Р‘Р»РѕРє РѕС‚СЂРёСЃРѕРІРєРё РІРµСЃР° РІ СЂР°РјРєРµ
 				   Point mid((p1.X + p2.X) / 2, (p1.Y + p2.Y) / 2);
 				   String^ weightStr = e.weight.ToString();
 				   System::Drawing::Font^ font = gcnew System::Drawing::Font("Consolas", 9, FontStyle::Bold);
@@ -573,7 +623,7 @@ namespace KRUSKAL {
 					   size.Width + padding,
 					   size.Height + padding);
 
-				   // Рисуем подложку, рамку и текст
+				   // Р РёСЃСѓРµРј РїРѕРґР»РѕР¶РєСѓ, СЂР°РјРєСѓ Рё С‚РµРєСЃС‚
 				   g->FillRectangle(gcnew SolidBrush(Color::Black), rect);
 				   g->DrawRectangle(gcnew Pen(Color::DeepSkyBlue, 1), rect);
 				   g->DrawString(weightStr, font, Brushes::White,
@@ -581,14 +631,14 @@ namespace KRUSKAL {
 			   }
 
 
-			   // Вершины: голубая обводка, белый текст
+			   // Р’РµСЂС€РёРЅС‹: РіРѕР»СѓР±Р°СЏ РѕР±РІРѕРґРєР°, Р±РµР»С‹Р№ С‚РµРєСЃС‚
 			   for (int i = 0; i < nodeCount; i++) {
 				   float angle = 2 * Math::PI * i / nodeCount;
 				   int x = center.X + R * Math::Cos(angle) - 15;
 				   int y = center.Y + R * Math::Sin(angle) - 15;
 
-				   g->FillEllipse(Brushes::Black, x, y, 30, 30); // Черный фон внутри узла
-				   g->DrawEllipse(gcnew Pen(Color::DeepSkyBlue, 2), x, y, 30, 30); // Голубой ободок
+				   g->FillEllipse(Brushes::Black, x, y, 30, 30); // Р§РµСЂРЅС‹Р№ С„РѕРЅ РІРЅСѓС‚СЂРё СѓР·Р»Р°
+				   g->DrawEllipse(gcnew Pen(Color::DeepSkyBlue, 2), x, y, 30, 30); // Р“РѕР»СѓР±РѕР№ РѕР±РѕРґРѕРє
 
 				   char letter = (char)(65 + i);
 				   g->DrawString(gcnew String(letter, 1), gcnew System::Drawing::Font("Arial", 10, FontStyle::Bold),
@@ -603,12 +653,12 @@ namespace KRUSKAL {
 		int n = (int)numericUpDown->Value;
 		bool can_start = false;
 
-		//Получаем ребра из матрицы 
+		//РџРѕР»СѓС‡Р°РµРј СЂРµР±СЂР° РёР· РјР°С‚СЂРёС†С‹ 
 		animation_edges = GetEdgesFromGrid();
 
 		if (animation_edges->Count == 0) {
-			MessageBox::Show("Таблица пуста или веса не введены! Пожалуйста, заполните матрицу.",
-				"Внимание", MessageBoxButtons::OK,
+			MessageBox::Show("РўР°Р±Р»РёС†Р° РїСѓСЃС‚Р° РёР»Рё РІРµСЃР° РЅРµ РІРІРµРґРµРЅС‹! РџРѕР¶Р°Р»СѓР№СЃС‚Р°, Р·Р°РїРѕР»РЅРёС‚Рµ РјР°С‚СЂРёС†Сѓ.",
+				"Р’РЅРёРјР°РЅРёРµ", MessageBoxButtons::OK,
 				MessageBoxIcon::Warning);
 		}
 		else {
@@ -619,15 +669,15 @@ namespace KRUSKAL {
 
 			bubble_sort_edges(animation_edges);
 
-			//Сброс состояния для анимации
+			//РЎР±СЂРѕСЃ СЃРѕСЃС‚РѕСЏРЅРёСЏ РґР»СЏ Р°РЅРёРјР°С†РёРё
 			curent_MST = gcnew System::Collections::Generic::List<edge>();
 			animation_DSU = gcnew DSU((int)numericUpDown->Value);
 			current_edge_index = 0;
 
 			lst_box->Items->Clear();
 
-			//Отрисовываем пустой исходный граф слева
-			DrawGraph(panel_1, animation_edges, n, false); //Исходный граф
+			//РћС‚СЂРёСЃРѕРІС‹РІР°РµРј РїСѓСЃС‚РѕР№ РёСЃС…РѕРґРЅС‹Р№ РіСЂР°С„ СЃР»РµРІР°
+			DrawGraph(panel_1, animation_edges, n, false); //РСЃС…РѕРґРЅС‹Р№ РіСЂР°С„
 			timer->Start();
 		}
 	}
@@ -638,45 +688,45 @@ namespace KRUSKAL {
 		
 			timer->Interval = 1000;
 
-			// n - количество вершин из numericUpDown
+			// n - РєРѕР»РёС‡РµСЃС‚РІРѕ РІРµСЂС€РёРЅ РёР· numericUpDown
 			int n = (int)numericUpDown->Value;
 
-			// Условие: пока не перебрали все ребра и не построили каркас (n-1 ребер)
+			// РЈСЃР»РѕРІРёРµ: РїРѕРєР° РЅРµ РїРµСЂРµР±СЂР°Р»Рё РІСЃРµ СЂРµР±СЂР° Рё РЅРµ РїРѕСЃС‚СЂРѕРёР»Рё РєР°СЂРєР°СЃ (n-1 СЂРµР±РµСЂ)
 			if (current_edge_index < animation_edges->Count && curent_MST->Count < n - 1) {
 
-				// Берем следующее ребро из отсортированного списка
+				// Р‘РµСЂРµРј СЃР»РµРґСѓСЋС‰РµРµ СЂРµР±СЂРѕ РёР· РѕС‚СЃРѕСЂС‚РёСЂРѕРІР°РЅРЅРѕРіРѕ СЃРїРёСЃРєР°
 				edge current_e = animation_edges[current_edge_index++];
 
-				// Конвертируем индексы в буквы для лога
+				// РљРѕРЅРІРµСЂС‚РёСЂСѓРµРј РёРЅРґРµРєСЃС‹ РІ Р±СѓРєРІС‹ РґР»СЏ Р»РѕРіР°
 				char u_letter = (char)(65 + current_e.u);
 				char v_letter = (char)(65 + current_e.v);
 				String^ name_u = gcnew String(u_letter, 1);
 				String^ name_v = gcnew String(v_letter, 1);
 
-				// Проверяем на цикл через DSU
+				// РџСЂРѕРІРµСЂСЏРµРј РЅР° С†РёРєР» С‡РµСЂРµР· DSU
 				if (animation_DSU->find(current_e.u) != animation_DSU->find(current_e.v)) {
 					animation_DSU->unite(current_e.u, current_e.v);
 					curent_MST->Add(current_e);
 
-					lbl_status->Text = String::Format("Добавлено: {0} - {1} (вес {2})", name_u, name_v, current_e.weight);
+					lbl_status->Text = String::Format("Р”РѕР±Р°РІР»РµРЅРѕ: {0} - {1} (РІРµСЃ {2})", name_u, name_v, current_e.weight);
 
-					String^ log_entry = String::Format("{0}) Ребро {1} - {2}, вес: {3} — ОК (Добавлено)",
+					String^ log_entry = String::Format("{0}) Р РµР±СЂРѕ {1} - {2}, РІРµСЃ: {3} вЂ” РћРљ (Р”РѕР±Р°РІР»РµРЅРѕ)",
 						current_edge_index, name_u, name_v, current_e.weight);
 
 					lst_box->Items->Add(log_entry);
 				}
 				else {
-					String^ logEntry = String::Format("{0}) Ребро {1} - {2}, вес: {3} — Пропуск (Цикл!)",
+					String^ logEntry = String::Format("{0}) Р РµР±СЂРѕ {1} - {2}, РІРµСЃ: {3} вЂ” РџСЂРѕРїСѓСЃРє (Р¦РёРєР»!)",
 						current_edge_index, name_u, name_v, current_e.weight);
 					lst_box->Items->Add(logEntry);
 
-					lbl_status->Text = String::Format("Пропуск ребра {0}-{1}", name_u, name_v);
+					lbl_status->Text = String::Format("РџСЂРѕРїСѓСЃРє СЂРµР±СЂР° {0}-{1}", name_u, name_v);
 				}
 
-				// Автоматическая прокрутка ListBox вниз к последней записи
+				// РђРІС‚РѕРјР°С‚РёС‡РµСЃРєР°СЏ РїСЂРѕРєСЂСѓС‚РєР° ListBox РІРЅРёР· Рє РїРѕСЃР»РµРґРЅРµР№ Р·Р°РїРёСЃРё
 				lst_box->SelectedIndex = lst_box->Items->Count - 1;
 
-				// Перерисовываем правую панель, чтобы видеть прогресс
+				// РџРµСЂРµСЂРёСЃРѕРІС‹РІР°РµРј РїСЂР°РІСѓСЋ РїР°РЅРµР»СЊ, С‡С‚РѕР±С‹ РІРёРґРµС‚СЊ РїСЂРѕРіСЂРµСЃСЃ
 				DrawGraph(panel_2, curent_MST, n, true);
 			}
 			else {
@@ -689,10 +739,10 @@ namespace KRUSKAL {
 				}
 
 				lst_box->Items->Add("------------------------------------------");
-				lst_box->Items->Add("Алгоритм завершен успешно.");
-				lst_box->Items->Add("Итоговый вес каркаса: " + total_weight.ToString());
+				lst_box->Items->Add("РђР»РіРѕСЂРёС‚Рј Р·Р°РІРµСЂС€РµРЅ СѓСЃРїРµС€РЅРѕ.");
+				lst_box->Items->Add("РС‚РѕРіРѕРІС‹Р№ РІРµСЃ РєР°СЂРєР°СЃР°: " + total_weight.ToString());
 
-				lbl_status->Text = "Готово!";
+				lbl_status->Text = "Р“РѕС‚РѕРІРѕ!";
 			}
 		}
 
@@ -704,7 +754,24 @@ namespace KRUSKAL {
 		}
 	}
 
-	};
+	private: System::Void btn_stop_Click(System::Object^ sender, System::EventArgs^ e) {
+
+		// Р•СЃР»Рё Р°Р»РіРѕСЂРёС‚Рј РЅР° РїР°СѓР·Рµ вЂ” Р·Р°РїСѓСЃРєР°РµРј РµРіРѕ РѕР±СЂР°С‚РЅРѕ
+		if (paused) {
+			timer->Start();           
+			paused = false;          
+			btn_stop->Text = "||";     
+			btn_stop->ForeColor = Color::DeepSkyBlue; // Р’РѕР·РІСЂР°С‰Р°РµРј РЅРµРѕРЅРѕРІС‹Р№ С†РІРµС‚
+		}
+		// Р•СЃР»Рё Р°Р»РіРѕСЂРёС‚Рј СЂР°Р±РѕС‚Р°РµС‚ вЂ” СЃС‚Р°РІРёРј РЅР° РїР°СѓР·Сѓ
+		else if (timer->Enabled) {
+			timer->Stop();          
+			paused = true;          
+			btn_stop->Text = ">";     
+			btn_stop->ForeColor = Color::Blue; 
+		}
+	}
+};
 };
 
 

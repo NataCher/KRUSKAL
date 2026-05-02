@@ -1,5 +1,7 @@
 ﻿#pragma once
 
+#include "MyFormDialog.h"
+
 namespace KRUSKAL {
 
 	using namespace System;
@@ -657,9 +659,10 @@ namespace KRUSKAL {
 		animation_edges = GetEdgesFromGrid();
 
 		if (animation_edges->Count == 0) {
-			MessageBox::Show("Таблица пуста или веса не введены! Пожалуйста, заполните матрицу.",
-				"Внимание", MessageBoxButtons::OK,
-				MessageBoxIcon::Warning);
+
+			MyFormDialog^ dlg = gcnew MyFormDialog();
+			dlg->lbl_st->Text = "Таблица пуста или веса не введены! Пожалуйста, заполните матрицу.",
+			dlg->ShowDialog();
 		}
 		else {
 			can_start = true;

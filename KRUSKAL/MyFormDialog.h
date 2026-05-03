@@ -35,7 +35,8 @@ namespace KRUSKAL {
 			}
 		}
 	public: System::Windows::Forms::Label^ lbl_st;
-	private: System::Windows::Forms::Button^ btn_ok;
+	public: System::Windows::Forms::Button^ btn_ok;
+
 	public:
 	protected:
 
@@ -59,6 +60,7 @@ namespace KRUSKAL {
 		/// </summary>
 		void InitializeComponent(void)
 		{
+			System::ComponentModel::ComponentResourceManager^ resources = (gcnew System::ComponentModel::ComponentResourceManager(MyFormDialog::typeid));
 			this->lbl_st = (gcnew System::Windows::Forms::Label());
 			this->btn_ok = (gcnew System::Windows::Forms::Button());
 			this->SuspendLayout();
@@ -66,23 +68,23 @@ namespace KRUSKAL {
 			// lbl_st
 			// 
 			this->lbl_st->AutoSize = true;
-			this->lbl_st->Font = (gcnew System::Drawing::Font(L"Consolas", 16, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
-				static_cast<System::Byte>(204)));
+			this->lbl_st->Font = (gcnew System::Drawing::Font(L"Courier New", 16));
 			this->lbl_st->ForeColor = System::Drawing::Color::DeepSkyBlue;
 			this->lbl_st->Location = System::Drawing::Point(25, 71);
 			this->lbl_st->Name = L"lbl_st";
-			this->lbl_st->Size = System::Drawing::Size(125, 37);
+			this->lbl_st->Size = System::Drawing::Size(129, 36);
 			this->lbl_st->TabIndex = 0;
 			this->lbl_st->Text = L"lbl_st";
-			this->lbl_st->TextAlign = System::Drawing::ContentAlignment::TopCenter;
+			this->lbl_st->TextAlign = System::Drawing::ContentAlignment::MiddleCenter;
 			// 
 			// btn_ok
 			// 
+			this->btn_ok->FlatAppearance->MouseOverBackColor = System::Drawing::Color::DarkBlue;
 			this->btn_ok->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
-			this->btn_ok->Font = (gcnew System::Drawing::Font(L"Consolas", 12, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
+			this->btn_ok->Font = (gcnew System::Drawing::Font(L"Courier New", 16, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(204)));
 			this->btn_ok->ForeColor = System::Drawing::Color::DodgerBlue;
-			this->btn_ok->Location = System::Drawing::Point(547, 164);
+			this->btn_ok->Location = System::Drawing::Point(579, 151);
 			this->btn_ok->Name = L"btn_ok";
 			this->btn_ok->Size = System::Drawing::Size(160, 90);
 			this->btn_ok->TabIndex = 1;
@@ -96,31 +98,42 @@ namespace KRUSKAL {
 			this->AutoScaleDimensions = System::Drawing::SizeF(9, 20);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			this->BackColor = System::Drawing::Color::Black;
-			this->ClientSize = System::Drawing::Size(1223, 266);
+			this->ClientSize = System::Drawing::Size(1336, 266);
 			this->Controls->Add(this->btn_ok);
 			this->Controls->Add(this->lbl_st);
 			this->FormBorderStyle = System::Windows::Forms::FormBorderStyle::None;
+			this->Icon = (cli::safe_cast<System::Drawing::Icon^>(resources->GetObject(L"$this.Icon")));
 			this->Name = L"MyFormDialog";
 			this->StartPosition = System::Windows::Forms::FormStartPosition::CenterScreen;
-			this->Text = L"MyFormDialog";
+			this->Text = L"Предупреждение";
+			this->Paint += gcnew System::Windows::Forms::PaintEventHandler(this, &MyFormDialog::MyFormDialog_Paint);
 			this->ResumeLayout(false);
 			this->PerformLayout();
 
 		}
 #pragma endregion
-	private: System::Void btn_ok_Click(System::Object^ sender, System::EventArgs^ e) {
-		// Здесь можно добавить дополнительные действия перед закрытием
-		this->DialogResult = System::Windows::Forms::DialogResult::OK; 
-		this->Close(); 
-	}
-
-		   // Внутри MyMessageBox.h
+		// Внутри MyMessageBox.h
 	public:
 		static void Show(String^ message) {
 			MyFormDialog^ msg = gcnew MyFormDialog();
 			msg->lbl_st->Text = message;
-			msg->ShowDialog(); // Модальное окно
+			msg->ShowDialog();
 		}
 
+	private: System::Void btn_ok_Click(System::Object^ sender, System::EventArgs^ e) {
+		// Здесь можно добавить дополнительные действия перед закрытием
+		this->DialogResult = System::Windows::Forms::DialogResult::OK; 
+		
+		this->Close(); 
+	}
+
+	private: System::Void MyFormDialog_Paint(System::Object^ sender, System::Windows::Forms::PaintEventArgs^ e) {
+		// Создаем перо нужного цвета (голубой неон) и толщиной 2 пикселя
+		System::Drawing::Pen^ neonPen = gcnew System::Drawing::Pen(System::Drawing::Color::FromArgb(0, 191, 255), 2);
+		// Рисуем прямоугольник по границе всей формы
+		// Отступаем 1 пиксель, чтобы рамка не обрезалась краем экрана
+		e->Graphics->DrawRectangle(neonPen, 1, 1, this->ClientSize.Width - 2, this->ClientSize.Height - 2);
+		}
 	};
+
 }

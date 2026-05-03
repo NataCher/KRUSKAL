@@ -1,6 +1,7 @@
 ﻿#pragma once
 
 #include "MyFormDialog.h"
+#include "MyFormDialog2.h"
 
 namespace KRUSKAL {
 
@@ -88,6 +89,7 @@ namespace KRUSKAL {
 			System::Windows::Forms::DataGridViewCellStyle^ dataGridViewCellStyle1 = (gcnew System::Windows::Forms::DataGridViewCellStyle());
 			System::Windows::Forms::DataGridViewCellStyle^ dataGridViewCellStyle2 = (gcnew System::Windows::Forms::DataGridViewCellStyle());
 			System::Windows::Forms::DataGridViewCellStyle^ dataGridViewCellStyle3 = (gcnew System::Windows::Forms::DataGridViewCellStyle());
+			System::ComponentModel::ComponentResourceManager^ resources = (gcnew System::ComponentModel::ComponentResourceManager(MyForm::typeid));
 			this->btn_exit = (gcnew System::Windows::Forms::Button());
 			this->lbl_1 = (gcnew System::Windows::Forms::Label());
 			this->lbl_2 = (gcnew System::Windows::Forms::Label());
@@ -124,6 +126,7 @@ namespace KRUSKAL {
 			this->btn_exit->Name = L"btn_exit";
 			this->btn_exit->Size = System::Drawing::Size(70, 64);
 			this->btn_exit->TabIndex = 0;
+			this->btn_exit->TabStop = false;
 			this->btn_exit->Text = L"x";
 			this->btn_exit->UseVisualStyleBackColor = false;
 			this->btn_exit->Click += gcnew System::EventHandler(this, &MyForm::btn_exit_Click);
@@ -157,14 +160,14 @@ namespace KRUSKAL {
 			this->numericUpDown->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(45)), static_cast<System::Int32>(static_cast<System::Byte>(45)),
 				static_cast<System::Int32>(static_cast<System::Byte>(48)));
 			this->numericUpDown->BorderStyle = System::Windows::Forms::BorderStyle::None;
-			this->numericUpDown->Font = (gcnew System::Drawing::Font(L"Courier New", 11, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
+			this->numericUpDown->Font = (gcnew System::Drawing::Font(L"Courier New", 14, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(204)));
 			this->numericUpDown->ForeColor = System::Drawing::Color::DeepSkyBlue;
-			this->numericUpDown->Location = System::Drawing::Point(497, 86);
+			this->numericUpDown->Location = System::Drawing::Point(497, 82);
 			this->numericUpDown->Maximum = System::Decimal(gcnew cli::array< System::Int32 >(4) { 10, 0, 0, 0 });
 			this->numericUpDown->Minimum = System::Decimal(gcnew cli::array< System::Int32 >(4) { 1, 0, 0, 0 });
 			this->numericUpDown->Name = L"numericUpDown";
-			this->numericUpDown->Size = System::Drawing::Size(123, 28);
+			this->numericUpDown->Size = System::Drawing::Size(123, 35);
 			this->numericUpDown->TabIndex = 3;
 			this->numericUpDown->TextAlign = System::Windows::Forms::HorizontalAlignment::Right;
 			this->numericUpDown->Value = System::Decimal(gcnew cli::array< System::Int32 >(4) { 1, 0, 0, 0 });
@@ -216,6 +219,7 @@ namespace KRUSKAL {
 			this->dataGridView->TabIndex = 4;
 			this->dataGridView->CellContentClick += gcnew System::Windows::Forms::DataGridViewCellEventHandler(this, &MyForm::dataGridView_CellContentClick);
 			this->dataGridView->CellValueChanged += gcnew System::Windows::Forms::DataGridViewCellEventHandler(this, &MyForm::dataGridView_CellValueChanged);
+			this->dataGridView->EditingControlShowing += gcnew System::Windows::Forms::DataGridViewEditingControlShowingEventHandler(this, &MyForm::dataGridView_EditingControlShowing);
 			// 
 			// btn_create_matrix
 			// 
@@ -250,6 +254,7 @@ namespace KRUSKAL {
 			this->btn_run->Name = L"btn_run";
 			this->btn_run->Size = System::Drawing::Size(576, 72);
 			this->btn_run->TabIndex = 6;
+			this->btn_run->TabStop = false;
 			this->btn_run->Text = L"Запуск алгоритма";
 			this->btn_run->UseVisualStyleBackColor = false;
 			this->btn_run->Click += gcnew System::EventHandler(this, &MyForm::btn_run_Click);
@@ -267,6 +272,7 @@ namespace KRUSKAL {
 			this->btn_random->Name = L"btn_random";
 			this->btn_random->Size = System::Drawing::Size(577, 72);
 			this->btn_random->TabIndex = 7;
+			this->btn_random->TabStop = false;
 			this->btn_random->Text = L"Заполнить случайными числами";
 			this->btn_random->UseVisualStyleBackColor = false;
 			this->btn_random->Click += gcnew System::EventHandler(this, &MyForm::btn_random_Click);
@@ -295,7 +301,7 @@ namespace KRUSKAL {
 			this->lbl_3->Font = (gcnew System::Drawing::Font(L"Courier New", 14, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(204)));
 			this->lbl_3->ForeColor = System::Drawing::Color::DeepSkyBlue;
-			this->lbl_3->Location = System::Drawing::Point(149, 1351);
+			this->lbl_3->Location = System::Drawing::Point(148, 1362);
 			this->lbl_3->Name = L"lbl_3";
 			this->lbl_3->Size = System::Drawing::Size(524, 31);
 			this->lbl_3->TabIndex = 10;
@@ -307,7 +313,7 @@ namespace KRUSKAL {
 			this->Lbl_4->Font = (gcnew System::Drawing::Font(L"Courier New", 14, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(204)));
 			this->Lbl_4->ForeColor = System::Drawing::Color::DeepSkyBlue;
-			this->Lbl_4->Location = System::Drawing::Point(817, 1351);
+			this->Lbl_4->Location = System::Drawing::Point(809, 1362);
 			this->Lbl_4->Name = L"Lbl_4";
 			this->Lbl_4->Size = System::Drawing::Size(626, 31);
 			this->Lbl_4->TabIndex = 11;
@@ -409,7 +415,7 @@ namespace KRUSKAL {
 			this->AutoSize = true;
 			this->BackColor = System::Drawing::SystemColors::ControlText;
 			this->BackgroundImageLayout = System::Windows::Forms::ImageLayout::None;
-			this->ClientSize = System::Drawing::Size(1514, 1401);
+			this->ClientSize = System::Drawing::Size(1514, 1415);
 			this->Controls->Add(this->lst_box);
 			this->Controls->Add(this->lbl_status);
 			this->Controls->Add(this->Lbl_4);
@@ -425,10 +431,11 @@ namespace KRUSKAL {
 			this->Controls->Add(this->lbl_1);
 			this->Controls->Add(this->panel1);
 			this->FormBorderStyle = System::Windows::Forms::FormBorderStyle::None;
+			this->Icon = (cli::safe_cast<System::Drawing::Icon^>(resources->GetObject(L"$this.Icon")));
 			this->Name = L"MyForm";
 			this->RightToLeft = System::Windows::Forms::RightToLeft::No;
 			this->StartPosition = System::Windows::Forms::FormStartPosition::CenterScreen;
-			this->Text = L"MyForm";
+			this->Text = L"Алгоритм Краскала";
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->numericUpDown))->EndInit();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->dataGridView))->EndInit();
 			this->panel1->ResumeLayout(false);
@@ -509,12 +516,10 @@ namespace KRUSKAL {
 		}
 	}
 	private: System::Void btn_exit_Click(System::Object^ sender, System::EventArgs^ e) {
-		System::Windows::Forms::DialogResult
-			result = MessageBox::Show("Вы уверены?", "Выход", MessageBoxButtons::YesNo);
-		if (result == System::Windows::Forms::DialogResult::Yes) {
+		MyFormDialog2^ dyn = gcnew MyFormDialog2();
+		if (dyn->ShowDialog() == System::Windows::Forms::DialogResult::Yes) {
 			Application::Exit();
 		}
-
 	}
 	private: System::Void dataGridView_CellContentClick(System::Object^ sender, System::Windows::Forms::DataGridViewCellEventArgs^ e) {
 	}
@@ -557,7 +562,7 @@ namespace KRUSKAL {
 		if (rows > 0) {
 			is_matrix_created = true;
 		}
-			//Если матрица создана — заполняем, если нет — выводим предупреждение
+		//Если матрица создана — заполняем, если нет — выводим предупреждение
 		if (is_matrix_created) {
 			// Проходим только по верхней треугольной части для симметрии
 			for (int i = 0; i < rows; i++) {
@@ -572,10 +577,17 @@ namespace KRUSKAL {
 			}
 		}
 		else {
-			MessageBox::Show("Сначала создайте матрицу, указав количество вершин.",
-				"Внимание", 
-				MessageBoxButtons::OK,
-				MessageBoxIcon::Warning);
+
+			MyFormDialog^ dlg = gcnew MyFormDialog();
+			dlg->lbl_st->Text = "Сначала создайте матрицу, указав количество вершин";
+			dlg->lbl_st->TextAlign = System::Drawing::ContentAlignment::MiddleCenter;
+			dlg->lbl_st->AutoSize = true;
+			dlg->Width = dlg->lbl_st->Width + 60;
+			dlg->Height = dlg->lbl_st->Height + dlg->btn_ok->Height + 80;
+			dlg->btn_ok->Left = (dlg->ClientSize.Width - dlg->btn_ok->Width) / 2;
+			dlg->btn_ok->Top = dlg->lbl_st->Bottom + 20;
+			dlg->ShowDialog();
+
 		}
 	}
 		   void bubble_sort_edges(System::Collections::Generic::List<edge>^ edges) {
@@ -591,61 +603,70 @@ namespace KRUSKAL {
 			   }
 		   }
 
-		   void DrawGraph(Panel^ p, System::Collections::Generic::List<edge>^ edges, int nodeCount, bool isResult) {
+		   void DrawGraph(Panel^ p, System::Collections::Generic::List<edge>^ edges, int node_count, bool is_result) {
 			   Graphics^ g = p->CreateGraphics();
 			   g->SmoothingMode = Drawing2D::SmoothingMode::AntiAlias; // Гладкие линии
-			   g->Clear(Color::Black); // Очистка черным цветом
+			   g->Clear(Color::Black); 
 
 			   int R = Math::Min(p->Width, p->Height) / 2 - 40;
 			   Point center(p->Width / 2, p->Height / 2);
 
-			   // Цвет ребер: обычные — тускло-синие, результат (MST) — ярко-голубой
-			   Color edgeColor = isResult ? Color::Cyan : Color::FromArgb(50, 50, 150);
-			   Pen^ edgePen = gcnew Pen(edgeColor, isResult ? 3 : 1);
+			   // Создание формата для центровки текста
+			   System::Drawing::StringFormat^ sf = gcnew System::Drawing::StringFormat();
+			   sf->Alignment = System::Drawing::StringAlignment::Center;
+			   sf->LineAlignment = System::Drawing::StringAlignment::Center;
 
+			   // Цвет ребер: обычные — тускло-синие, результат (MST) — ярко-голубой
+			   Color edge_color = is_result ? Color::Cyan : Color::FromArgb(50, 50, 150);
+			   Pen^ edge_pen = gcnew Pen(edge_color, is_result ? 3 : 1);
+
+			   // Отрисовка ребер
 			   for each (edge e in edges) {
-				   // Вычисление координат вершин
-				   float a1 = 2 * Math::PI * e.u / nodeCount;
-				   float a2 = 2 * Math::PI * e.v / nodeCount;
+				   float a1 = 2 * Math::PI * e.u / node_count;
+				   float a2 = 2 * Math::PI * e.v / node_count;
 				   Point p1(center.X + R * Math::Cos(a1), center.Y + R * Math::Sin(a1));
 				   Point p2(center.X + R * Math::Cos(a2), center.Y + R * Math::Sin(a2));
 
-				   // Рисуем само ребро
-				   g->DrawLine(edgePen, p1, p2);
+				   g->DrawLine(edge_pen, p1, p2);
 
-				   // Блок отрисовки веса в рамке
+				   // Отрисовка веса ребра в рамке
 				   Point mid((p1.X + p2.X) / 2, (p1.Y + p2.Y) / 2);
-				   String^ weightStr = e.weight.ToString();
+				   String^ weight_str = e.weight.ToString();
 				   System::Drawing::Font^ font = gcnew System::Drawing::Font("Consolas", 9, FontStyle::Bold);
 
-				   SizeF size = g->MeasureString(weightStr, font);
+				   SizeF size = g->MeasureString(weight_str, font);
 				   int padding = 4;
 				   Rectangle rect(mid.X - size.Width / 2 - padding / 2,
 					   mid.Y - size.Height / 2 - padding / 2,
 					   size.Width + padding,
 					   size.Height + padding);
 
-				   // Рисуем подложку, рамку и текст
 				   g->FillRectangle(gcnew SolidBrush(Color::Black), rect);
 				   g->DrawRectangle(gcnew Pen(Color::DeepSkyBlue, 1), rect);
-				   g->DrawString(weightStr, font, Brushes::White,
-					   mid.X - size.Width / 2, mid.Y - size.Height / 2);
+
+				   // Рисуем текст веса (используем тот же формат sf для надежности)
+				   g->DrawString(weight_str, font, Brushes::White, RectangleF(rect.X, rect.Y, rect.Width, rect.Height), sf);
 			   }
+					// Отрисовка вершин (буквы A, B, C...) 
+				   int node_size = 30;
+				   System::Drawing::Font^ vertex_font = gcnew System::Drawing::Font("Consolas", 12, FontStyle::Bold);
 
+				   for (int i = 0; i < node_count; i++) {
+					   float angle = 2 * Math::PI * i / node_count;
+					   int x = center.X + R * Math::Cos(angle);
+					   int y = center.Y + R * Math::Sin(angle);
 
-			   // Вершины: голубая обводка, белый текст
-			   for (int i = 0; i < nodeCount; i++) {
-				   float angle = 2 * Math::PI * i / nodeCount;
-				   int x = center.X + R * Math::Cos(angle) - 15;
-				   int y = center.Y + R * Math::Sin(angle) - 15;
+					   RectangleF node_rect(x - node_size / 2, y - node_size / 2, node_size, node_size);
 
-				   g->FillEllipse(Brushes::Black, x, y, 30, 30); // Черный фон внутри узла
-				   g->DrawEllipse(gcnew Pen(Color::DeepSkyBlue, 2), x, y, 30, 30); // Голубой ободок
+					   g->FillEllipse(Brushes::Black, node_rect);
+					   g->DrawEllipse(gcnew Pen(Color::DeepSkyBlue, 2), node_rect);
 
-				   char letter = (char)(65 + i);
-				   g->DrawString(gcnew String(letter, 1), gcnew System::Drawing::Font("Arial", 10, FontStyle::Bold),
-					   Brushes::White, (float)(x + 7), (float)(y + 6));
-			   }
+					   // Превращаем индекс i в букву. 0 -> 'A', 1 -> 'B' и т.д.
+					   String^ vertex_name = ((wchar_t)('A' + i)).ToString();
+
+					   // Рисуем букву с использованием формата sf (созданного ранее для центрации)
+					   g->DrawString(vertex_name, vertex_font, Brushes::DeepSkyBlue, node_rect, sf);
+				   }
 		   }
 
 	private: System::Void label4_Click(System::Object^ sender, System::EventArgs^ e) {
@@ -661,17 +682,15 @@ namespace KRUSKAL {
 		if (animation_edges->Count == 0) {
 
 			MyFormDialog^ dlg = gcnew MyFormDialog();
-			dlg->lbl_st->Text = "Таблица пуста или веса не введены! Пожалуйста, заполните матрицу.",
-			dlg->ShowDialog();
+			dlg->lbl_st->Text = "Таблица пуста или веса не введены! Пожалуйста, заполните матрицу",
+				dlg->ShowDialog();
 		}
 		else {
 			can_start = true;
 		}
 
 		if (can_start) {
-
 			bubble_sort_edges(animation_edges);
-
 			//Сброс состояния для анимации
 			curent_MST = gcnew System::Collections::Generic::List<edge>();
 			animation_DSU = gcnew DSU((int)numericUpDown->Value);
@@ -688,66 +707,65 @@ namespace KRUSKAL {
 		this->WindowState = FormWindowState::Minimized;
 	}
 	private: System::Void timer_Tick(System::Object^ sender, System::EventArgs^ e) {
-		
-			timer->Interval = 1000;
 
-			// n - количество вершин из numericUpDown
-			int n = (int)numericUpDown->Value;
+		timer->Interval = 1000;
 
-			// Условие: пока не перебрали все ребра и не построили каркас (n-1 ребер)
-			if (current_edge_index < animation_edges->Count && curent_MST->Count < n - 1) {
+		// n - количество вершин из numericUpDown
+		int n = (int)numericUpDown->Value;
 
-				// Берем следующее ребро из отсортированного списка
-				edge current_e = animation_edges[current_edge_index++];
+		// Условие: пока не перебрали все ребра и не построили каркас (n-1 ребер)
+		if (current_edge_index < animation_edges->Count && curent_MST->Count < n - 1) {
 
-				// Конвертируем индексы в буквы для лога
-				char u_letter = (char)(65 + current_e.u);
-				char v_letter = (char)(65 + current_e.v);
-				String^ name_u = gcnew String(u_letter, 1);
-				String^ name_v = gcnew String(v_letter, 1);
+			// Берем следующее ребро из отсортированного списка
+			edge current_e = animation_edges[current_edge_index++];
 
-				// Проверяем на цикл через DSU
-				if (animation_DSU->find(current_e.u) != animation_DSU->find(current_e.v)) {
-					animation_DSU->unite(current_e.u, current_e.v);
-					curent_MST->Add(current_e);
+			// Конвертируем индексы в буквы для лога
+			char u_letter = (char)(65 + current_e.u);
+			char v_letter = (char)(65 + current_e.v);
+			String^ name_u = gcnew String(u_letter, 1);
+			String^ name_v = gcnew String(v_letter, 1);
 
-					lbl_status->Text = String::Format("Добавлено: {0} - {1} (вес {2})", name_u, name_v, current_e.weight);
+			// Проверяем на цикл через DSU
+			if (animation_DSU->find(current_e.u) != animation_DSU->find(current_e.v)) {
+				animation_DSU->unite(current_e.u, current_e.v);
+				curent_MST->Add(current_e);
 
-					String^ log_entry = String::Format("{0}) Ребро {1} - {2}, вес: {3} — ОК (Добавлено)",
-						current_edge_index, name_u, name_v, current_e.weight);
+				lbl_status->Text = String::Format("Добавлено: {0} - {1} (вес {2})", name_u, name_v, current_e.weight);
 
-					lst_box->Items->Add(log_entry);
-				}
-				else {
-					String^ logEntry = String::Format("{0}) Ребро {1} - {2}, вес: {3} — Пропуск (Цикл!)",
-						current_edge_index, name_u, name_v, current_e.weight);
-					lst_box->Items->Add(logEntry);
+				String^ log_entry = String::Format("{0}) Ребро {1} - {2}, вес: {3} — ОК (Добавлено)",
+					current_edge_index, name_u, name_v, current_e.weight);
 
-					lbl_status->Text = String::Format("Пропуск ребра {0}-{1}", name_u, name_v);
-				}
-
-				// Автоматическая прокрутка ListBox вниз к последней записи
-				lst_box->SelectedIndex = lst_box->Items->Count - 1;
-
-				// Перерисовываем правую панель, чтобы видеть прогресс
-				DrawGraph(panel_2, curent_MST, n, true);
+				lst_box->Items->Add(log_entry);
 			}
 			else {
+				String^ Log_entry = String::Format("{0}) Ребро {1} - {2}, вес: {3} — Пропуск (Цикл!)",
+					current_edge_index, name_u, name_v, current_e.weight);
+				lst_box->Items->Add(Log_entry);
 
-				timer->Stop();
-
-				int total_weight = 0;
-				for each (edge mst_edge in curent_MST) {
-					total_weight += mst_edge.weight;
-				}
-
-				lst_box->Items->Add("------------------------------------------");
-				lst_box->Items->Add("Алгоритм завершен успешно.");
-				lst_box->Items->Add("Итоговый вес каркаса: " + total_weight.ToString());
-
-				lbl_status->Text = "Готово!";
+				lbl_status->Text = String::Format("Пропуск ребра {0}-{1}", name_u, name_v);
 			}
+
+			// Автоматическая прокрутка ListBox вниз к последней записи
+			lst_box->SelectedIndex = lst_box->Items->Count - 1;
+
+			// Перерисовываем правую панель, чтобы видеть прогресс
+			DrawGraph(panel_2, curent_MST, n, true);
 		}
+		else {
+
+			timer->Stop();
+
+			int total_weight = 0;
+			for each (edge mst_edge in curent_MST) {
+				total_weight += mst_edge.weight;
+			}
+
+			lst_box->Items->Add("------------------------------------------");
+			lst_box->Items->Add("Алгоритм завершен успешно.");
+			lst_box->Items->Add("Итоговый вес каркаса: " + total_weight.ToString());
+			lbl_status->Text = "Готово!";
+		}
+	}
 
 	private: System::Void panel_Paint(System::Object^ sender, System::Windows::Forms::PaintEventArgs^ e) {
 		Panel^ p = dynamic_cast<Panel^>(sender);
@@ -758,24 +776,47 @@ namespace KRUSKAL {
 	}
 
 	private: System::Void btn_stop_Click(System::Object^ sender, System::EventArgs^ e) {
-
 		// Если алгоритм на паузе — запускаем его обратно
 		if (paused) {
-			timer->Start();           
-			paused = false;          
-			btn_stop->Text = "||";     
-			btn_stop->ForeColor = Color::DeepSkyBlue; // Возвращаем неоновый цвет
+			timer->Start();
+			paused = false;
+			btn_stop->Text = "||";
+			btn_stop->ForeColor = Color::DeepSkyBlue;
 		}
 		// Если алгоритм работает — ставим на паузу
 		else if (timer->Enabled) {
-			timer->Stop();          
-			paused = true;          
-			btn_stop->Text = ">";     
-			btn_stop->ForeColor = Color::Blue; 
+			timer->Stop();
+			paused = true;
+			btn_stop->Text = ">";
+			btn_stop->ForeColor = Color::Blue;
+		}
+	}
+
+	private: System::Void dataGridView_EditingControlShowing(System::Object^ sender, System::Windows::Forms::DataGridViewEditingControlShowingEventArgs^ e) {
+		// Получаем доступ к текстовому полю внутри ячейки
+		TextBox^ tb = dynamic_cast<TextBox^>(e->Control);
+		if (tb != nullptr) {
+			// Удаляем старый обработчик, чтобы они не накапливались
+			tb->KeyPress -= gcnew KeyPressEventHandler(this, &MyForm::only_digits_key_press);
+			// Добавляем новый
+			tb->KeyPress += gcnew KeyPressEventHandler(this, &MyForm::only_digits_key_press);
+		}
+	}
+		   // Новый метод, который фильтрует нажатия клавиш
+	private: System::Void only_digits_key_press(System::Object^ sender, System::Windows::Forms::KeyPressEventArgs^ e) {
+		// Проверяем, НЕ является ли символ клавишей Backspace
+		if (e->KeyChar != 0x08) {
+
+			// Если это не Backspace, проверяем, является ли символ цифрой
+			if (!Char::IsDigit(e->KeyChar)) {
+				// Если это буква или спецсимвол — блокируем
+				e->Handled = true;
+			}
 		}
 	}
 };
 };
+
 
 
 

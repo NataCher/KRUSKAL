@@ -119,10 +119,14 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="MyForm.cpp" />
+    <ClCompile Include="MyFormDialog2.cpp" />
     <ClCompile Include="MyFormDialog.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="MyForm.h">
+      <FileType>CppForm</FileType>
+    </ClInclude>
+    <ClInclude Include="MyFormDialog2.h">
       <FileType>CppForm</FileType>
     </ClInclude>
     <ClInclude Include="MyFormDialog.h">
@@ -136,6 +140,12 @@
     <EmbeddedResource Include="MyFormDialog.resx">
       <DependentUpon>MyFormDialog.h</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="MyFormDialog2.resx">
+      <DependentUpon>MyFormDialog2.h</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="..\..\..\..\..\Downloads\kruskal.ico" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -140,11 +140,10 @@ namespace KRUSKAL {
 }
 
 	private: System::Void MyFormDialog2_Paint(System::Object^ sender, System::Windows::Forms::PaintEventArgs^ e) {
-		   // Создаем перо нужного цвета (голубой неон) и толщиной 2 пикселя
-		System::Drawing::Pen^ neonPen = gcnew System::Drawing::Pen(System::Drawing::Color::FromArgb(0, 191, 255), 2);
+		System::Drawing::Pen^ neon_pen = gcnew System::Drawing::Pen(System::Drawing::Color::FromArgb(0, 191, 255), 2);
 		   // Рисуем прямоугольник по границе всей формы
 		   // Отступаем 1 пиксель, чтобы рамка не обрезалась краем экрана
-		e->Graphics->DrawRectangle(neonPen, 1, 1, this->ClientSize.Width - 2, this->ClientSize.Height - 2);
+		e->Graphics->DrawRectangle(neon_pen, 1, 1, this->ClientSize.Width - 2, this->ClientSize.Height - 2);
 	 }
 };
 }

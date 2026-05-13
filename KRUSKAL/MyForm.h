@@ -41,22 +41,14 @@ namespace KRUSKAL {
 	private: System::Windows::Forms::Label^ lbl_1;
 	private: System::Windows::Forms::Label^ lbl_2;
 	private: System::Windows::Forms::NumericUpDown^ numericUpDown;
-
-
-
 	private: System::Windows::Forms::DataGridView^ dataGridView;
 	private: System::Windows::Forms::Button^ btn_create_matrix;
 	private: System::Windows::Forms::Button^ btn_run;
-
-
-
-
 	private: System::Windows::Forms::Button^ btn_random;
 	private: System::Windows::Forms::Panel^ panel_1;
 	private: System::Windows::Forms::Panel^ panel_2;
 	private: System::Windows::Forms::Label^ lbl_3;
 	private: System::Windows::Forms::Label^ Lbl_4;
-
 	private: System::Windows::Forms::Label^ lbl_status;
 	private: System::Windows::Forms::Button^ btn_minimaze;
 	private: System::Windows::Forms::Timer^ timer;
@@ -64,14 +56,7 @@ namespace KRUSKAL {
 	private: System::Windows::Forms::Label^ label1;
 	private: System::Windows::Forms::Panel^ panel1;
 	private: System::Windows::Forms::Button^ btn_stop;
-
-
-
 	private: System::ComponentModel::IContainer^ components;
-
-	protected:
-
-	protected:
 
 	private:
 		/// <summary>
@@ -139,9 +124,9 @@ namespace KRUSKAL {
 			this->lbl_1->ForeColor = System::Drawing::Color::SkyBlue;
 			this->lbl_1->Location = System::Drawing::Point(35, 80);
 			this->lbl_1->Name = L"lbl_1";
-			this->lbl_1->Size = System::Drawing::Size(371, 31);
+			this->lbl_1->Size = System::Drawing::Size(388, 31);
 			this->lbl_1->TabIndex = 1;
-			this->lbl_1->Text = L"Введите вершины графа";
+			this->lbl_1->Text = L"Выберите вершины графа";
 			// 
 			// lbl_2
 			// 
@@ -151,9 +136,9 @@ namespace KRUSKAL {
 			this->lbl_2->ForeColor = System::Drawing::Color::SkyBlue;
 			this->lbl_2->Location = System::Drawing::Point(36, 197);
 			this->lbl_2->Name = L"lbl_2";
-			this->lbl_2->Size = System::Drawing::Size(222, 27);
+			this->lbl_2->Size = System::Drawing::Size(250, 27);
 			this->lbl_2->TabIndex = 2;
-			this->lbl_2->Text = L"Введите матрицу";
+			this->lbl_2->Text = L"Заполните матрицу";
 			// 
 			// numericUpDown
 			// 
@@ -167,6 +152,7 @@ namespace KRUSKAL {
 			this->numericUpDown->Maximum = System::Decimal(gcnew cli::array< System::Int32 >(4) { 10, 0, 0, 0 });
 			this->numericUpDown->Minimum = System::Decimal(gcnew cli::array< System::Int32 >(4) { 1, 0, 0, 0 });
 			this->numericUpDown->Name = L"numericUpDown";
+			this->numericUpDown->ReadOnly = true;
 			this->numericUpDown->Size = System::Drawing::Size(123, 35);
 			this->numericUpDown->TabIndex = 3;
 			this->numericUpDown->TextAlign = System::Windows::Forms::HorizontalAlignment::Right;
@@ -176,6 +162,7 @@ namespace KRUSKAL {
 			// 
 			this->dataGridView->AllowUserToResizeColumns = false;
 			this->dataGridView->AllowUserToResizeRows = false;
+			this->dataGridView->AutoSizeColumnsMode = System::Windows::Forms::DataGridViewAutoSizeColumnsMode::DisplayedCells;
 			this->dataGridView->BackgroundColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(30)),
 				static_cast<System::Int32>(static_cast<System::Byte>(30)), static_cast<System::Int32>(static_cast<System::Byte>(30)));
 			this->dataGridView->BorderStyle = System::Windows::Forms::BorderStyle::None;
@@ -513,6 +500,7 @@ namespace KRUSKAL {
 			dataGridView->Rows[e->ColumnIndex]->Cells[e->RowIndex]->Value = dataGridView->Rows[e->RowIndex]->Cells[e->ColumnIndex]->Value;
 		}
 	}
+
 	private: System::Void btn_exit_Click(System::Object^ sender, System::EventArgs^ e) {
 		MyFormDialog2^ dyn = gcnew MyFormDialog2();
 		if (dyn->ShowDialog() == System::Windows::Forms::DialogResult::Yes) {
@@ -873,19 +861,23 @@ namespace KRUSKAL {
 	}
 
 	private: System::Void dataGridView_EditingControlShowing(System::Object^ sender, System::Windows::Forms::DataGridViewEditingControlShowingEventArgs^ e) {
-		// Получаем доступ к текстовому полю внутри ячейки
-		TextBox^ tb = dynamic_cast<TextBox^>(e->Control);
+		TextBox^ tb = safe_cast<TextBox^>(e->Control);
 		if (tb != nullptr) {
-			// Удаляем старый обработчик, чтобы они не накапливались
-			tb->KeyPress -= gcnew KeyPressEventHandler(this, &MyForm::only_digits_key_press);
-			// Добавляем новый
-			tb->KeyPress += gcnew KeyPressEventHandler(this, &MyForm::only_digits_key_press);
+			tb->MaxLength = 3;
+			// Дополнительно: запрет на ввод всего, кроме цифр
+			tb->KeyPress -= gcnew KeyPressEventHandler(this, &MyForm::Cell_KeyPress);
+			tb->KeyPress += gcnew KeyPressEventHandler(this, &MyForm::Cell_KeyPress);
 		}
 	}
+
+	private: System::Void Cell_KeyPress(System::Object^ sender, System::Windows::Forms::KeyPressEventArgs^ e) {
+		if (!Char::IsControl(e->KeyChar) && !Char::IsDigit(e->KeyChar)) {
+			e->Handled = true; // Блокируем ввод букв
+		}
+}
 	private: System::Void only_digits_key_press(System::Object^ sender, System::Windows::Forms::KeyPressEventArgs^ e) {
 		// Проверяем, НЕ является ли символ клавишей Backspace
 		if (e->KeyChar != 0x08) {
-
 			// Если это не Backspace, проверяем, является ли символ цифрой
 			if (!Char::IsDigit(e->KeyChar)) {
 				// Если это буква или спецсимвол — блокируем

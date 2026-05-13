@@ -112,7 +112,6 @@ namespace KRUSKAL {
 
 		}
 #pragma endregion
-		// Внутри MyMessageBox.h
 	public:
 		static void Show(String^ message) {
 			MyFormDialog^ msg = gcnew MyFormDialog();
@@ -121,18 +120,15 @@ namespace KRUSKAL {
 		}
 
 	private: System::Void btn_ok_Click(System::Object^ sender, System::EventArgs^ e) {
-		// Здесь можно добавить дополнительные действия перед закрытием
-		this->DialogResult = System::Windows::Forms::DialogResult::OK; 
-		
+		this->DialogResult = System::Windows::Forms::DialogResult::OK; 	
 		this->Close(); 
 	}
 
 	private: System::Void MyFormDialog_Paint(System::Object^ sender, System::Windows::Forms::PaintEventArgs^ e) {
-		// Создаем перо нужного цвета (голубой неон) и толщиной 2 пикселя
-		System::Drawing::Pen^ neonPen = gcnew System::Drawing::Pen(System::Drawing::Color::FromArgb(0, 191, 255), 2);
+		System::Drawing::Pen^ neon_pen = gcnew System::Drawing::Pen(System::Drawing::Color::FromArgb(0, 191, 255), 2);
 		// Рисуем прямоугольник по границе всей формы
 		// Отступаем 1 пиксель, чтобы рамка не обрезалась краем экрана
-		e->Graphics->DrawRectangle(neonPen, 1, 1, this->ClientSize.Width - 2, this->ClientSize.Height - 2);
+		e->Graphics->DrawRectangle(neon_pen, 1, 1, this->ClientSize.Width - 2, this->ClientSize.Height - 2);
 		}
 	};
 

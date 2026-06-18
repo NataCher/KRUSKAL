@@ -1118,7 +1118,6 @@ namespace KRUSKAL {
 		}
 
 		// 4. Полностью очищаем таблицу (матрицу смежности)
-		// Благодаря проверкам в CellValueChanged, Rows->Clear() теперь пройдёт гладко
 		dataGridView->Rows->Clear();
 		dataGridView->Columns->Clear();
 		dataGridView->RowCount = 0;

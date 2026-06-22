@@ -2,6 +2,7 @@
 
 #include "MyFormDialog.h"
 #include "MyFormDialog2.h"
+#include <cmath>
 
 namespace KRUSKAL {
 
@@ -55,7 +56,17 @@ namespace KRUSKAL {
 	private: System::Windows::Forms::Label^ label1;
 	private: System::Windows::Forms::Panel^ panel1;
 	private: System::Windows::Forms::Button^ btn_stop;
+
+
+	private: System::Windows::Forms::Button^ btn_help;
+	private: System::Windows::Forms::Button^ btn_info;
+
+
+	private: System::Windows::Forms::Button^ btn_next;
+
 	private: System::Windows::Forms::Button^ btn_clear;
+
+
 
 	private: System::ComponentModel::IContainer^ components;
 
@@ -94,8 +105,11 @@ namespace KRUSKAL {
 			this->lst_box = (gcnew System::Windows::Forms::ListBox());
 			this->label1 = (gcnew System::Windows::Forms::Label());
 			this->panel1 = (gcnew System::Windows::Forms::Panel());
-			this->btn_clear = (gcnew System::Windows::Forms::Button());
+			this->btn_info = (gcnew System::Windows::Forms::Button());
+			this->btn_help = (gcnew System::Windows::Forms::Button());
 			this->btn_stop = (gcnew System::Windows::Forms::Button());
+			this->btn_next = (gcnew System::Windows::Forms::Button());
+			this->btn_clear = (gcnew System::Windows::Forms::Button());
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->numericUpDown))->BeginInit();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->dataGridView))->BeginInit();
 			this->panel1->SuspendLayout();
@@ -354,7 +368,7 @@ namespace KRUSKAL {
 			this->lst_box->ItemHeight = 31;
 			this->lst_box->Location = System::Drawing::Point(652, 222);
 			this->lst_box->Name = L"lst_box";
-			this->lst_box->Size = System::Drawing::Size(1313, 558);
+			this->lst_box->Size = System::Drawing::Size(1313, 465);
 			this->lst_box->TabIndex = 14;
 			// 
 			// label1
@@ -373,7 +387,8 @@ namespace KRUSKAL {
 			// panel1
 			// 
 			this->panel1->BackColor = System::Drawing::Color::MidnightBlue;
-			this->panel1->Controls->Add(this->btn_clear);
+			this->panel1->Controls->Add(this->btn_info);
+			this->panel1->Controls->Add(this->btn_help);
 			this->panel1->Controls->Add(this->btn_stop);
 			this->panel1->Controls->Add(this->label1);
 			this->panel1->Controls->Add(this->btn_minimaze);
@@ -383,22 +398,37 @@ namespace KRUSKAL {
 			this->panel1->Size = System::Drawing::Size(1995, 64);
 			this->panel1->TabIndex = 16;
 			// 
-			// btn_clear
+			// btn_info
 			// 
-			this->btn_clear->BackColor = System::Drawing::Color::MidnightBlue;
-			this->btn_clear->Cursor = System::Windows::Forms::Cursors::Hand;
-			this->btn_clear->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
-			this->btn_clear->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 18, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
+			this->btn_info->BackColor = System::Drawing::Color::MidnightBlue;
+			this->btn_info->Cursor = System::Windows::Forms::Cursors::Hand;
+			this->btn_info->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
+			this->btn_info->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 18, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(204)));
-			this->btn_clear->ForeColor = System::Drawing::Color::DeepSkyBlue;
-			this->btn_clear->Location = System::Drawing::Point(1706, 0);
-			this->btn_clear->Name = L"btn_clear";
-			this->btn_clear->Size = System::Drawing::Size(67, 64);
-			this->btn_clear->TabIndex = 18;
-			this->btn_clear->Text = L"C";
-			this->btn_clear->UseVisualStyleBackColor = false;
-			this->btn_clear->Click += gcnew System::EventHandler(this, &MyForm::btn_clear_Click);
-
+			this->btn_info->ForeColor = System::Drawing::Color::DeepSkyBlue;
+			this->btn_info->Location = System::Drawing::Point(204, 0);
+			this->btn_info->Name = L"btn_info";
+			this->btn_info->Size = System::Drawing::Size(299, 64);
+			this->btn_info->TabIndex = 20;
+			this->btn_info->Text = L"О программе";
+			this->btn_info->UseVisualStyleBackColor = false;
+			this->btn_info->Click += gcnew System::EventHandler(this, &MyForm::btn_info_Click);
+			// 
+			// btn_help
+			// 
+			this->btn_help->BackColor = System::Drawing::Color::MidnightBlue;
+			this->btn_help->Cursor = System::Windows::Forms::Cursors::Hand;
+			this->btn_help->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
+			this->btn_help->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 18, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(204)));
+			this->btn_help->ForeColor = System::Drawing::Color::DeepSkyBlue;
+			this->btn_help->Location = System::Drawing::Point(3, 0);
+			this->btn_help->Name = L"btn_help";
+			this->btn_help->Size = System::Drawing::Size(195, 64);
+			this->btn_help->TabIndex = 19;
+			this->btn_help->Text = L"Помощь";
+			this->btn_help->UseVisualStyleBackColor = false;
+			this->btn_help->Click += gcnew System::EventHandler(this, &MyForm::btn_help_Click);
 			// 
 			// btn_stop
 			// 
@@ -416,6 +446,42 @@ namespace KRUSKAL {
 			this->btn_stop->UseVisualStyleBackColor = false;
 			this->btn_stop->Click += gcnew System::EventHandler(this, &MyForm::btn_stop_Click);
 			// 
+			// btn_next
+			// 
+			this->btn_next->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(30)), static_cast<System::Int32>(static_cast<System::Byte>(30)),
+				static_cast<System::Int32>(static_cast<System::Byte>(30)));
+			this->btn_next->FlatAppearance->MouseOverBackColor = System::Drawing::Color::DarkBlue;
+			this->btn_next->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
+			this->btn_next->Font = (gcnew System::Drawing::Font(L"Courier New", 16, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(204)));
+			this->btn_next->ForeColor = System::Drawing::Color::DeepSkyBlue;
+			this->btn_next->Location = System::Drawing::Point(712, 708);
+			this->btn_next->Name = L"btn_next";
+			this->btn_next->Size = System::Drawing::Size(579, 72);
+			this->btn_next->TabIndex = 17;
+			this->btn_next->TabStop = false;
+			this->btn_next->Text = L"Следующий шаг";
+			this->btn_next->UseVisualStyleBackColor = false;
+			this->btn_next->Click += gcnew System::EventHandler(this, &MyForm::btn_next_Click);
+			// 
+			// btn_clear
+			// 
+			this->btn_clear->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(30)), static_cast<System::Int32>(static_cast<System::Byte>(30)),
+				static_cast<System::Int32>(static_cast<System::Byte>(30)));
+			this->btn_clear->FlatAppearance->MouseOverBackColor = System::Drawing::Color::DarkBlue;
+			this->btn_clear->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
+			this->btn_clear->Font = (gcnew System::Drawing::Font(L"Courier New", 16, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(204)));
+			this->btn_clear->ForeColor = System::Drawing::Color::DeepSkyBlue;
+			this->btn_clear->Location = System::Drawing::Point(1316, 708);
+			this->btn_clear->Name = L"btn_clear";
+			this->btn_clear->Size = System::Drawing::Size(579, 72);
+			this->btn_clear->TabIndex = 18;
+			this->btn_clear->TabStop = false;
+			this->btn_clear->Text = L"Очистка интерфейса";
+			this->btn_clear->UseVisualStyleBackColor = false;
+			this->btn_clear->Click += gcnew System::EventHandler(this, &MyForm::btn_clear_Click);
+			// 
 			// MyForm
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(9, 20);
@@ -424,6 +490,8 @@ namespace KRUSKAL {
 			this->BackColor = System::Drawing::SystemColors::ControlText;
 			this->BackgroundImageLayout = System::Windows::Forms::ImageLayout::None;
 			this->ClientSize = System::Drawing::Size(1996, 1532);
+			this->Controls->Add(this->btn_clear);
+			this->Controls->Add(this->btn_next);
 			this->Controls->Add(this->panel_2);
 			this->Controls->Add(this->lst_box);
 			this->Controls->Add(this->lbl_status);
@@ -572,7 +640,7 @@ namespace KRUSKAL {
 			   int click_radius = 20; // Радиус попадания в вершину
 			   int target_node = -1;
 
-			   // Проверяем, попал ли клик в уже существующую вершину (без break)
+			   // Проверяем, попал ли клик в уже существующую вершину
 			   if (node_positions != nullptr) {
 				   for (int i = 0; i < node_positions->Length && target_node == -1; i++) {
 					   double dx = e->X - node_positions[i].X;
@@ -583,151 +651,182 @@ namespace KRUSKAL {
 				   }
 			   }
 
-			   // 1. КЛИК ПО ПУСТОМУ МЕСТУ — Создание новой вершины
+			   // ЛОГИКА ДЛЯ ЛЕВОЙ КНОПКИ МЫШИ (ЛКМ)
 
-			   if (target_node == -1) {
-				   int current_nodes_num = (node_positions != nullptr) ? node_positions->Length : 0;
-				   max_nodes = (int)numericUpDown->Maximum;
+			   if (e->Button == System::Windows::Forms::MouseButtons::Left) {
 
-				   if (current_nodes_num >= max_nodes) {
-					   // Ошибка превышения лимита вершин
-					   MyFormDialog^ err_dlg = gcnew MyFormDialog();
-					   err_dlg->Size = System::Drawing::Size(590, 180);
+				   // 1. КЛИК ПО ПУСТОМУ МЕСТУ — Создание новой вершины
+				   if (target_node == -1) {
+					   int current_nodes_num = (node_positions != nullptr) ? node_positions->Length : 0;
+					   max_nodes = (int)numericUpDown->Maximum;
 
-					   if (err_dlg->lbl_st != nullptr) {
-						   err_dlg->lbl_st->Text = "Достигнуто максимальное количество вершин!";
-						   err_dlg->lbl_st->Location = System::Drawing::Point(20, 30);
-						   err_dlg->lbl_st->Size = System::Drawing::Size(360, 40);
-						   err_dlg->lbl_st->TextAlign = System::Drawing::ContentAlignment::MiddleCenter;
+					   if (current_nodes_num >= max_nodes) {
+						   // Ошибка превышения лимита вершин
+						   MyFormDialog^ err_dlg = gcnew MyFormDialog();
+						   err_dlg->Size = System::Drawing::Size(590, 180);
+
+						   if (err_dlg->lbl_st != nullptr) {
+							   err_dlg->lbl_st->Text = "Достигнуто максимальное количество вершин!";
+							   err_dlg->lbl_st->Location = System::Drawing::Point(20, 30);
+							   err_dlg->lbl_st->Size = System::Drawing::Size(360, 40);
+							   err_dlg->lbl_st->TextAlign = System::Drawing::ContentAlignment::MiddleCenter;
+						   }
+
+						   if (err_dlg->btn_ok != nullptr) {
+							   err_dlg->btn_ok->Location = System::Drawing::Point((err_dlg->ClientSize.Width - err_dlg->btn_ok->Width) / 2, 90);
+						   }
+
+						   err_dlg->ShowDialog();
 					   }
+					   else {
+						   // Расширяем массив позиций точек
+						   Array::Resize(node_positions, current_nodes_num + 1);
+						   node_positions[current_nodes_num] = Point(e->X, e->Y);
 
-					   if (err_dlg->btn_ok != nullptr) {
-						   err_dlg->btn_ok->Location = System::Drawing::Point((err_dlg->ClientSize.Width - err_dlg->btn_ok->Width) / 2, 90);
+						   // Обновляем DataGridView
+						   AddNodeToMatrix();
+
+						   // Сбрасываем выделение ребер
+						   selected_node_index = -1;
+
+						   // Отрисовываем обновленный граф
+						   System::Collections::Generic::List<edge>^ current_edges = GetEdgesFromGrid();
+						   DrawGraph(panel_1, current_edges, dataGridView->RowCount, false);
 					   }
-
-					   err_dlg->ShowDialog();
 				   }
+
+				   // 2. КЛИК ПО СУЩЕСТВУЮЩЕЙ ВЕРШИНЕ (Создание ребра)
 				   else {
-					   // Расширяем массив позиций точек
-					   Array::Resize(node_positions, current_nodes_num + 1);
-					   node_positions[current_nodes_num] = Point(e->X, e->Y);
+					   if (selected_node_index == -1) {
+						   // Выбираем первую вершину для ребра
+						   selected_node_index = target_node;
 
-					   // Обновляем DataGridView
-					   AddNodeToMatrix();
+						   // Подсвечиваем выбранную вершину
+						   System::Collections::Generic::List<edge>^ current_edges = GetEdgesFromGrid();
+						   DrawGraph(panel_1, current_edges, dataGridView->RowCount, false);
 
-					   // Сбрасываем выделение ребер
-					   selected_node_index = -1;
+						   // Визуально выделим выбранную вершину маленьким кружком поверх
+						   Graphics^ g = panel_1->CreateGraphics();
+						   g->DrawEllipse(gcnew Pen(Color::Orange, 3.0f), node_positions[selected_node_index].X - 17, node_positions[selected_node_index].Y - 17, 34, 34);
+						   delete g;
+					   }
+					   else {
+						   // Если выбрали ту же самую вершину — снимаем выделение
+						   if (selected_node_index == target_node) {
+							   selected_node_index = -1;
+							   System::Collections::Generic::List<edge>^ current_edges = GetEdgesFromGrid();
+							   DrawGraph(panel_1, current_edges, dataGridView->RowCount, false);
+						   }
+						   // Соединяем две разные вершины ребром
+						   else {
+							   MyFormDialog^ dlg = gcnew MyFormDialog();
+							   dlg->Size = System::Drawing::Size(350, 190);
 
-					   // Отрисовываем обновленный граф
-					   System::Collections::Generic::List<edge>^ current_edges = GetEdgesFromGrid();
-					   DrawGraph(panel_1, current_edges, dataGridView->RowCount, false);
+							   wchar_t char_u = (wchar_t)('A' + selected_node_index);
+							   wchar_t char_v = (wchar_t)('A' + target_node);
+							   String^ name_u = gcnew String(char_u, 1);
+							   String^ name_v = gcnew String(char_v, 1);
+
+							   if (dlg->lbl_st != nullptr) {
+								   dlg->lbl_st->Text = String::Format("Введите вес ребра {0} - {1}:", name_u, name_v);
+								   dlg->lbl_st->Location = System::Drawing::Point(25, 20);
+								   dlg->lbl_st->Size = System::Drawing::Size(300, 30);
+								   dlg->lbl_st->TextAlign = System::Drawing::ContentAlignment::MiddleCenter;
+							   }
+
+							   TextBox^ txt_weight = gcnew TextBox();
+							   txt_weight->Location = System::Drawing::Point(25, 65);
+							   txt_weight->Width = 300;
+							   txt_weight->Text = "1";
+							   txt_weight->MaxLength = 3;
+							   txt_weight->TextAlign = System::Windows::Forms::HorizontalAlignment::Center;
+							   txt_weight->BackColor = System::Drawing::Color::FromArgb(20, 20, 25);
+							   txt_weight->ForeColor = System::Drawing::Color::White;
+							   txt_weight->BorderStyle = System::Windows::Forms::BorderStyle::FixedSingle;
+							   txt_weight->Font = gcnew System::Drawing::Font("Consolas", 12, System::Drawing::FontStyle::Bold);
+							   txt_weight->KeyPress += gcnew System::Windows::Forms::KeyPressEventHandler(this, &MyForm::Cell_KeyPress);
+
+							   dlg->Controls->Add(txt_weight);
+
+							   if (dlg->btn_ok != nullptr) {
+								   dlg->btn_ok->Size = System::Drawing::Size(110, 35);
+								   dlg->btn_ok->Location = System::Drawing::Point((dlg->ClientSize.Width - dlg->btn_ok->Width) / 2, 125);
+							   }
+
+							   dlg->ActiveControl = txt_weight;
+
+							   if (dlg->ShowDialog() == System::Windows::Forms::DialogResult::OK) {
+								   int w = 0;
+								   if (Int32::TryParse(txt_weight->Text, w) && w > 0) {
+									   dataGridView->Rows[selected_node_index]->Cells[target_node]->Value = w.ToString();
+								   }
+								   else {
+									   MyFormDialog^ err_dlg = gcnew MyFormDialog();
+									   err_dlg->Size = System::Drawing::Size(600, 180);
+
+									   if (err_dlg->lbl_st != nullptr) {
+										   err_dlg->lbl_st->Text = "Вес ребра должен быть положительным числом!";
+										   err_dlg->lbl_st->Location = System::Drawing::Point(20, 30);
+										   err_dlg->lbl_st->Size = System::Drawing::Size(360, 40);
+										   err_dlg->lbl_st->TextAlign = System::Drawing::ContentAlignment::MiddleCenter;
+									   }
+
+									   if (err_dlg->btn_ok != nullptr) {
+										   err_dlg->btn_ok->Location = System::Drawing::Point((err_dlg->ClientSize.Width - err_dlg->btn_ok->Width) / 2, 90);
+									   }
+
+									   err_dlg->ShowDialog();
+								   }
+							   }
+
+							   selected_node_index = -1;
+							   System::Collections::Generic::List<edge>^ current_edges = GetEdgesFromGrid();
+							   DrawGraph(panel_1, current_edges, dataGridView->RowCount, false);
+						   }
+					   }
 				   }
 			   }
 
-			   // 2. КЛИК ПО СУЩЕСТВУЮЩЕЙ ВЕРШИНЕ
+				   // ЛОГИКА ДЛЯ ПРАВОЙ КНОПКИ МЫШИ (ПКМ)
 
-			   else {
-				   if (selected_node_index == -1) {
-					   // Выбираем первую вершину для ребра
-					   selected_node_index = target_node;
+			   if (e->Button == System::Windows::Forms::MouseButtons::Right) {
 
-					   // Подсвечиваем выбранную вершину
+				   // Удаляем вершину только в том случае, если кликнули прямо по ней
+				   if (target_node != -1 && node_positions != nullptr) {
+
+					   // 1. Правильное удаление столбца и строки из DataGridView
+					   if (target_node < dataGridView->ColumnCount) {
+						   dataGridView->Columns->RemoveAt(target_node); // Удаляем весь вертикальный столбец целиком
+					   }
+					   if (target_node < dataGridView->RowCount) {
+						   dataGridView->Rows->RemoveAt(target_node);    // Удаляем горизонтальную строку целиком
+					   }
+
+					   // Синхронизируем ColumnCount с RowCount после удаления элементов
+					   dataGridView->ColumnCount = dataGridView->RowCount;
+
+					   // 2. Сдвигаем элементы в массиве координат вершин node_positions
+					   for (int i = target_node; i < node_positions->Length - 1; i++) {
+						   node_positions[i] = node_positions[i + 1];
+					   }
+
+					   // Уменьшаем физический размер массива координат на 1 единицу
+					   Array::Resize(node_positions, node_positions->Length - 1);
+
+					   // 3. Сбрасываем промежуточные индексы выделения
+					   selected_node_index = -1;
+
+					   // Пересчитываем текущее общее количество вершин
+					   node_сount = node_positions->Length;
+
+					   // Обновляем счетчик numericUpDown (если он используется)
+					   if (node_сount >= (int)numericUpDown->Minimum) {
+						   numericUpDown->Value = node_сount;
+					   }
+
+					   // 4. Полностью перерисовываем обновленный граф на рабочей панели
 					   System::Collections::Generic::List<edge>^ current_edges = GetEdgesFromGrid();
 					   DrawGraph(panel_1, current_edges, dataGridView->RowCount, false);
-
-					   // Визуально выделим выбранную вершину маленьким кружком поверх
-					   Graphics^ g = panel_1->CreateGraphics();
-					   g->DrawEllipse(gcnew Pen(Color::Orange, 3.0f), node_positions[selected_node_index].X - 17, node_positions[selected_node_index].Y - 17, 34, 34);
-					   delete g;
-				   }
-				   else {
-					   // Если выбрали ту же самую вершину — снимаем выделение
-					   if (selected_node_index == target_node) {
-						   selected_node_index = -1;
-						   System::Collections::Generic::List<edge>^ current_edges = GetEdgesFromGrid();
-						   DrawGraph(panel_1, current_edges, dataGridView->RowCount, false);
-					   }
-					   // Соединяем две разные вершины ребром
-					   else {
-						   // Открываем диалоговое окно MyFormDialog
-						   MyFormDialog^ dlg = gcnew MyFormDialog();
-						   dlg->Size = System::Drawing::Size(350, 190);
-
-						   // Переводим индексы в явные буквенные символы (A, B, C...)
-						   wchar_t char_u = (wchar_t)('A' + selected_node_index);
-						   wchar_t char_v = (wchar_t)('A' + target_node);
-						   String^ name_u = gcnew String(char_u, 1);
-						   String^ name_v = gcnew String(char_v, 1);
-
-						   // Настраиваем существующую текстовую метку lbl_st
-						   if (dlg->lbl_st != nullptr) {
-							   dlg->lbl_st->Text = String::Format("Введите вес ребра {0} - {1}:", name_u, name_v);
-							   dlg->lbl_st->Location = System::Drawing::Point(25, 20);
-							   dlg->lbl_st->Size = System::Drawing::Size(300, 30);
-							   dlg->lbl_st->TextAlign = System::Drawing::ContentAlignment::MiddleCenter;
-						   }
-
-						   // ДИНАМИЧЕСКОЕ СОЗДАНИЕ TEXTBOX ПРИ ВЫЗОВЕ ОКНА
-						   TextBox^ txt_weight = gcnew TextBox();
-						   txt_weight->Location = System::Drawing::Point(25, 65);
-						   txt_weight->Width = 300;
-						   txt_weight->Text = "1"; // Дефолтный вес
-						   txt_weight->MaxLength = 3;
-						   txt_weight->TextAlign = System::Windows::Forms::HorizontalAlignment::Center;
-
-						   // Задаем темный Sci-Fi стиль для динамического TextBox
-						   txt_weight->BackColor = System::Drawing::Color::FromArgb(20, 20, 25);
-						   txt_weight->ForeColor = System::Drawing::Color::White;
-						   txt_weight->BorderStyle = System::Windows::Forms::BorderStyle::FixedSingle;
-						   txt_weight->Font = gcnew System::Drawing::Font("Consolas", 12, System::Drawing::FontStyle::Bold);
-
-						   // Привязываем проверку ввода только цифр (ваш метод Cell_KeyPress)
-						   txt_weight->KeyPress += gcnew System::Windows::Forms::KeyPressEventHandler(this, &MyForm::Cell_KeyPress);
-
-						   // Добавляем созданный TextBox в коллекцию элементов формы
-						   dlg->Controls->Add(txt_weight);
-
-						   // Позиционируем кнопку btn_ok, встроенную в диалог
-						   if (dlg->btn_ok != nullptr) {
-							   dlg->btn_ok->Size = System::Drawing::Size(110, 35);
-							   dlg->btn_ok->Location = System::Drawing::Point((dlg->ClientSize.Width - dlg->btn_ok->Width) / 2, 125);
-						   }
-
-						   // Устанавливаем фокус на динамическое поле ввода при показе
-						   dlg->ActiveControl = txt_weight;
-
-						   // Отображаем окно
-						   if (dlg->ShowDialog() == System::Windows::Forms::DialogResult::OK) {
-							   int w = 0;
-							   if (Int32::TryParse(txt_weight->Text, w) && w > 0) {
-								   // Записываем данные в таблицу
-								   dataGridView->Rows[selected_node_index]->Cells[target_node]->Value = w.ToString();
-							   }
-							   else {
-								   // Окно ошибки при некорректном вводе
-								   MyFormDialog^ err_dlg = gcnew MyFormDialog();
-								   err_dlg->Size = System::Drawing::Size(600, 180);
-
-								   if (err_dlg->lbl_st != nullptr) {
-									   err_dlg->lbl_st->Text = "Вес ребра должен быть положительным числом!";
-									   err_dlg->lbl_st->Location = System::Drawing::Point(20, 30);
-									   err_dlg->lbl_st->Size = System::Drawing::Size(360, 40);
-									   err_dlg->lbl_st->TextAlign = System::Drawing::ContentAlignment::MiddleCenter;
-								   }
-
-								   if (err_dlg->btn_ok != nullptr) {
-									   err_dlg->btn_ok->Location = System::Drawing::Point((err_dlg->ClientSize.Width - err_dlg->btn_ok->Width) / 2, 90);
-								   }
-
-								   err_dlg->ShowDialog();
-							   }
-						   }
-
-						   selected_node_index = -1; // Сбрасываем выбор вершины
-
-						   System::Collections::Generic::List<edge>^ current_edges = GetEdgesFromGrid();
-						   DrawGraph(panel_1, current_edges, dataGridView->RowCount, false);
-					   }
 				   }
 			   }
 		   }
@@ -836,18 +935,32 @@ namespace KRUSKAL {
 	private: System::Void btn_random_Click(System::Object^ sender, System::EventArgs^ e) {
 		Random^ rand = gcnew Random();
 		int rows = dataGridView->RowCount;
-		bool is_matrix_created = false;
-		if (rows > 0) {
-			is_matrix_created = true;
-		}
+		bool is_matrix_created = (rows > 0);
+
 		if (is_matrix_created) {
+			// Задаем вероятность появления нуля. 
+			// 0.75 означает, что примерно 75% ячеек (рёбер) гарантированно станут нулями.
+			double zero_probability = 0.30;
+
 			for (int i = 0; i < rows; i++) {
+				// Диагональ матрицы смежности (связь вершины самой с собой) всегда 0
+				dataGridView->Rows[i]->Cells[i]->Value = "0";
+
 				for (int j = i + 1; j < rows; j++) {
-					int weight = rand->Next(1, 51);
+					int weight = 0;
+
+					// NextDouble() возвращает случайное число от 0.0 до 1.0
+					if (rand->NextDouble() >= zero_probability) {
+						// Если не повезло попасть в "нулевую зону", генерируем вес от 1 до 50
+						weight = rand->Next(1, 51);
+					}
+
+					// Заполняем зеркально для неориентированного графа
 					dataGridView->Rows[i]->Cells[j]->Value = weight.ToString();
 					dataGridView->Rows[j]->Cells[i]->Value = weight.ToString();
 				}
 			}
+
 			// Перерисовываем панели
 			System::Collections::Generic::List<edge>^ current_edges = GetEdgesFromGrid();
 			DrawGraph(panel_1, current_edges, rows, false);
@@ -878,7 +991,8 @@ namespace KRUSKAL {
 			   }
 		   }
 
-	private: bool is_edge_in_MST(edge target) {
+	private: 
+		bool is_edge_in_MST(edge target) {
 		bool found = false;
 		if (curent_MST != nullptr) {
 			for (int i = 0; i < curent_MST->Count; i++) {
@@ -891,99 +1005,108 @@ namespace KRUSKAL {
 		return found;
 	}
 
-		   void DrawGraph(Panel^ p, System::Collections::Generic::List<edge>^ edges_to_draw, int node_count, bool is_result_panel) {
-			   if (node_positions != nullptr) {
-				   Graphics^ g = p->CreateGraphics();
-				   g->SmoothingMode = System::Drawing::Drawing2D::SmoothingMode::AntiAlias;
-				   g->TextRenderingHint = System::Drawing::Text::TextRenderingHint::AntiAlias;
-				   g->Clear(Color::Black);
+		void DrawGraph(Panel^ p, System::Collections::Generic::List<edge>^ edges_to_draw, int node_count, bool is_result_panel) {
+			if (node_positions != nullptr) {
+				Graphics^ g = p->CreateGraphics();
+				g->SmoothingMode = System::Drawing::Drawing2D::SmoothingMode::AntiAlias;
+				g->TextRenderingHint = System::Drawing::Text::TextRenderingHint::AntiAlias;
+				g->Clear(Color::Black);
 
-				   StringFormat^ sf = gcnew StringFormat();
-				   sf->Alignment = StringAlignment::Center;
-				   sf->LineAlignment = StringAlignment::Center;
-				   System::Drawing::Font^ f_weight = gcnew System::Drawing::Font("Consolas", 11, FontStyle::Bold);
+				StringFormat^ sf = gcnew StringFormat();
+				sf->Alignment = StringAlignment::Center;
+				sf->LineAlignment = StringAlignment::Center;
+				System::Drawing::Font^ f_weight = gcnew System::Drawing::Font("Consolas", 11, FontStyle::Bold);
 
-				   // --- ОТРИСОВКА РЕБЕР ---
-				   for each (edge e in edges_to_draw) {
-					   if (e.u < node_positions->Length && e.v < node_positions->Length) {
-						   Point p1 = node_positions[e.u];
-						   Point p2 = node_positions[e.v];
 
-						   Color c;
-						   float thick;
-						   bool draw_weight = false;
+				System::Collections::Generic::List<edge>^ actual_edges = edges_to_draw;
+				if (is_result_panel) {
+					actual_edges = GetEdgesFromGrid(); // Принудительно берем все существующие ребра
+				}
 
-						   if (is_result_panel) {
-							   if (is_edge_in_MST(e)) {
-								   c = Color::Cyan;
-								   thick = 2.5f;
-								   draw_weight = true;
-							   }
-							   else {
-								   c = Color::RoyalBlue;
-								   thick = 1.0f;
-								   draw_weight = false;
-							   }
-						   }
-						   else {
-							   c = Color::RoyalBlue;
-							   thick = 1.5f;
-							   draw_weight = true;
-						   }
-						   Pen^ pen = gcnew Pen(c, thick);
-						   g->DrawLine(pen, (float)p1.X, (float)p1.Y, (float)p2.X, (float)p2.Y);
+				// --- ОТРИСОВКА РЕБЕР ---
+				for (int i = 0; i < edges_to_draw->Count; i++) {
+					edge e = edges_to_draw[i];
 
-						   // Отрисовка веса
-						   if (draw_weight) {
-							   float midX = (p1.X + p2.X) / 2.0f;
-							   float midY = (p1.Y + p2.Y) / 2.0f;
-							   float dx = (float)p2.X - p1.X, dy = (float)p2.Y - p1.Y;
-							   float len = (float)Math::Sqrt(dx * dx + dy * dy);
-							   if (len > 0) {
-								   float nx = -dy / len, ny = dx / len;
-								   float tx = midX + nx * 14.0f, ty = midY + ny * 14.0f;
-								   String^ s = e.weight.ToString();
-								   SizeF sz = g->MeasureString(s, f_weight);
+					if (e.u < node_positions->Length && e.v < node_positions->Length) {
+						Point p1 = node_positions[e.u];
+						Point p2 = node_positions[e.v];
 
-								   g->FillRectangle(Brushes::Black, tx - sz.Width / 2.0f, ty - sz.Height / 2.0f, sz.Width, sz.Height);
-								   g->DrawString(s, f_weight, Brushes::White, tx, ty, sf);
-							   }
-						   }
-						   delete pen;
-					   }
-				   }
+						Color c;
+						float thick;
+						bool draw_weight = false;
 
-				   // --- ОТРИСОВКА ВЕРШИН ---
-				   int n_size = 30;
-				   System::Drawing::Font^ f_node = gcnew System::Drawing::Font("Consolas", 11, FontStyle::Bold);
-				   for (int i = 0; i < node_count; i++) {
-					   if (i < node_positions->Length) {
-						   Point pos = node_positions[i];
-						   RectangleF r((float)pos.X - n_size / 2.0f, (float)pos.Y - n_size / 2.0f, (float)n_size, (float)n_size);
+						if (is_result_panel) {
+							if (is_edge_in_MST(e)) {
+								c = Color::Cyan;
+								thick = 2.5f;
+								draw_weight = true; // Рисуем веса только для каркаса
+							}
+							else {
+								c = Color::RoyalBlue;
+								thick = 1.0f;
+								draw_weight = false;
+							}
+						}
+						else {
+							c = Color::RoyalBlue;
+							thick = 1.5f;
+							draw_weight = true;
+						}
+						Pen^ pen = gcnew Pen(c, thick);
+						g->DrawLine(pen, (float)p1.X, (float)p1.Y, (float)p2.X, (float)p2.Y);
 
-						   g->FillEllipse(Brushes::Black, r);
-						   g->DrawEllipse(gcnew Pen(Color::DeepSkyBlue, 2.5f), r);
-						   g->DrawString(((wchar_t)('A' + i)).ToString(), f_node, Brushes::White, r, sf);
-					   }
-				   }
-				   delete g;
-			   }
-		   }
+						// отрисовка веса
+						if (draw_weight) {
+							float midX = (p1.X + p2.X) / 2.0f;
+							float midY = (p1.Y + p2.Y) / 2.0f;
+							float dx = (float)p2.X - p1.X, dy = (float)p2.Y - p1.Y;
+							float len = (float)Math::Sqrt(dx * dx + dy * dy);
+
+							if (len > 0) {
+								float nx = -dy / len, ny = dx / len;
+								float tx = midX + nx * 14.0f, ty = midY + ny * 14.0f;
+								String^ s = e.weight.ToString();
+								SizeF sz = g->MeasureString(s, f_weight);
+
+								//Подложка под цифры
+								g->FillRectangle(Brushes::Black, tx - sz.Width / 2.0f, ty - sz.Height / 2.0f, sz.Width, sz.Height);
+								g->DrawString(s, f_weight, Brushes::White, tx, ty, sf);
+							}
+						}
+						delete pen;
+					}
+				}
+				// --- ОТРИСОВКА ВЕРШИН ---
+				int n_size = 30;
+				System::Drawing::Font^ f_node = gcnew System::Drawing::Font("Consolas", 11, FontStyle::Bold);
+				for (int i = 0; i < node_count; i++) {
+					if (i < node_positions->Length) {
+						Point pos = node_positions[i];
+						RectangleF r((float)pos.X - n_size / 2.0f, (float)pos.Y - n_size / 2.0f, (float)n_size, (float)n_size);
+
+						g->FillEllipse(Brushes::Black, r);
+						g->DrawEllipse(gcnew Pen(Color::DeepSkyBlue, 2.5f), r);
+						g->DrawString(((wchar_t)('A' + i)).ToString(), f_node, Brushes::White, r, sf);
+					}
+				}
+				delete g;
+			}
+		}
 
 	private: System::Void label4_Click(System::Object^ sender, System::EventArgs^ e) {
 	}
 
 	private: System::Void btn_run_Click(System::Object^ sender, System::EventArgs^ e) {
-		int n = dataGridView->RowCount;
-		if (n == 0) return;
 
+		int n = (int)numericUpDown->Value;
 		bool can_start = false;
 		animation_edges = GetEdgesFromGrid();
 
 		if (animation_edges->Count == 0) {
+
 			MyFormDialog^ dlg = gcnew MyFormDialog();
-			dlg->lbl_st->Text = "Таблица пуста или веса не введены! Пожалуйста, заполните матрицу";
-			dlg->ShowDialog();
+			dlg->lbl_st->Text = "Таблица пуста или веса не введены! Пожалуйста, заполните матрицу",
+				dlg->ShowDialog();
 		}
 		else {
 			can_start = true;
@@ -991,11 +1114,14 @@ namespace KRUSKAL {
 
 		if (can_start) {
 			bubble_sort_edges(animation_edges);
+			//Сброс состояния для анимации
 			curent_MST = gcnew System::Collections::Generic::List<edge>();
-			animation_DSU = gcnew DSU(n);
+			animation_DSU = gcnew DSU((int)numericUpDown->Value);
 			current_edge_index = 0;
 
 			lst_box->Items->Clear();
+
+			//Отрисовываем пустой исходный граф слева
 			DrawGraph(panel_1, animation_edges, n, false);
 
 			timer->Start();
@@ -1007,7 +1133,11 @@ namespace KRUSKAL {
 	}
 
 	private: System::Void timer_Tick(System::Object^ sender, System::EventArgs^ e) {
+
 		timer->Interval = 1000;
+
+		//ExecuteNextStep();
+
 		int n = dataGridView->RowCount;
 
 		if (current_edge_index < animation_edges->Count && curent_MST->Count < n - 1) {
@@ -1026,7 +1156,7 @@ namespace KRUSKAL {
 				lst_box->Items->Add(log_entry);
 			}
 			else {
-				String^ Log_entry = String::Format("{0}) Ребро {1} - {2}, вес: {3} — Пропуск (Цикл!)",
+				String^ Log_entry = String::Format("{0}) Ребро {1} - {2}, вес: {3} – Пропуск (Цикл!)",
 					current_edge_index, name_u, name_v, current_e.weight);
 				lst_box->Items->Add(Log_entry);
 				lbl_status->Text = String::Format("Пропуск ребра {0}-{1}", name_u, name_v);
@@ -1038,7 +1168,9 @@ namespace KRUSKAL {
 		else {
 			timer->Stop();
 			int total_weight = 0;
-			for each (edge mst_edge in curent_MST) {
+
+			for (int i = 0; i < curent_MST->Count; i++) {
+				edge mst_edge = curent_MST[i];
 				total_weight += mst_edge.weight;
 			}
 
@@ -1093,6 +1225,7 @@ namespace KRUSKAL {
 			}
 		}
 	}
+
 	private: System::Void btn_clear_Click(System::Object^ sender, System::EventArgs^ e) {
 		// 1. Останавливаем таймер анимации
 		timer->Stop();
@@ -1100,13 +1233,16 @@ namespace KRUSKAL {
 		btn_stop->Text = "||";
 		btn_stop->ForeColor = Color::DeepSkyBlue;
 
-		// 2. Сначала сбрасываем numericUpDown в его минимально допустимый лимит (например, 1)
+		// 2. Сбрасываем numericUpDown в минимальный лимит
 		numericUpDown->Value = numericUpDown->Minimum;
 
-		// 3. Полностью обнуляем данные графа
+		// 3. Сбрасываем данные графа
 		node_сount = 0;
-		node_positions = nullptr;         // Удаляем координаты вершин, чтобы триггер отрисовки блокировался
-		selected_node_index = -1;        // Сбрасываем выделение вершины мышью
+
+		// БЕЗОПАСНО: Выделяем пустой массив вместо nullptr, чтобы ->Length возвращал 0
+		node_positions = gcnew array<Point>(0);
+
+		selected_node_index = -1;
 		current_edge_index = 0;
 		animation_DSU = nullptr;
 
@@ -1120,8 +1256,8 @@ namespace KRUSKAL {
 		// 4. Полностью очищаем таблицу (матрицу смежности)
 		dataGridView->Rows->Clear();
 		dataGridView->Columns->Clear();
-		dataGridView->RowCount = 0;
-		dataGridView->ColumnCount = 0;
+		dataGridView->RowCount = 1;
+		dataGridView->ColumnCount = 1;
 
 		// 5. Очищаем логи и статусы
 		lst_box->Items->Clear();
@@ -1146,9 +1282,248 @@ namespace KRUSKAL {
 			delete g2;
 		}
 	}
-	};
+
+		   void ExecuteNextStep() {
+			   // Проверяем существование списка и границы индекса
+			   if (this->animation_edges != nullptr && this->current_edge_index < this->animation_edges->Count) {
+
+				   edge e = this->animation_edges[this->current_edge_index];
+
+				   // Проверка компонентов через СНМ
+				   if (this->animation_DSU->find(e.u) != this->animation_DSU->find(e.v)) {
+					   this->animation_DSU->unite(e.u, e.v);
+					   this->curent_MST->Add(e);
+
+					   // ИСПРАВЛЕНИЕ: Форматируем строку как на втором эталонном скриншоте
+					   this->lst_box->Items->Add((this->current_edge_index + 1) + ") Ребро " +
+						   ((wchar_t)('A' + e.u)).ToString() + " - " + ((wchar_t)('A' + e.v)).ToString() +
+						   ", вес: " + e.weight + " – ОК (Добавлено)");
+				   }
+				   else {
+					   // ИСПРАВЛЕНИЕ: Форматируем строку пропуска из-за цикла
+					   this->lst_box->Items->Add((this->current_edge_index + 1) + ") Ребро " +
+						   ((wchar_t)('A' + e.u)).ToString() + " - " + ((wchar_t)('A' + e.v)).ToString() +
+						   ", вес: " + e.weight + " – Пропуск (Цикл!)");
+				   }
+
+				   this->lst_box->SelectedIndex = this->lst_box->Items->Count - 1;
+
+				   // Отрисовка результатов
+				   DrawGraph(this->panel_1, this->animation_edges, this->node_сount, false);
+				   DrawGraph(this->panel_2, this->curent_MST, this->node_сount, true);
+
+				   this->current_edge_index = this->current_edge_index + 1;
+
+				   if (this->current_edge_index >= this->animation_edges->Count) {
+					   this->lbl_status->Text = "Алгоритм завершен. Минимальное остовное дерево построено!";
+					   this->timer->Stop();
+
+					   int total_weight = 0;
+
+					   for (int i = 0; i < this->curent_MST->Count; i++) {
+						   edge mst_edge = this->curent_MST[i];
+						   total_weight += mst_edge.weight;
+					   }
+
+					   lst_box->Items->Add("------------------------------------------");
+					   lst_box->Items->Add("Алгоритм завершен успешно.");
+					   lst_box->Items->Add("Итоговый вес каркаса: " + total_weight.ToString());
+					   lbl_status->Text = "Готово!";
+				   }
+			   }
+		   }
+
+	private: System::Void btn_next_Click(System::Object^ sender, System::EventArgs^ e) {
+		// 1. Принудительно останавливаем автоматический таймер анимации, значок при этом НЕ меняем
+		this->timer->Stop();
+		this->paused = true;
+
+		// 2. Если данные ещё не инициализированы, пытаемся их подготовить
+		if (this->animation_edges == nullptr || this->animation_DSU == nullptr || (this->current_edge_index == 0 && this->curent_MST->Count == 0)) {
+
+			this->animation_edges = GetEdgesFromGrid();
+
+			// ПРОВЕРКА: Если граф пустой, ребер нет (ничего не введено)
+			if (this->animation_edges == nullptr || this->animation_edges->Count == 0) {
+
+				String^ error_msg = "Граф не инициализирован! Невозможно выполнить шаг";
+
+				// Создаем экземпляр диалогового окна
+				MyFormDialog^ dialog = gcnew MyFormDialog();
+
+				// Устанавливаем жесткие размеры диалогового окна
+				dialog->Size = System::Drawing::Size(680, 180);
+
+				// Передаем текст напрямую в элемент lbl_st вашего диалогового окна
+				dialog->lbl_st->Text = error_msg;
+
+				// Динамическое центрирование кнопки ОК по середине
+				if (dialog->btn_ok != nullptr) {
+					int centerX = (dialog->ClientSize.Width - dialog->btn_ok->Width) / 2;
+					dialog->btn_ok->Location = System::Drawing::Point(centerX, dialog->btn_ok->Location.Y);
+				}
+
+				// Отображаем окно модально
+				dialog->ShowDialog();
+			}
+
+			// Если ребра успешно найдены, выполняем инициализацию и сортировку
+			if (this->animation_edges != nullptr && this->animation_edges->Count > 0) {
+
+				// --- СОРТИРОВКА ПУЗЫРЬКОМ  ---
+				for (int i = 0; i < this->animation_edges->Count - 1; i++) {
+					for (int j = 0; j < this->animation_edges->Count - i - 1; j++) {
+
+						// Если текущее ребро тяжелее следующего — меняем их местами
+						if (this->animation_edges[j].weight > this->animation_edges[j + 1].weight) {
+							edge temp = this->animation_edges[j];
+							this->animation_edges[j] = this->animation_edges[j + 1];
+							this->animation_edges[j + 1] = temp;
+						}
+					}
+				}
+				// --- КОНЕЦ СОРТИРОВКИ ---
+
+				// Инициализируем DSU и список под минимальное остовное дерево
+				this->animation_DSU = gcnew DSU(this->node_сount);
+				this->curent_MST = gcnew System::Collections::Generic::List<edge>();
+				this->current_edge_index = 0;
+
+				this->lst_box->Items->Clear();
+				this->lst_box->Items->Add("Инициализация пошагового режима. Рёбра отсортированы.");
+				this->lbl_status->Text = "Выполнение: Пошаговый режим...";
+			}
+		}
+
+		if (this->current_edge_index < this->animation_edges->Count) {
+			// Вызываем логику одного шага
+			ExecuteNextStep();
+		}
+		else {
+
+			// 5. Сбрасываем состояние, чтобы можно было запустить алгоритм заново
+			this->animation_edges = nullptr;
+			this->animation_DSU = nullptr; // Желательно сбросить и DSU
+			this->curent_MST = nullptr;
+		}
 	}
 
+	private: System::Void btn_help_Click(System::Object^ sender, System::EventArgs^ e) {
+		// 1. Наш структурированный текст справки
+		String^ help_text =
+			"ПРОГРАММНЫЙ КОМПЛЕКС: ВИЗУАЛИЗАЦИЯ АЛГОРИТМА КРАСКАЛА\n" +
+			"==================================================\n\n" +
+			"ДАННАЯ ПРОГРАММА ПРЕДНАЗНАЧЕНА ДЛЯ:\n" +
+			"• Построения произвольных неориентированных графов;\n" +
+			"• Пошагового или автоматического поиска минимального остовного дерева (MST);\n" +
+			"• Демонстрации работы структуры данных СНМ (Система непересекающихся множеств).\n\n" +
+			"ОСНОВНЫЕ ВОЗМОЖНОСТИ И КНОПКИ УПРАВЛЕНИЯ:\n" +
+			"--------------------------------------------------\n" +
+			"1. Клик ЛКМ по пустому месту — Создать новую вершину графа.\n" +
+			"2. Клик ЛКМ по вершине 'А', затем по 'В' — Соединить их ребром (откроется ввод веса).\n" +
+			"3. Клик ПКМ по любой вершине — Полное удаление вершины и всех связанных рёбер.\n" +
+			"4. Кнопка 'Создать матрицу' — Генерирует пустую сетку таблицы для ручного ввода.\n" +
+			"5. Кнопка 'Следующий шаг' — Выполняет ровно одну итерацию алгоритма Краскала.\n" +
+			"6. Кнопка 'Старт / Пауза' — Запуск или остановка непрерывной автоматической анимации.\n" +
+			"7. Кнопка 'Очистить' — Сброс интерфейса, удаление графа и скрытие таблицы.\n\n" +
+			"ПРАВИЛА ВВОДА ВЕСОВ И ОГРАНИЧЕНИЯ:\n" +
+			"--------------------------------------------------\n" +
+			"1. Вес ребра должен быть строго ПОЛОЖИТЕЛЬНЫМ целым числом (от 1 до 999).\n" +
+			"2. Ввод символов, букв или отрицательных значений автоматически блокируется.\n" +
+			"3. Алгоритм предварительно сортирует рёбра методом ПУЗЫРЬКА по возрастанию веса.\n" +
+			"4. Ребро добавляется в остов только в том случае, если оно НЕ образует цикл.";
+
+		// 2. Создаем экземпляр диалогового окна
+		MyFormDialog^ dialog = gcnew MyFormDialog();
+
+		// 3. Измеряем точные габариты текста в пикселях
+		// Задаем максимальные ограничения для замера (ширина 800, высота с запасом)
+		System::Drawing::Size proposeSize = System::Drawing::Size(950, 2000);
+		System::Drawing::Size textSize = TextRenderer::MeasureText(help_text, dialog->lbl_st->Font, proposeSize, TextFormatFlags::WordBreak);
+
+		// 4. Вычисляем необходимые размеры самого окна на основе замеров текста
+		int calculatedWidth = 860; // Фиксированная комфортная ширина формы
+		int calculatedHeight = textSize.Height + 140; // Высота текста + отступы сверху/снизу + под кнопку ОК
+
+		// На всякий случай ставим минимальный порог, чтобы окно не сжималось слишком сильно
+		if (calculatedHeight < 550) {
+			calculatedHeight = 550;
+		}
+
+		// Устанавливаем динамически вычисленный размер окна
+		dialog->Size = System::Drawing::Size(calculatedWidth, calculatedHeight);
+
+		// 5. Динамически позиционируем встроенную кнопку ОК ровно по центру в самом низу окна
+		if (dialog->btn_ok != nullptr) {
+			int centerX = (dialog->ClientSize.Width - dialog->btn_ok->Width) / 2;
+			int bottomY = dialog->ClientSize.Height - dialog->btn_ok->Height - 20;
+			dialog->btn_ok->Location = System::Drawing::Point(centerX, bottomY);
+		}
+
+		// 6. Настраиваем текстовую метку lbl_st под новые размеры окна
+		if (dialog->lbl_st != nullptr) {
+			dialog->lbl_st->AutoSize = false;
+			dialog->lbl_st->Location = System::Drawing::Point(30, 20);
+
+			// Текстовое поле занимает всю высоту ровно до кнопки ОК
+			int availableHeight = dialog->btn_ok->Location.Y - dialog->lbl_st->Location.Y - 15;
+			dialog->lbl_st->Size = System::Drawing::Size(800, availableHeight);
+
+			dialog->lbl_st->TextAlign = System::Drawing::ContentAlignment::TopLeft;
+			dialog->lbl_st->Text = help_text;
+		}
+
+		// 7. Отображаем полностью подогнанное под текст окно
+		dialog->ShowDialog();
+	}
+
+	private: System::Void btn_info_Click(System::Object^ sender, System::EventArgs^ e) {
+		// 1. Формируем полный текст 
+		String^ about_text =
+			"Программа: Визуализация алгоритма Краскала\n" +
+			"Год: 2026\n" +
+			"Разработчик: Н.А. Червякова\n" +
+			"Курс: ИКТб-2301-04-20";
+
+		// 2. Создаем экземпляр диалогового окна
+		MyFormDialog^ dialog = gcnew MyFormDialog();
+
+		// 3. Немного увеличиваем общую высоту окна (до 260), чтобы точно всё влезло
+		dialog->Size = System::Drawing::Size(580, 260);
+
+		// 4. Тонкая настройка текстовой метки lbl_st
+		if (dialog->lbl_st != nullptr) {
+			// Отключаем AutoSize для полного контроля геометрии
+			dialog->lbl_st->AutoSize = false;
+
+			// Устанавливаем аккуратный отступ слева и сверху
+			dialog->lbl_st->Location = System::Drawing::Point(35, 30);
+
+			// ИСПРАВЛЕНИЕ: Увеличиваем высоту текстового поля до 120, чтобы 4-я строка не скрывалась
+			dialog->lbl_st->Size = System::Drawing::Size(510, 120);
+
+			// Выравниваем текст по левому краю (вверх-влево)
+			dialog->lbl_st->TextAlign = System::Drawing::ContentAlignment::TopLeft;
+
+			// Передаем сформированный текст
+			dialog->lbl_st->Text = about_text;
+		}
+
+		// 5. Динамическое позиционирование встроенной кнопки ОК ровно по центру внизу
+		if (dialog->btn_ok != nullptr) {
+			// Вычисляем центральную координату по горизонтали (X)
+			int centerX = (dialog->ClientSize.Width - dialog->btn_ok->Width) / 2;
+
+			// Прижимаем кнопку к нижнему краю с аккуратным отступом (Y)
+			int bottomY = dialog->ClientSize.Height - dialog->btn_ok->Height - 20;
+
+			dialog->btn_ok->Location = System::Drawing::Point(centerX, bottomY);
+		}
+
+		dialog->ShowDialog();
+	}
+	};
+}
 
 
 
